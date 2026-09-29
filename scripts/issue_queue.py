@@ -12,6 +12,7 @@ Queueing an issue that already has a card returns that card instead of a second 
 """
 import argparse
 import json
+import os
 import shutil
 import sqlite3
 import subprocess
@@ -20,7 +21,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "triage.db"
-KANBAN_DB = Path.home() / ".hermes-dashboard" / "kanban.db"
+# The gateway's Hermes home, whose dispatcher runs the cards. The web service runs without
+# HERMES_HOME, and `hermes` would then write to ~/.hermes, a board no dispatcher watches.
+HERMES_HOME = Path.home() / ".hermes-dashboard"
+KANBAN_DB = HERMES_HOME / "kanban.db"
 ARTIFACTS = Path.home() / "hermes-issue-queue"
 REPO = "NousResearch/hermes-agent"
 MAX_BATCH = 10
@@ -78,7 +82,8 @@ def add(numbers, related=None):
         cmd = [HERMES, "kanban", "create", f"Work hermes-agent {'PR' if is_pr else 'issue'} #{n}: {title[:80]}",
                "--body", card_body(n, title, is_pr, (related or {}).get(n, ())),
                "--idempotency-key", KEY.format(n), *CARD_ARGS, "--json"]
-        res = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        res = subprocess.run(cmd, capture_output=True, text=True, timeout=300,
+                             env={**os.environ, "HERMES_HOME": str(HERMES_HOME)})
         if res.returncode:
             out.append({"number": n, "error": (res.stderr or res.stdout).strip()[-300:]})
             continue
