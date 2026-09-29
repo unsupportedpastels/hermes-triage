@@ -9,7 +9,7 @@ from web/dist. `&skip=M` leaves out reports from the newest M days (the dashboar
 first); `apart` and the rest still cover all N days.
 Each report also carries `owners`: the STAFF members active on it (opened it, assigned, commented,
 reviewed, pushed, or opened an open PR that fixes or salvages it), and `ownersChecked`, false until
-ingest.py has read its activity.
+ingest.py has read its activity. `mine` is the same record for ME, or null when they haven't touched it.
 GET /api/stats?days=N returns counts over the whole mirror for the Stats page (default 30, at
 most 365), including who merged or closed PRs in the window and the issues those merges closed.
 GET /api/advisories returns every GHSA ID an issue or PR names, with the items naming it and the
@@ -48,6 +48,10 @@ GHSA = re.compile(r"\bGHSA(?:-[23456789cfghjmpqrvwx]{4}){3}\b", re.I)
 # Nous staff on hermes-agent. When one of them is active on an item it's probably theirs.
 STAFF = {s.lower() for s in ("alt-glitch", "austinpickett", "ethernet8023", "jquesnelle", "kshitijk4poor",
                              "OutThisLife", "teknium1", "yoniebans")}
+# The dashboard's user. Their activity is read like STAFF's but kept apart, so they can see what
+# they've already worked on.
+ME = "unsupportedpastels"
+WATCHED = STAFF | {ME}
 ACT_KEY = {"comment": "comments", "review": "reviews", "commit": "commits", "push": "pushes"}
 
 
@@ -66,18 +70,18 @@ def load(days, skip=0):
             "FROM items i LEFT JOIN summaries s USING (number) "
             f"WHERE i.state = 'open' AND i.created_at >= {SINCE} {newer}"
             "ORDER BY i.created_at DESC", window).fetchall()
-        staff_in = ",".join("?" * len(STAFF))
+        watched_in = ",".join("?" * len(WATCHED))
         has_activity = db.execute("SELECT 1 FROM sqlite_master WHERE name = 'activity_checked'").fetchone()
         acts = db.execute(
             "SELECT a.number, a.login, a.kind, a.n, a.last_at FROM activity a JOIN items i USING (number) "
-            f"WHERE lower(a.login) IN ({staff_in}) AND i.state = 'open' AND i.created_at >= {SINCE} {newer}",
-            tuple(STAFF) + window).fetchall() if has_activity else []
+            f"WHERE lower(a.login) IN ({watched_in}) AND i.state = 'open' AND i.created_at >= {SINCE} {newer}",
+            tuple(WATCHED) + window).fetchall() if has_activity else []
         checked = {n for (n,) in db.execute("SELECT number FROM activity_checked")} if has_activity else set()
-        # open PRs by staff that say they fix an issue or salvage a PR
+        # open PRs by staff or ME that say they fix an issue or salvage a PR
         staff_prs = db.execute(
             "SELECT l.target, p.number, p.author FROM (SELECT issue AS target, pr FROM fixes "
             "UNION SELECT orig, new FROM salvages) l JOIN items p ON p.number = l.pr "
-            f"WHERE p.state = 'open' AND lower(p.author) IN ({staff_in})", tuple(STAFF)).fetchall()
+            f"WHERE p.state = 'open' AND lower(p.author) IN ({watched_in})", tuple(WATCHED)).fetchall()
         # CROSS JOIN scans the salvage links once; with `IN (...) OR IN (...)` SQLite took ~15x longer.
         links = db.execute(
             "SELECT v.new, v.orig, n.author, n.state, n.merged_at, o.author, o.state, o.merged_at "
@@ -140,8 +144,9 @@ def load(days, skip=0):
         labels = {k: v for k, v in (("kind", kind), ("comp", comp), ("prio", prio)) if v}
         if labels:
             labels["by"] = "alt-glitch"  # the repo's labeler; the mirror doesn't record who applied them
-        if author and author.lower() in STAFF:
+        if author and author.lower() in WATCHED:
             owner(number, author)["opened"] = True
+        people = owners.get(number, {})
         reports.append({
             "number": number, "url": url, "title": title, "author": author or "",
             "createdAt": created, "isPr": bool(is_pr), "draft": bool(draft),
@@ -150,7 +155,8 @@ def load(days, skip=0):
             "labels": labels, "tags": json.loads(raw_labels) if raw_labels else [],
             "salvages": salvages.get(number, []), "salvagedBy": salvaged_by.get(number, []),
             "fixes": fixes.get(number, []),
-            "owners": sorted(owners.get(number, {}).values(), key=lambda o: o.get("lastAt", ""), reverse=True),
+            "owners": sorted((o for k, o in people.items() if k != ME), key=lambda o: o.get("lastAt", ""), reverse=True),
+            "mine": people.get(ME),
             "ownersChecked": number in checked,
         })
     return {

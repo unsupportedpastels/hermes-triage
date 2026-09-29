@@ -57,7 +57,9 @@ again whenever its `updated_at` moves. `STAFF` in `scripts/serve.py` lists the N
 report one of them opened, is assigned to, commented, reviewed or pushed on, or has an open PR
 fixing or salvaging, is marked with their name in All reports and the detail pane, and "Hide items
 staff are on" leaves those out. A commit counts for its author, so a staff member who only rebased
-someone else's commits shows up through the force-push.
+someone else's commits shows up through the force-push. `ME` in the same file is the dashboard's
+user; their own activity is read the same way and shown apart from staff as a green "You're on it"
+chip and detail section, so work they've already done stands out.
 
 `ingest.py` also looks up every GHSA ID named in an issue or PR title or body in GitHub's advisory
 database (GraphQL, 50 per query) into `advisories`: severity, summary, CVE and affected packages

@@ -61,6 +61,8 @@ export interface Report {
   /** For a PR, the issues its text says it fixes ("Fixes #N"). */
   fixes?: number[];
   owners?: Owner[];
+  /** The dashboard user's own activity on it, recorded like a staff member's. */
+  mine?: Owner | null;
   /** False until the sync has read who is active on it. */
   ownersChecked?: boolean;
 }
@@ -82,6 +84,7 @@ export interface SeedRow {
   salvages?: SalvageLink[];
   salvagedBy?: SalvageLink[];
   owners?: Owner[];
+  mine?: Owner | null;
   ownersChecked?: boolean;
 }
 

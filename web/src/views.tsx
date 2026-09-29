@@ -215,6 +215,7 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
   const recent = reps.some((r) => s.now - r.createdAt < 2 * HOUR);
   const staff = staffOn(reps);
   const staffed = reps.filter((r) => r.owners?.length).length;
+  const mine = reps.filter((r) => r.mine).length;
   return (
     <li
       data-id={i.id}
@@ -233,6 +234,7 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
           {STATUS_NAME[i.status]}
           {!i.firing && " · rules quiet"}
         </span>
+        {mine > 0 && <span className="chip mine">{reps.length > 1 ? `You're on ${mine} of ${reps.length}` : "You're on it"}</span>}
         {staff.length > 0 && (
           <span className="chip owned" title={staff.map(([login, n]) => `${login} is on ${plural(n, "report")}`).join("\n")}>
             Staff: {listJoin(staff.map(([login]) => login))}
@@ -477,6 +479,11 @@ function ReportItem({ r, s }: { r: Report; s: State }) {
         </span>
         <span className="spacer" />
         {size > 1 && <span className="similar">{plural(size - 1, "similar report")}</span>}
+        {r.mine && (
+          <span className="chip mine" title={`You ${ownerActs(r.mine, true)}`}>
+            You're on it
+          </span>
+        )}
         {r.owners?.length ? (
           <span className="chip owned" title={r.owners.map((o) => `${o.login} ${ownerActs(o)}`).join("\n")}>
             Staff: {listJoin(r.owners.map((o) => o.login))}

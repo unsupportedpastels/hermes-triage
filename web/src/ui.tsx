@@ -31,12 +31,12 @@ export const listJoin = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.s
 
 const times = (n: number) => (n === 1 ? "once" : n === 2 ? "twice" : `${n} times`);
 
-/** What one staff member did on an item, e.g. "pushed 2 commits and commented once". */
-export function ownerActs(o: Owner) {
+/** What one staff member did on an item, e.g. "pushed 2 commits and commented once". `you` words it for the dashboard user. */
+export function ownerActs(o: Owner, you = false) {
   const acts: string[] = [];
   if (o.opened) acts.push("opened it");
   if (o.prs?.length) acts.push(`opened ${listJoin(o.prs.map((n) => `#${n}`))} for it`);
-  if (o.assigned) acts.push("is assigned");
+  if (o.assigned) acts.push(you ? "are assigned" : "is assigned");
   if (o.commits) acts.push(`pushed ${plural(o.commits, "commit")}`);
   if (o.pushes) acts.push(`force-pushed ${times(o.pushes)}`);
   if (o.reviews) acts.push(`reviewed ${times(o.reviews)}`);

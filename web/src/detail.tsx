@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import pipeline from "./data/pipeline.json";
 import { SIM, actions, useStore, type State } from "./store";
 import type { Cluster, Incident, Report } from "./types";
-import { Age, LabelChips, LevelBadge, STATUS_NAME, SourceBadge, compName, fmtMinutes, listJoin, plural, refLabel, staffOn, stateName } from "./ui";
+import { Age, LabelChips, LevelBadge, STATUS_NAME, SourceBadge, compName, fmtMinutes, listJoin, ownerActs, plural, refLabel, staffOn, stateName } from "./ui";
 import { OwnerNote, SalvageNote } from "./views";
 
 const REPO_URL = "https://github.com/NousResearch/hermes-agent";
@@ -61,6 +61,7 @@ function ReportList({ ids, s }: { ids: string[]; s: State }) {
             <SourceBadge source={r.source} />
             <span className="ref">{refLabel(r)}</span>
             <span>{r.author}</span>
+            {r.mine ? <span className="chip mine">You</span> : null}
             {r.owners?.length ? <span className="chip owned">Staff: {listJoin(r.owners.map((o) => o.login))}</span> : null}
             <span className="meta">
               <Age at={r.createdAt} now={s.now} />
@@ -89,6 +90,7 @@ function IncidentDetail({ i, s }: { i: Incident; s: State }) {
   const reps = i.reportIds.map((id) => s.byId.get(id)!);
   const staff = staffOn(reps);
   const unchecked = reps.filter((r) => !r.sample && !r.ownersChecked).length;
+  const mine = reps.filter((r) => r.mine);
   return (
     <>
       <div className="d-top">
@@ -130,6 +132,18 @@ function IncidentDetail({ i, s }: { i: Incident; s: State }) {
         </ul>
       ) : (
         <p className="muted">No rule is firing right now.</p>
+      )}
+      {mine.length > 0 && (
+        <>
+          <h3>You're on it</h3>
+          <ul className="owners">
+            {mine.map((r) => (
+              <li key={r.id}>
+                <b>{refLabel(r)}</b>: you {ownerActs(r.mine!, true)}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
       <h3>Nous staff on it</h3>
       {staff.length ? (
@@ -242,6 +256,20 @@ function ReportDetail({ r, s }: { r: Report; s: State }) {
       </p>
       {r.sample && <p className="note warn">This is a simulated report for trying out the dashboard. It isn't real data.</p>}
       <SalvageNote r={r} />
+      {r.mine && (
+        <>
+          <h3>You're on it</h3>
+          <p>
+            You {ownerActs(r.mine, true)}
+            {r.mine.lastAt && (
+              <span className="meta">
+                {" · last "}
+                <Age at={Date.parse(r.mine.lastAt)} now={s.now} />
+              </span>
+            )}
+          </p>
+        </>
+      )}
       {!r.sample && (
         <>
           <h3>Nous staff on it</h3>
