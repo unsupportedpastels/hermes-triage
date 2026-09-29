@@ -7,6 +7,9 @@ pipeline stats, plus `apart`: pairs of those reports that check_pairs.py's model
 have different causes, so the dashboard doesn't group them on keywords. Everything else is served
 from web/dist. `&skip=M` leaves out reports from the newest M days (the dashboard loads those
 first); `apart` and the rest still cover all N days.
+Each report also carries `owners`: the STAFF members active on it (opened it, assigned, commented,
+reviewed, pushed, or opened an open PR that fixes or salvages it), and `ownersChecked`, false until
+ingest.py has read its activity.
 GET /api/stats?days=N returns counts over the whole mirror for the Stats page (default 30, at
 most 365), including who merged or closed PRs in the window and the issues those merges closed.
 GET /api/advisories returns every GHSA ID an issue or PR names, with the items naming it and the
@@ -42,6 +45,10 @@ AGE_BUCKETS = ["Under a day", "1–7 days", "1–4 weeks", "1–3 months", "Over
 PRIOS = ("P0", "P1", "P2", "P3", "P4", "")
 # same pattern as ingest.py
 GHSA = re.compile(r"\bGHSA(?:-[23456789cfghjmpqrvwx]{4}){3}\b", re.I)
+# Nous staff on hermes-agent. When one of them is active on an item it's probably theirs.
+STAFF = {s.lower() for s in ("alt-glitch", "austinpickett", "ethernet8023", "jquesnelle", "kshitijk4poor",
+                             "OutThisLife", "teknium1", "yoniebans")}
+ACT_KEY = {"comment": "comments", "review": "reviews", "commit": "commits", "push": "pushes"}
 
 
 def connect():
@@ -52,12 +59,25 @@ def load(days, skip=0):
     db = connect()
     try:
         newer = f"AND i.created_at < {SINCE} " if skip else ""
+        window = (f"-{days} days",) + ((f"-{skip} days",) if skip else ())
         rows = db.execute(
             "SELECT i.number, i.url, i.title, i.author, i.created_at, i.is_pr, i.draft, i.kind, "
             "i.comp, i.prio, i.labels, s.problem_statement, s.duplicate_query "
             "FROM items i LEFT JOIN summaries s USING (number) "
             f"WHERE i.state = 'open' AND i.created_at >= {SINCE} {newer}"
-            "ORDER BY i.created_at DESC", (f"-{days} days",) + ((f"-{skip} days",) if skip else ())).fetchall()
+            "ORDER BY i.created_at DESC", window).fetchall()
+        staff_in = ",".join("?" * len(STAFF))
+        has_activity = db.execute("SELECT 1 FROM sqlite_master WHERE name = 'activity_checked'").fetchone()
+        acts = db.execute(
+            "SELECT a.number, a.login, a.kind, a.n, a.last_at FROM activity a JOIN items i USING (number) "
+            f"WHERE lower(a.login) IN ({staff_in}) AND i.state = 'open' AND i.created_at >= {SINCE} {newer}",
+            tuple(STAFF) + window).fetchall() if has_activity else []
+        checked = {n for (n,) in db.execute("SELECT number FROM activity_checked")} if has_activity else set()
+        # open PRs by staff that say they fix an issue or salvage a PR
+        staff_prs = db.execute(
+            "SELECT l.target, p.number, p.author FROM (SELECT issue AS target, pr FROM fixes "
+            "UNION SELECT orig, new FROM salvages) l JOIN items p ON p.number = l.pr "
+            f"WHERE p.state = 'open' AND lower(p.author) IN ({staff_in})", tuple(STAFF)).fetchall()
         # CROSS JOIN scans the salvage links once; with `IN (...) OR IN (...)` SQLite took ~15x longer.
         links = db.execute(
             "SELECT v.new, v.orig, n.author, n.state, n.merged_at, o.author, o.state, o.merged_at "
@@ -96,6 +116,18 @@ def load(days, skip=0):
     fixes = {}
     for pr, issue in fix_rows:
         fixes.setdefault(pr, []).append(issue)
+    owners = {}
+    owner = lambda number, login: owners.setdefault(number, {}).setdefault(login.lower(), {"login": login})
+    for number, login, kind, n, last in acts:
+        o = owner(number, login)
+        if kind == "assigned":
+            o["assigned"] = True
+        elif kind in ACT_KEY:
+            o[ACT_KEY[kind]] = n
+            if last and last > o.get("lastAt", ""):
+                o["lastAt"] = last
+    for target, pr, author in staff_prs:
+        owner(target, author).setdefault("prs", []).append(pr)
     closable = {}
     for number, url, title, author, created, new, n_author, merged in closable_rows:
         closable.setdefault(number, {
@@ -108,6 +140,8 @@ def load(days, skip=0):
         labels = {k: v for k, v in (("kind", kind), ("comp", comp), ("prio", prio)) if v}
         if labels:
             labels["by"] = "alt-glitch"  # the repo's labeler; the mirror doesn't record who applied them
+        if author and author.lower() in STAFF:
+            owner(number, author)["opened"] = True
         reports.append({
             "number": number, "url": url, "title": title, "author": author or "",
             "createdAt": created, "isPr": bool(is_pr), "draft": bool(draft),
@@ -116,6 +150,8 @@ def load(days, skip=0):
             "labels": labels, "tags": json.loads(raw_labels) if raw_labels else [],
             "salvages": salvages.get(number, []), "salvagedBy": salvaged_by.get(number, []),
             "fixes": fixes.get(number, []),
+            "owners": sorted(owners.get(number, {}).values(), key=lambda o: o.get("lastAt", ""), reverse=True),
+            "ownersChecked": number in checked,
         })
     return {
         "days": days,

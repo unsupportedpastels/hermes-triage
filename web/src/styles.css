@@ -148,6 +148,9 @@ input[type="checkbox"], input[type="range"] { accent-color: var(--accent-strong)
 .chip { padding: 1px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font-size: 12px; white-space: nowrap; }
 .chip.prio-p0 { color: var(--urgent); border-color: color-mix(in srgb, var(--urgent) 45%, transparent); }
 .chip.prio-p1 { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
+.chip.owned { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); background: none; }
+.owners { margin: 0; padding-left: 18px; font-size: 13px; }
+.owners li { margin: 2px 0; }
 button.chip.tag { color: var(--muted); cursor: pointer; }
 button.chip.tag:hover { color: var(--fg); border-color: var(--accent); }
 button.chip.tag.on { color: var(--fg); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 18%, var(--surface)); }

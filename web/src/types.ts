@@ -21,6 +21,21 @@ export interface SalvageLink {
   state: "open" | "merged" | "closed";
 }
 
+/** A Nous staff member active on an item, so it's probably theirs. Counts cover the item's last 100 comments, reviews, commits and force-pushes. */
+export interface Owner {
+  login: string;
+  opened?: boolean;
+  assigned?: boolean;
+  comments?: number;
+  reviews?: number;
+  commits?: number;
+  pushes?: number;
+  /** Open PRs by this person that say they fix or salvage the item. */
+  prs?: number[];
+  /** Newest comment, review, commit or push. */
+  lastAt?: string;
+}
+
 export interface Report {
   id: string;
   source: Source;
@@ -45,6 +60,9 @@ export interface Report {
   salvagedBy?: SalvageLink[];
   /** For a PR, the issues its text says it fixes ("Fixes #N"). */
   fixes?: number[];
+  owners?: Owner[];
+  /** False until the sync has read who is active on it. */
+  ownersChecked?: boolean;
 }
 
 export interface SeedRow {
@@ -63,6 +81,8 @@ export interface SeedRow {
   draft?: boolean;
   salvages?: SalvageLink[];
   salvagedBy?: SalvageLink[];
+  owners?: Owner[];
+  ownersChecked?: boolean;
 }
 
 /** Pipeline stats from /api/reports. */

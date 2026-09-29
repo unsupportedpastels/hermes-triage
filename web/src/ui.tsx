@@ -1,4 +1,4 @@
-import type { IncidentStatus, Labels, Level, Report, Source } from "./types";
+import type { IncidentStatus, Labels, Level, Owner, Report, Source } from "./types";
 
 export const cx = (...c: (string | false | null | undefined | 0)[]) => c.filter(Boolean).join(" ");
 
@@ -28,6 +28,21 @@ export function fmtMinutes(m: number) {
 export const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 
 export const listJoin = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
+
+const times = (n: number) => (n === 1 ? "once" : n === 2 ? "twice" : `${n} times`);
+
+/** What one staff member did on an item, e.g. "pushed 2 commits and commented once". */
+export function ownerActs(o: Owner) {
+  const acts: string[] = [];
+  if (o.opened) acts.push("opened it");
+  if (o.prs?.length) acts.push(`opened ${listJoin(o.prs.map((n) => `#${n}`))} for it`);
+  if (o.assigned) acts.push("is assigned");
+  if (o.commits) acts.push(`pushed ${plural(o.commits, "commit")}`);
+  if (o.pushes) acts.push(`force-pushed ${times(o.pushes)}`);
+  if (o.reviews) acts.push(`reviewed ${times(o.reviews)}`);
+  if (o.comments) acts.push(`commented ${times(o.comments)}`);
+  return listJoin(acts);
+}
 
 /** Counts timestamps into `n` equal buckets ending at `now`. */
 export function buckets(times: number[], now: number, spanMs: number, n: number) {

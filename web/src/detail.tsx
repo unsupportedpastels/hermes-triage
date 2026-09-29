@@ -3,7 +3,7 @@ import pipeline from "./data/pipeline.json";
 import { SIM, actions, useStore, type State } from "./store";
 import type { Cluster, Incident, Report } from "./types";
 import { Age, LabelChips, LevelBadge, STATUS_NAME, SourceBadge, compName, fmtMinutes, plural, refLabel, stateName } from "./ui";
-import { SalvageNote } from "./views";
+import { OwnerNote, SalvageNote } from "./views";
 
 const REPO_URL = "https://github.com/NousResearch/hermes-agent";
 
@@ -224,6 +224,12 @@ function ReportDetail({ r, s }: { r: Report; s: State }) {
       </p>
       {r.sample && <p className="note warn">This is a simulated report for trying out the dashboard. It isn't real data.</p>}
       <SalvageNote r={r} />
+      {!r.sample && (
+        <>
+          <h3>Nous staff on it</h3>
+          <OwnerNote r={r} now={s.now} />
+        </>
+      )}
       <h3>
         Summary <span className="by">written by the model</span>
       </h3>

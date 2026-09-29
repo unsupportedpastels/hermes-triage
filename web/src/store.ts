@@ -36,6 +36,8 @@ export interface State {
   /** Label filter on All reports; a report must carry every one. */
   tags: string[];
   includeClosed: boolean;
+  /** All reports leaves out items Nous staff are active on. */
+  hideOwned: boolean;
   incidentTab: IncidentTab;
   meta: Meta | null;
   closable: Closable[];
@@ -120,6 +122,7 @@ let state: State = derive({
   source: "all",
   tags: [],
   includeClosed: false,
+  hideOwned: false,
   incidentTab: "open",
   meta: null,
   closable: [],
@@ -218,6 +221,7 @@ export const actions = {
   tag: (t: string) => set({ tags: state.tags.includes(t) ? state.tags.filter((x) => x !== t) : [...state.tags, t] }),
   clearTags: () => set({ tags: [] }),
   includeClosed: (includeClosed: boolean) => set({ includeClosed }),
+  hideOwned: (hideOwned: boolean) => set({ hideOwned }),
   incidentTab: (incidentTab: IncidentTab) => set({ incidentTab }),
   toggleLive: () => set({ live: !state.live }),
   ack: (id: string) =>

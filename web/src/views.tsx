@@ -15,6 +15,7 @@ import {
   cx,
   fmtMinutes,
   listJoin,
+  ownerActs,
   plural,
   refLabel,
   sourceName,
@@ -179,6 +180,34 @@ export function SalvageNote({ r }: { r: Report }) {
   );
 }
 
+/** Which Nous staff are active on a report, so work that's theirs isn't picked up twice. */
+export function OwnerNote({ r, now }: { r: Report; now: number }) {
+  if (!r.owners?.length) {
+    return (
+      <p className="muted">
+        {r.ownersChecked
+          ? "No staff activity: none of them opened it, is assigned, or commented, reviewed or pushed in its last 100 events, and none has an open PR for it."
+          : "Not checked yet. The sync reads recently updated items first."}
+      </p>
+    );
+  }
+  return (
+    <ul className="owners">
+      {r.owners.map((o) => (
+        <li key={o.login}>
+          <b>{o.login}</b> {ownerActs(o)}
+          {o.lastAt && (
+            <span className="meta">
+              {" · last "}
+              <Age at={Date.parse(o.lastAt)} now={now} />
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function IncidentItem({ i, s }: { i: Incident; s: State }) {
   const reps = i.reportIds.map((id) => s.byId.get(id)!);
   const sources = [...new Set(reps.map((r) => sourceName(r.source)))];
@@ -280,7 +309,11 @@ export function ReportsView() {
         (s.includeClosed || isOpenState(r)) &&
         (s.source === "all" || r.source === s.source) &&
         s.tags.every((t) => r.tags?.includes(t)) &&
-        (!q || `${r.number ?? ""} ${r.title} ${r.problem} ${(r.tags ?? []).join(" ")} ${r.author}`.toLowerCase().includes(q)),
+        (!s.hideOwned || !r.owners?.length) &&
+        (!q ||
+          `${r.number ?? ""} ${r.title} ${r.problem} ${(r.tags ?? []).join(" ")} ${r.author} ${(r.owners ?? []).map((o) => o.login).join(" ")}`
+            .toLowerCase()
+            .includes(q)),
     )
     .sort((a, b) => b.createdAt - a.createdAt);
   // Counts come from the current results, so they show how far each label would narrow them.
@@ -311,6 +344,10 @@ export function ReportsView() {
           ))}
         </div>
         <TagFilter counts={tagCounts} selected={s.tags} />
+        <label className="check" title="Items a Nous staff member opened, is assigned, commented, reviewed or pushed on, or opened a PR for">
+          <input type="checkbox" checked={s.hideOwned} onChange={(e) => actions.hideOwned(e.target.checked)} />
+          Hide items staff are on
+        </label>
         <span className="meta">
           {plural(list.length, "report")}
           {list.length > SHOW && ` · showing the newest ${SHOW}; search to narrow`}
@@ -393,6 +430,11 @@ function ReportItem({ r, s }: { r: Report; s: State }) {
         </span>
         <span className="spacer" />
         {size > 1 && <span className="similar">{plural(size - 1, "similar report")}</span>}
+        {r.owners?.length ? (
+          <span className="chip owned" title={r.owners.map((o) => `${o.login} ${ownerActs(o)}`).join("\n")}>
+            Staff: {listJoin(r.owners.map((o) => o.login))}
+          </span>
+        ) : null}
         {!r.sample && !r.summarized && <span className="pending">Summary pending</span>}
       </div>
       <h2 className="item-title clamp">{r.title}</h2>

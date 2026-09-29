@@ -10,7 +10,7 @@ on a repo this size.
 - Once the backfill ends, each run walks /issues updated since the last stored updated_at.
   The cursor starts from when the backfill began, so changes made during the backfill are caught.
 
-Comments are not fetched. Summaries come from scripts/summarize.py.
+Summaries come from scripts/summarize.py.
 
 Salvages are read from PR titles and bodies ("Salvages #123 by @x", "salvage of #123") into the
 salvages table: `new` is the PR that carries the work on, `orig` the PR it names. Fix links
@@ -26,6 +26,12 @@ GHSA IDs named in any issue or PR title or body are looked up in GitHub's adviso
 GraphQL, 50 per query, into the advisories table, and again after 30 days in case the advisory
 changed. Advisories published against hermes-agent itself are read from the REST advisory search
 every 6 hours and marked `own`.
+
+Open items from the last 90 days get who is active on them into the activity table: authors of
+their last 100 comments, reviews, commits and force-pushes, plus current assignees, 50 items per
+GraphQL query. An item is read again whenever its updated_at moves (a comment or push moves it),
+most recently updated first, at most ACTIVITY_QUERIES queries per run so a backlog never holds up
+the sync for long.
 """
 import argparse
 import fcntl
@@ -57,6 +63,20 @@ GHSA = re.compile(r"\bGHSA(?:-[23456789cfghjmpqrvwx]{4}){3}\b", re.I)
 OWN_ADVISORIES = "https://api.github.com/advisories?affects=hermes-agent&per_page=100"
 OWN_EVERY_S = 6 * 3600
 REFETCH_DAYS = 30
+ACTIVITY_DAYS = 90  # the dashboard loads at most 90 days (MAX_DAYS in serve.py)
+ACTIVITY_QUERIES = 60  # per run; each takes ~5 s
+ACTIVITY_KIND = {"IssueComment": "comment", "PullRequestReview": "review",
+                 "PullRequestCommit": "commit", "HeadRefForcePushedEvent": "push"}
+_WHO = "__typename ... on IssueComment { author { login } createdAt }"
+ACTIVITY_FIELDS = (
+    f"... on Issue {{ assignees(first: 10) {{ nodes {{ login }} }} "
+    f"timelineItems(last: 100, itemTypes: [ISSUE_COMMENT]) {{ nodes {{ {_WHO} }} }} }} "
+    f"... on PullRequest {{ assignees(first: 10) {{ nodes {{ login }} }} timelineItems(last: 100, itemTypes: "
+    f"[ISSUE_COMMENT, PULL_REQUEST_REVIEW, PULL_REQUEST_COMMIT, HEAD_REF_FORCE_PUSHED_EVENT]) {{ nodes {{ {_WHO} "
+    "... on PullRequestReview { author { login } submittedAt } "
+    "... on PullRequestCommit { commit { committedDate author { user { login } } } } "
+    "... on HeadRefForcePushedEvent { actor { login } createdAt } } } }"
+)
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS items (
@@ -134,6 +154,22 @@ CREATE TABLE IF NOT EXISTS advisories (
   published_at TEXT,
   withdrawn_at TEXT,
   own INTEGER NOT NULL DEFAULT 0,
+  fetched_at TEXT NOT NULL
+);
+-- who is active on an open item: kind is comment, review, commit or push (n of them among the item's
+-- last 100, newest at last_at; a commit counts for its author, not whoever pushed it), or assigned
+CREATE TABLE IF NOT EXISTS activity (
+  number INTEGER NOT NULL,
+  login TEXT NOT NULL,
+  kind TEXT NOT NULL,
+  n INTEGER NOT NULL,
+  last_at TEXT,
+  PRIMARY KEY (number, login, kind)
+);
+-- the updated_at each item's activity was read at; it is read again once the item changes
+CREATE TABLE IF NOT EXISTS activity_checked (
+  number INTEGER PRIMARY KEY,
+  updated_at TEXT NOT NULL,
   fetched_at TEXT NOT NULL
 );
 """
@@ -424,6 +460,58 @@ def fetch_closes(db, token):
             return queries
 
 
+def activity_rows(number, it):
+    """(number, login, kind, n, last_at) rows for one item's timeline nodes and assignees."""
+    seen = {}
+    for node in (it.get("timelineItems") or {}).get("nodes") or []:
+        kind = ACTIVITY_KIND.get(node.get("__typename"))
+        if node.get("commit"):
+            c = node["commit"]
+            who, at = (c.get("author") or {}).get("user"), c.get("committedDate")
+        else:
+            who, at = node.get("author") or node.get("actor"), node.get("createdAt") or node.get("submittedAt")
+        login = (who or {}).get("login")  # None for deleted accounts and commit emails not linked to one
+        if not kind or not login:
+            continue
+        n, last = seen.get((login, kind), (0, None))
+        seen[(login, kind)] = (n + 1, max(filter(None, (last, at)), default=None))
+    rows = [(number, login, kind, n, last) for (login, kind), (n, last) in seen.items()]
+    return rows + [(number, a["login"], "assigned", 1, None)
+                   for a in (it.get("assignees") or {}).get("nodes") or [] if a]
+
+
+def fetch_activity(db, token):
+    """Read who is active on recent open items that changed since they were last read. Returns queries made."""
+    owner, name = REPO.split("/")
+    todo_sql = ("FROM items i LEFT JOIN activity_checked a USING (number) WHERE i.state = 'open' "
+                f"AND i.created_at >= strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-{ACTIVITY_DAYS} days') "
+                "AND a.updated_at IS NOT i.updated_at")
+    queries = 0
+    while queries < ACTIVITY_QUERIES:
+        todo = db.execute(f"SELECT i.number, i.updated_at {todo_sql} ORDER BY i.updated_at DESC LIMIT ?",
+                          (MERGE_BATCH,)).fetchall()
+        if not todo:
+            break
+        fields = " ".join(f"i{n}: issueOrPullRequest(number: {n}) {{ {ACTIVITY_FIELDS} }}" for n, _ in todo)
+        data = graphql(token, f'{{ rateLimit {{ remaining resetAt }} '
+                              f'repository(owner: "{owner}", name: "{name}") {{ {fields} }} }}')
+        queries += 1
+        at, repo = now(), data["repository"] or {}
+        db.executemany("DELETE FROM activity WHERE number = ?", [(n,) for n, _ in todo])
+        # an item GitHub no longer returns (transferred or deleted) is marked read too, so it isn't asked again
+        db.executemany("INSERT INTO activity VALUES (?, ?, ?, ?, ?)",
+                       [r for n, _ in todo for r in activity_rows(n, repo.get(f"i{n}") or {})])
+        db.executemany("INSERT OR REPLACE INTO activity_checked VALUES (?, ?, ?)", [(n, u, at) for n, u in todo])
+        db.commit()
+        if data["rateLimit"]["remaining"] <= KEEP_SPARE:
+            log("activity: near the GraphQL rate limit; the rest waits for the next run")
+            break
+    if queries:
+        left = db.execute(f"SELECT count(*) {todo_sql}").fetchone()[0]
+        log(f"activity: {queries} GraphQL queries, {left} items left to read")
+    return queries
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--db", default=str(ROOT / "data" / "triage.db"))
@@ -513,6 +601,7 @@ def main():
             close_queries = fetch_closes(db, token)
             if close_queries:
                 log(f"closes: {close_queries} GraphQL queries")
+            fetch_activity(db, token)
             advisory_requests = fetch_advisories(db, token, state)
             if advisory_requests:
                 log(f"advisories: {advisory_requests} requests")

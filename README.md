@@ -50,6 +50,15 @@ issues GitHub closed with it. PRs closed without merging get who closed them int
 Stats page's "Merged by" leaderboard reads both; it counts closes only by people who have merged a
 PR (only Nous staff can), so authors closing their own PRs stay off it.
 
+`ingest.py` also reads who is active on open items from the last 90 days into `activity`: authors
+of each item's last 100 comments, reviews, commits and force-pushes, plus its assignees (GraphQL,
+50 items per query, at most 60 queries per run, most recently updated first). An item is read
+again whenever its `updated_at` moves. `STAFF` in `scripts/serve.py` lists the Nous staff; a
+report one of them opened, is assigned to, commented, reviewed or pushed on, or has an open PR
+fixing or salvaging, is marked with their name in All reports and the detail pane, and "Hide items
+staff are on" leaves those out. A commit counts for its author, so a staff member who only rebased
+someone else's commits shows up through the force-push.
+
 `ingest.py` also looks up every GHSA ID named in an issue or PR title or body in GitHub's advisory
 database (GraphQL, 50 per query) into `advisories`: severity, summary, CVE and affected packages
 with their first fixed versions. Each ID is looked up again after 30 days. An ID GitHub doesn't
