@@ -14,6 +14,9 @@ export const DAYS = Number(params.get("days")) || 14;
 const FIRST_DAYS = 2;
 const POLL_MS = 60_000;
 
+/** How All reports is ordered; newest and oldest group by day, the others by group or priority. */
+export type ReportSort = "newest" | "similar" | "priority" | "oldest";
+
 export interface State {
   reports: Report[];
   byId: Map<string, Report>;
@@ -38,6 +41,7 @@ export interface State {
   includeClosed: boolean;
   /** All reports leaves out items Nous staff are active on. */
   hideOwned: boolean;
+  reportSort: ReportSort;
   incidentTab: IncidentTab;
   meta: Meta | null;
   closable: Closable[];
@@ -123,6 +127,7 @@ let state: State = derive({
   tags: [],
   includeClosed: false,
   hideOwned: false,
+  reportSort: "newest",
   incidentTab: "open",
   meta: null,
   closable: [],
@@ -222,6 +227,7 @@ export const actions = {
   clearTags: () => set({ tags: [] }),
   includeClosed: (includeClosed: boolean) => set({ includeClosed }),
   hideOwned: (hideOwned: boolean) => set({ hideOwned }),
+  reportSort: (reportSort: ReportSort) => set({ reportSort }),
   incidentTab: (incidentTab: IncidentTab) => set({ incidentTab }),
   toggleLive: () => set({ live: !state.live }),
   ack: (id: string) =>

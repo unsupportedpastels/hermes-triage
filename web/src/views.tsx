@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import pipeline from "./data/pipeline.json";
 import { rank } from "./engine";
-import { DAYS, SIM, actions, useStore, type State } from "./store";
+import { DAYS, SIM, actions, useStore, type ReportSort, type State } from "./store";
 import type { Closable, Incident, IncidentTab, Report, Rule, Source } from "./types";
 import {
   Age,
@@ -19,6 +19,7 @@ import {
   plural,
   refLabel,
   sourceName,
+  staffOn,
   stateName,
 } from "./ui";
 
@@ -212,6 +213,8 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
   const reps = i.reportIds.map((id) => s.byId.get(id)!);
   const sources = [...new Set(reps.map((r) => sourceName(r.source)))];
   const recent = reps.some((r) => s.now - r.createdAt < 2 * HOUR);
+  const staff = staffOn(reps);
+  const staffed = reps.filter((r) => r.owners?.length).length;
   return (
     <li
       data-id={i.id}
@@ -230,6 +233,12 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
           {STATUS_NAME[i.status]}
           {!i.firing && " · rules quiet"}
         </span>
+        {staff.length > 0 && (
+          <span className="chip owned" title={staff.map(([login, n]) => `${login} is on ${plural(n, "report")}`).join("\n")}>
+            Staff: {listJoin(staff.map(([login]) => login))}
+            {reps.length > 1 && ` · on ${staffed} of ${reps.length}`}
+          </span>
+        )}
         <span className="spacer" />
         <span>
           Last report <Age at={i.lastAt} now={s.now} />
@@ -300,9 +309,40 @@ const SOURCES: ["all" | Source, string][] = [
   ["discord", "Discord"],
 ];
 
+const SORTS: [ReportSort, string][] = [
+  ["newest", "Newest first"],
+  ["similar", "Most similar reports"],
+  ["priority", "Priority"],
+  ["oldest", "Oldest first"],
+];
+
+/** P0 first; reports without a priority label last. */
+const prioRank = (r: Report) => (r.labels.prio ? Number(r.labels.prio.slice(1)) : 9);
+
 export function ReportsView() {
   const s = useStore((x) => x);
   const q = s.query.trim().toLowerCase();
+  const cluster = (r: Report) => s.clusterById.get(s.clusterOf.get(r.id)!);
+  const size = (r: Report) => cluster(r)?.reportIds.length ?? 1;
+  const newest = (a: Report, b: Report) => b.createdAt - a.createdAt;
+  const orders: Record<ReportSort, (a: Report, b: Report) => number> = {
+    newest,
+    oldest: (a, b) => a.createdAt - b.createdAt,
+    // biggest groups first; a group's reports stay together, the most recently active group first
+    similar: (a, b) =>
+      size(b) - size(a) ||
+      (cluster(b)?.lastAt ?? 0) - (cluster(a)?.lastAt ?? 0) ||
+      (s.clusterOf.get(a.id) ?? "").localeCompare(s.clusterOf.get(b.id) ?? "") ||
+      newest(a, b),
+    priority: (a, b) => prioRank(a) - prioRank(b) || newest(a, b),
+  };
+  /** The heading a report is listed under: its day, its group of similar reports, or its priority. */
+  const groupOf = (r: Report): [key: string, label: string] => {
+    if (s.reportSort === "similar") return size(r) > 1 ? [s.clusterOf.get(r.id)!, "Similar reports"] : ["single", "No similar reports"];
+    if (s.reportSort === "priority") return [r.labels.prio ?? "", r.labels.prio ?? "No priority"];
+    const d = dayLabel(r.createdAt, s.now);
+    return [d, d];
+  };
   const list = s.reports
     .filter(
       (r) =>
@@ -315,16 +355,16 @@ export function ReportsView() {
             .toLowerCase()
             .includes(q)),
     )
-    .sort((a, b) => b.createdAt - a.createdAt);
+    .sort(orders[s.reportSort]);
   // Counts come from the current results, so they show how far each label would narrow them.
   const tagCounts = new Map<string, number>();
   for (const r of list) for (const t of r.tags ?? []) if (!s.tags.includes(t)) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
-  const groups: [string, Report[]][] = [];
+  const groups: [string, string, Report[]][] = [];
   for (const r of list.slice(0, SHOW)) {
-    const d = dayLabel(r.createdAt, s.now);
+    const [key, label] = groupOf(r);
     const last = groups[groups.length - 1];
-    if (last && last[0] === d) last[1].push(r);
-    else groups.push([d, [r]]);
+    if (last && last[0] === key) last[2].push(r);
+    else groups.push([key, label, [r]]);
   }
   return (
     <section className="view">
@@ -344,20 +384,27 @@ export function ReportsView() {
           ))}
         </div>
         <TagFilter counts={tagCounts} selected={s.tags} />
+        <select className="sort" aria-label="Sort reports" value={s.reportSort} onChange={(e) => actions.reportSort(e.target.value as ReportSort)}>
+          {SORTS.map(([id, label]) => (
+            <option key={id} value={id}>
+              {label}
+            </option>
+          ))}
+        </select>
         <label className="check" title="Items a Nous staff member opened, is assigned, commented, reviewed or pushed on, or opened a PR for">
           <input type="checkbox" checked={s.hideOwned} onChange={(e) => actions.hideOwned(e.target.checked)} />
           Hide items staff are on
         </label>
         <span className="meta">
           {plural(list.length, "report")}
-          {list.length > SHOW && ` · showing the newest ${SHOW}; search to narrow`}
+          {list.length > SHOW && ` · showing the first ${SHOW}; search to narrow`}
         </span>
       </Head>
       {list.length === 0 && <Empty title="No reports match">Try a different search or remove a label filter.</Empty>}
-      {groups.map(([day, rs]) => (
-        <div key={day}>
+      {groups.map(([key, label, rs]) => (
+        <div key={key}>
           <h2 className="group-head">
-            {day} <span className="count">{rs.length}</span>
+            {label} <span className="count">{rs.length}</span>
           </h2>
           <ul className="list">
             {rs.map((r) => (

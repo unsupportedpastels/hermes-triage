@@ -44,6 +44,13 @@ export function ownerActs(o: Owner) {
   return listJoin(acts);
 }
 
+/** Staff active on any of these reports, with how many of them each is on, most first. */
+export function staffOn(reps: Report[]): [string, number][] {
+  const on = new Map<string, number>();
+  for (const r of reps) for (const o of r.owners ?? []) on.set(o.login, (on.get(o.login) ?? 0) + 1);
+  return [...on].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
 /** Counts timestamps into `n` equal buckets ending at `now`. */
 export function buckets(times: number[], now: number, spanMs: number, n: number) {
   const size = spanMs / n;

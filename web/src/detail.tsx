@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import pipeline from "./data/pipeline.json";
 import { SIM, actions, useStore, type State } from "./store";
 import type { Cluster, Incident, Report } from "./types";
-import { Age, LabelChips, LevelBadge, STATUS_NAME, SourceBadge, compName, fmtMinutes, plural, refLabel, stateName } from "./ui";
+import { Age, LabelChips, LevelBadge, STATUS_NAME, SourceBadge, compName, fmtMinutes, listJoin, plural, refLabel, staffOn, stateName } from "./ui";
 import { OwnerNote, SalvageNote } from "./views";
 
 const REPO_URL = "https://github.com/NousResearch/hermes-agent";
@@ -61,6 +61,7 @@ function ReportList({ ids, s }: { ids: string[]; s: State }) {
             <SourceBadge source={r.source} />
             <span className="ref">{refLabel(r)}</span>
             <span>{r.author}</span>
+            {r.owners?.length ? <span className="chip owned">Staff: {listJoin(r.owners.map((o) => o.login))}</span> : null}
             <span className="meta">
               <Age at={r.createdAt} now={s.now} />
             </span>
@@ -85,6 +86,9 @@ function AlertLink({ i }: { i: Incident }) {
 
 function IncidentDetail({ i, s }: { i: Incident; s: State }) {
   const [handoff, setHandoff] = useState(false);
+  const reps = i.reportIds.map((id) => s.byId.get(id)!);
+  const staff = staffOn(reps);
+  const unchecked = reps.filter((r) => !r.sample && !r.ownersChecked).length;
   return (
     <>
       <div className="d-top">
@@ -126,6 +130,20 @@ function IncidentDetail({ i, s }: { i: Incident; s: State }) {
         </ul>
       ) : (
         <p className="muted">No rule is firing right now.</p>
+      )}
+      <h3>Nous staff on it</h3>
+      {staff.length ? (
+        <ul className="owners">
+          {staff.map(([login, n]) => (
+            <li key={login}>
+              <b>{login}</b> on {n} of {plural(reps.length, "report")}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="muted">
+          {unchecked ? `None on the checked reports; ${unchecked} not checked yet.` : "None of them is active on these reports."}
+        </p>
       )}
       <h3>Reports ({i.reportIds.length})</h3>
       <ReportList ids={i.reportIds} s={s} />
