@@ -1,0 +1,87 @@
+{
+ "122222": {
+  "problem": "On self-managed installs the restart-safe cron external worker exits before its ownership ack with ModuleNotFoundError because pin_hermes_tree_on_pythonpath in cron/scheduler_worker_env.py restores only the repo root on PYTHONPATH and not the activated dependency site-packages, while sys.executable is the store Python that owns no dependencies.",
+  "query": "scheduler_worker_env.py pin_hermes_tree_on_pythonpath PYTHONPATH site-packages ModuleNotFoundError ruamel cron external worker",
+  "old_query": "cron external worker PYTHONPATH ruamel self-managed site-packages"
+ },
+ "122238": {
+  "problem": "Under a self-managed install, external cron workers crash with ModuleNotFoundError (e.g. \"No module named 'ruamel'\") because the subprocess sanitizer strips the activated dependency site-packages from PYTHONPATH and cron/scheduler_worker_env.py only restores repo_root.",
+  "query": "scheduler_worker_env.py pin_hermes_tree_on_pythonpath site-packages PYTHONPATH cron worker ModuleNotFoundError",
+  "old_query": "cron worker PYTHONPATH site-packages activated dependency"
+ },
+ "122529": {
+  "problem": "Every cron job fails with \"ModuleNotFoundError: No module named 'ruamel'\" because cron/scheduler_worker_env.py::pin_hermes_tree_on_pythonpath() only prepends the repo root to the external worker's PYTHONPATH and never adds the PM venv's site-packages where third-party dependencies live.",
+  "query": "scheduler_worker_env.py pin_hermes_tree_on_pythonpath site-packages PYTHONPATH ModuleNotFoundError ruamel.yaml cron external worker",
+  "old_query": "cron external worker PYTHONPATH site-packages ruamel pin_hermes_tree_on_pythonpath"
+ },
+ "122685": {
+  "problem": "The external cron worker dies with ModuleNotFoundError: No module named 'ruamel' because cron/scheduler_worker_env.py's pin_hermes_tree_on_pythonpath only re-pins the repo root and not the committed dependency environment's site-packages, so the worker's import chain cannot resolve.",
+  "query": "pin_hermes_tree_on_pythonpath scheduler_worker_env.py site-packages ruamel ModuleNotFoundError cron-worker",
+  "old_query": "cron external worker ruamel ModuleNotFoundError site-packages PYTHONPATH"
+ },
+ "123400": {
+  "problem": "External cron workers spawned by the gateway die with ModuleNotFoundError: No module named 'ruamel' because pin_hermes_tree_on_pythonpath() re-pins only the checkout root after the subprocess-env sanitizer strips the runtime site-packages, leaving the bare store Python without third-party packages.",
+  "query": "cron/scheduler_worker_env.py local_pythonpath.py ModuleNotFoundError ruamel external cron worker PYTHONPATH site-packages",
+  "old_query": "cron external worker ModuleNotFoundError ruamel PYTHONPATH pin_hermes_tree_on_pythonpath"
+ },
+ "123738": {
+  "problem": "Cron workers spawned with a sanitized env have the committed venv's site-packages stripped from PYTHONPATH by local_pythonpath.py, so their first third-party import (ruamel.yaml) fails before the ownership acknowledgement.",
+  "query": "pin_hermes_tree_on_pythonpath local_pythonpath.py build_subprocess_env site-packages ruamel cron worker ownership acknowledgement",
+  "old_query": "cron worker ownership acknowledgement ModuleNotFoundError ruamel pin_hermes_tree_on_pythonpath 112729"
+ },
+ "123875": {
+  "problem": "External cron workers crash on import with ModuleNotFoundError because cron/scheduler_worker_env.py's pin_hermes_tree_on_pythonpath rebuilt PYTHONPATH without the tree's companion site-packages, so the fix reuses _installed_purelib() to preserve that directory.",
+  "query": "scheduler_worker_env.py pin_hermes_tree_on_pythonpath _installed_purelib PYTHONPATH site-packages ModuleNotFoundError ruamel cron external worker",
+  "old_query": "cron external worker site-packages PYTHONPATH ModuleNotFoundError"
+ },
+ "122742": {
+  "problem": "POSIX .py cron scripts on a PM-managed install fail with ModuleNotFoundError for runtime dependencies because cron/scheduler_script.py's _script_argv non-Windows branch returns an empty env_overlay, leaving PYTHONPATH stripped so the child interpreter cannot import third-party packages.",
+  "query": "cron/scheduler_script.py _script_argv _posix_cron_python_invocation PYTHONPATH No module named ruamel cron script",
+  "old_query": "cron scheduler_script PYTHONPATH POSIX store Python"
+ },
+ "123044": {
+  "problem": "Cron `.py` job scripts on POSIX fail with ModuleNotFoundError because `cron/scheduler_script.py::_script_argv` runs them with the bare managed interpreter and `_windows_cron_python_invocation()` only overlays the repo and dependency site-packages when `sys.platform == \"win32\"`.",
+  "query": "_script_argv _windows_cron_python_invocation scheduler_script.py PYTHONPATH ModuleNotFoundError cron-script",
+  "old_query": "cron script_argv POSIX PYTHONPATH dependency environment"
+ },
+ "123440": {
+  "problem": "On POSIX PM-managed installs, cron .py scripts fail with ModuleNotFoundError for Hermes modules and managed packages because cron/scheduler_script.py::_script_argv launches them with sys.executable (the bare store interpreter) while build_subprocess_env strips PYTHONPATH and _windows_cron_python_invocation returns early off Windows.",
+  "query": "scheduler_script.py _script_argv sys.executable build_subprocess_env \"No module named 'cron'\" selected_venv cron-script",
+  "old_query": "cron .py import Hermes modules macOS managed install ModuleNotFoundError"
+ },
+ "123547": {
+  "problem": "On POSIX, cron jobs running Python scripts fail with ModuleNotFoundError because _windows_cron_python_invocation() in cron/scheduler_script.py only builds the PYTHONPATH overlay on Windows, so the managed store Python launches without the generation site-packages.",
+  "query": "scheduler_script.py _windows_cron_python_invocation PYTHONPATH ModuleNotFoundError cron POSIX",
+  "old_query": "cron PYTHONPATH POSIX ModuleNotFoundError generation environment"
+ },
+ "123548": {
+  "problem": "POSIX cron scripts that import third-party libraries fail with ModuleNotFoundError because _windows_cron_python_invocation() in cron/scheduler_script.py returns an empty env overlay on non-Windows platforms, so spawned script interpreters never receive the generation site-packages PYTHONPATH.",
+  "query": "scheduler_script.py _windows_cron_python_invocation PYTHONPATH env_overlay ModuleNotFoundError cron script",
+  "old_query": "cron scheduler POSIX PYTHONPATH ModuleNotFoundError generation environment"
+ },
+ "89422": {
+  "problem": "Cron script jobs crash project venv Python subprocesses with a cross-version 'ModuleNotFoundError: No module named numpy._core._multiarray_umath' because build_subprocess_env() in tools/environments/local.py never scrubs the gateway's inherited PYTHONPATH/PYTHONHOME before _run_job_script spawns the child.",
+  "query": "build_subprocess_env _run_job_script cron/scheduler.py tools/environments/local.py PYTHONPATH numpy._core._multiarray_umath script-job venv",
+  "old_query": "cron script PYTHONPATH build_subprocess_env scrub"
+ },
+ "89433": {
+  "problem": "Cron script jobs inherit the gateway's PYTHONPATH/PYTHONHOME because _run_job_script builds the child env via build_subprocess_env() without scrubbing interpreter variables, causing cross-version ModuleNotFoundError in user venvs.",
+  "query": "cron/scheduler.py _run_job_script build_subprocess_env PYTHONPATH PYTHONHOME ModuleNotFoundError script job",
+  "old_query": "cron PYTHONPATH PYTHONHOME script job leak"
+ },
+ "91239": {
+  "problem": "Gateway and cron restarts double the inherited PYTHONPATH each time because gateway/run.py and cron/scheduler.py append the whole inherited value as one element before dict.fromkeys dedupe instead of splitting it on os.pathsep first.",
+  "query": "_ensure_windows_gateway_venv_imports _start_detached_restart_helper _windows_cron_python_invocation PYTHONPATH dict.fromkeys os.pathsep duplicate restart",
+  "old_query": "PYTHONPATH exponential growth restart dedupe"
+ },
+ "108778": {
+  "problem": "The restart-safe cron worker is spawned with cwd set to the repo checkout, so terminal-tool calls lacking an explicit TERMINAL_CWD/MESSAGING_CWD fall back to os.getcwd() and permanently mount the hermes-agent source tree as the job's Docker /workspace; the fix spawns it from the profile HERMES_HOME cwd and prepends the repo root to the worker PYTHONPATH so `python -m cron.scheduler` still resolves.",
+  "query": "_launch_external_cron_worker _worker_env_with_repo_path cron.scheduler PYTHONPATH os.getcwd TERMINAL_CWD cron worker cwd",
+  "old_query": "external cron worker cwd repo PYTHONPATH"
+ },
+ "27660": {
+  "problem": "Clicking 'Always Approve' for destructive slash commands silently fails to persist because save_config_value() routes through atomic_roundtrip_yaml_update(), whose missing ruamel.yaml ImportError is swallowed and logged only after the misleading 'opted out' info line.",
+  "query": "save_config_value atomic_roundtrip_yaml_update ruamel.yaml destructive_slash_confirm Failed to save config Always Approve",
+  "old_query": "Always Approve destructive slash ruamel.yaml save_config_value"
+ }
+}

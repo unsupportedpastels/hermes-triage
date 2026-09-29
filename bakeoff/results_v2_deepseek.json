@@ -1,0 +1,1004 @@
+[
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123888,
+  "attempts": 1,
+  "latency_s": 7.4458911418914795,
+  "prompt_tokens": 1329,
+  "completion_tokens": 582,
+  "reasoning_tokens": 476,
+  "cost": 0.00072078,
+  "parsed": {
+   "problem_statement": "Hermes Desktop on Windows shows the first-run setup chooser on every launch even though the local runtime is healthy, because the launcher/`--version` resolution path fails silently and falls through to bootstrap-needed.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "desktop first-run chooser bootstrap-needed localBootstrapConfirmed resolveSourceInstallationBackend",
+   "confidence": 0.72
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Hermes Desktop on Windows shows the first-run setup chooser on every launch even though the local runtime is healthy, because the launcher/`--version` resolution path fails silently and falls through to bootstrap-needed.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P1\", \"duplicate_query\": \"desktop first-run chooser bootstrap-needed localBootstrapConfirmed resolveSourceInstallationBackend\", \"confidence\": 0.72}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123898,
+  "attempts": 1,
+  "latency_s": 62.49762272834778,
+  "prompt_tokens": 1358,
+  "completion_tokens": 505,
+  "reasoning_tokens": 421,
+  "cost": 0.00063708,
+  "parsed": {
+   "problem_statement": "Telegram replies rejected with send_path_degraded are recorded as failed in the delivery ledger but never redelivered until a gateway restart, because the runtime redelivery sweep is only triggered by full adapter reconnects and not by the Telegram polling-generation degradation/recovery path.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "send_path_degraded redelivery sweep telegram delivery_obligations",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Telegram replies rejected with send_path_degraded are recorded as failed in the delivery ledger but never redelivered until a gateway restart, because the runtime redelivery sweep is only triggered by full adapter reconnects and not by the Telegram polling-generation degradation/recovery path.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/gateway\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"send_path_degraded redelivery sweep telegram delivery_obligations\",\n  \"confidence\": 0.85\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123685,
+  "attempts": 1,
+  "latency_s": 2.3557939529418945,
+  "prompt_tokens": 1523,
+  "completion_tokens": 169,
+  "reasoning_tokens": 50,
+  "cost": 0.000245748,
+  "parsed": {
+   "problem_statement": "In the desktop app, archiving a session optimistically removes it from the sidebar but an in-flight list refresh merges the stale pre-archive row back as a ghost row lacking owner metadata, so clicking it fails with a fail-closed \"Session owner could not be resolved\" error until the window is reloaded.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "archive session sidebar resurrect ghost tombstone mergeSessionPage",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"In the desktop app, archiving a session optimistically removes it from the sidebar but an in-flight list refresh merges the stale pre-archive row back as a ghost row lacking owner metadata, so clicking it fails with a fail-closed \\\"Session owner could not be resolved\\\" error until the window is reloaded.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"archive session sidebar resurrect ghost tombstone mergeSessionPage\", \"confidence\": 0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123989,
+  "attempts": 1,
+  "latency_s": 12.371816635131836,
+  "prompt_tokens": 1767,
+  "completion_tokens": 796,
+  "reasoning_tokens": 696,
+  "cost": 0.000972564,
+  "parsed": {
+   "problem_statement": "On a multiplexed host gateway, API-server turns for different profiles can share one persistent Docker container because the derived API session id (and the environment cache lookup) does not include the serving profile, breaking documented per-profile sandbox isolation.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": "multiplex profiles docker container shared session id",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"On a multiplexed host gateway, API-server turns for different profiles can share one persistent Docker container because the derived API session id (and the environment cache lookup) does not include the serving profile, breaking documented per-profile sandbox isolation.\", \"kind\": \"bug\", \"component\": \"comp/gateway\", \"priority\": \"P1\", \"duplicate_query\": \"multiplex profiles docker container shared session id\", \"confidence\": 0.82}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123801,
+  "attempts": 1,
+  "latency_s": 3.7130091190338135,
+  "prompt_tokens": 1812,
+  "completion_tokens": 259,
+  "reasoning_tokens": 172,
+  "cost": 0.000359892,
+  "parsed": {
+   "problem_statement": "Hermes Desktop on macOS intermittently renders the same assistant reply twice (two separate assistant message roots) even though the gateway stored only one message row and emitted a single completion.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "duplicate assistant reply desktop stream root",
+   "confidence": 0.72
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Hermes Desktop on macOS intermittently renders the same assistant reply twice (two separate assistant message roots) even though the gateway stored only one message row and emitted a single completion.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"duplicate assistant reply desktop stream root\", \"confidence\": 0.72}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123856,
+  "attempts": 1,
+  "latency_s": 8.978525161743164,
+  "prompt_tokens": 1098,
+  "completion_tokens": 382,
+  "reasoning_tokens": 250,
+  "cost": 0.000486744,
+  "parsed": {
+   "problem_statement": "In the Electron desktop app, the stale-transcript guard (`refreshIfTranscriptStale`) refuses every send to a long (302-message) session with a non-converging \"conversation is stale\" toast, permanently locking the user out of that session even after an app restart.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "refreshIfTranscriptStale stale transcript guard desktop refusal loop LATEST_SESSION_MESSAGES_LIMIT",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"In the Electron desktop app, the stale-transcript guard (`refreshIfTranscriptStale`) refuses every send to a long (302-message) session with a non-converging \\\"conversation is stale\\\" toast, permanently locking the user out of that session even after an app restart.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"refreshIfTranscriptStale stale transcript guard desktop refusal loop LATEST_SESSION_MESSAGES_LIMIT\",\n  \"confidence\": 0.82\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 124006,
+  "attempts": 1,
+  "latency_s": 26.429062128067017,
+  "prompt_tokens": 1830,
+  "completion_tokens": 431,
+  "reasoning_tokens": 307,
+  "cost": 0.000539352,
+  "parsed": {
+   "problem_statement": "The `ultra` reasoning effort is only clamped to the accepted wire value `max` when the model string contains the literal \"gpt-5.6\", so on newer Codex models like `gpt-6-astra` it is sent unclamped and every call fails with a non-retryable HTTP 400, silencing the gateway.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "ultra reasoning effort clamp gpt-5.6 codex 400",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The `ultra` reasoning effort is only clamped to the accepted wire value `max` when the model string contains the literal \\\"gpt-5.6\\\", so on newer Codex models like `gpt-6-astra` it is sent unclamped and every call fails with a non-retryable HTTP 400, silencing the gateway.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P2\", \"duplicate_query\": \"ultra reasoning effort clamp gpt-5.6 codex 400\", \"confidence\": 0.85}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123787,
+  "attempts": 1,
+  "latency_s": 7.587812185287476,
+  "prompt_tokens": 1181,
+  "completion_tokens": 827,
+  "reasoning_tokens": 732,
+  "cost": 0.001008012,
+  "parsed": {
+   "problem_statement": "Outgoing email attachments with spaces, semicolons, or non-ASCII characters in the filename are sent with malformed Content-Disposition headers, so receivers see truncated names or do not recognize the attachment.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "duplicate_query": "email attachment filename Content-Disposition non-ASCII",
+   "confidence": 0.88
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Outgoing email attachments with spaces, semicolons, or non-ASCII characters in the filename are sent with malformed Content-Disposition headers, so receivers see truncated names or do not recognize the attachment.\", \"kind\": \"bug\", \"component\": \"comp/plugins\", \"priority\": \"P2\", \"duplicate_query\": \"email attachment filename Content-Disposition non-ASCII\", \"confidence\": 0.88}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123971,
+  "attempts": 1,
+  "latency_s": 26.78860569000244,
+  "prompt_tokens": 1796,
+  "completion_tokens": 389,
+  "reasoning_tokens": 274,
+  "cost": 0.000478752,
+  "parsed": {
+   "problem_statement": "On Windows, `hermes update` always exits 1 because the post-relaunch gateway liveness check cannot identify a gateway started by the Desktop via an inline-source command line, and the failed verification also deletes a running gateway's identity files and re-spawns it.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "Windows gateway relaunch not verified, inline source PID identity, update exit 1 gateway, gateway lock no PID metadata",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"On Windows, `hermes update` always exits 1 because the post-relaunch gateway liveness check cannot identify a gateway started by the Desktop via an inline-source command line, and the failed verification also deletes a running gateway's identity files and re-spawns it.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/gateway\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"Windows gateway relaunch not verified, inline source PID identity, update exit 1 gateway, gateway lock no PID metadata\",\n  \"confidence\": 0.82\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123768,
+  "attempts": 1,
+  "latency_s": 19.798964500427246,
+  "prompt_tokens": 1562,
+  "completion_tokens": 338,
+  "reasoning_tokens": 191,
+  "cost": 0.000422616,
+  "parsed": {
+   "problem_statement": "Live compression-config edits silently fail to reach sessions when a non-ContextCompressor context engine (e.g. hermes-lcm's LCMEngine) is active, because tui_gateway/session_compression.py calls the ContextCompressor staticmethod _coerce_threshold_tokens_cap as a bound method on the engine object, raising a swallowed AttributeError.",
+   "kind": "bug",
+   "component": "comp/tui",
+   "priority": "P2",
+   "duplicate_query": "session_compression _coerce_threshold_tokens_cap LCMEngine live compression config",
+   "confidence": 0.88
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Live compression-config edits silently fail to reach sessions when a non-ContextCompressor context engine (e.g. hermes-lcm's LCMEngine) is active, because tui_gateway/session_compression.py calls the ContextCompressor staticmethod _coerce_threshold_tokens_cap as a bound method on the engine object, raising a swallowed AttributeError.\", \"kind\": \"bug\", \"component\": \"comp/tui\", \"priority\": \"P2\", \"duplicate_query\": \"session_compression _coerce_threshold_tokens_cap LCMEngine live compression config\", \"confidence\": 0.88}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123781,
+  "attempts": 1,
+  "latency_s": 3.3325681686401367,
+  "prompt_tokens": 998,
+  "completion_tokens": 116,
+  "reasoning_tokens": 34,
+  "cost": 0.000212808,
+  "parsed": {
+   "problem_statement": "The CLI's /skin command lowercases its argument before matching against available skins, so user skins whose names contain uppercase letters can never be selected.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": "/skin Unknown skin case sensitivity _handle_skin_command",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The CLI's /skin command lowercases its argument before matching against available skins, so user skins whose names contain uppercase letters can never be selected.\", \"kind\": \"bug\", \"component\": \"comp/cli\", \"priority\": \"P2\", \"duplicate_query\": \"/skin Unknown skin case sensitivity _handle_skin_command\", \"confidence\": 0.95}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123988,
+  "attempts": 1,
+  "latency_s": 13.277056217193604,
+  "prompt_tokens": 1456,
+  "completion_tokens": 97,
+  "reasoning_tokens": 0,
+  "cost": 0.000139248,
+  "parsed": {
+   "problem_statement": "The TUI gateway's file.attach upload path allocates destination filenames with a non-atomic existence check, so concurrent same-name uploads can overwrite each other and failed writes leave partial files behind.",
+   "kind": "bug",
+   "component": "comp/tui",
+   "priority": "P2",
+   "duplicate_query": "file.attach atomic upload allocation tui_gateway",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The TUI gateway's file.attach upload path allocates destination filenames with a non-atomic existence check, so concurrent same-name uploads can overwrite each other and failed writes leave partial files behind.\", \"kind\": \"bug\", \"component\": \"comp/tui\", \"priority\": \"P2\", \"duplicate_query\": \"file.attach atomic upload allocation tui_gateway\", \"confidence\": 0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123832,
+  "attempts": 1,
+  "latency_s": 4.1483917236328125,
+  "prompt_tokens": 1413,
+  "completion_tokens": 373,
+  "reasoning_tokens": 261,
+  "cost": 0.0008715,
+  "parsed": {
+   "type": "json_object",
+   "problem_statement": "When a chat-completions stream drops with no finish_reason mid tool-call arguments, the assembler repairs the malformed JSON and executes the tool on guessed/truncated arguments instead of triggering the partial-stream retry.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "_repair_tool_call_arguments finish_reason None dropped stream truncated tool args",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\"type\": \"json_object\", \"problem_statement\": \"When a chat-completions stream drops with no finish_reason mid tool-call arguments, the assembler repairs the malformed JSON and executes the tool on guessed/truncated arguments instead of triggering the partial-stream retry.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P2\", \"duplicate_query\": \"_repair_tool_call_arguments finish_reason None dropped stream truncated tool args\", \"confidence\": 0.82}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123828,
+  "attempts": 1,
+  "latency_s": 34.25891470909119,
+  "prompt_tokens": 1469,
+  "completion_tokens": 328,
+  "reasoning_tokens": 225,
+  "cost": 0.000759036,
+  "parsed": {
+   "problem_statement": "`hermes update` unconditionally installs and rebuilds the ui-tui and web workspaces, so Desktop-only users have no way to skip components they never use.",
+   "kind": "feature",
+   "component": "comp/cli",
+   "priority": "P3",
+   "duplicate_query": "hermes update skip tui web build component-scoped",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"`hermes update` unconditionally installs and rebuilds the ui-tui and web workspaces, so Desktop-only users have no way to skip components they never use.\",\n  \"kind\": \"feature\",\n  \"component\": \"comp/cli\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"hermes update skip tui web build component-scoped\",\n  \"confidence\": 0.82\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 120575,
+  "attempts": 1,
+  "latency_s": 15.17900538444519,
+  "prompt_tokens": 1716,
+  "completion_tokens": 181,
+  "reasoning_tokens": 128,
+  "cost": 0.000280416,
+  "parsed": {
+   "problem_statement": "Desktop configuration views use inconsistent controls for binary on/off settings, mixing the canonical Switch with SegmentedControl and other idioms.",
+   "kind": "feature",
+   "component": "comp/desktop",
+   "priority": "P3",
+   "duplicate_query": "desktop Switch SegmentedControl binary settings consistency",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop configuration views use inconsistent controls for binary on/off settings, mixing the canonical Switch with SegmentedControl and other idioms.\",\"kind\":\"feature\",\"component\":\"comp/desktop\",\"priority\":\"P3\",\"duplicate_query\":\"desktop Switch SegmentedControl binary settings consistency\",\"confidence\":0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 120580,
+  "attempts": 1,
+  "latency_s": 5.586978912353516,
+  "prompt_tokens": 1559,
+  "completion_tokens": 216,
+  "reasoning_tokens": 118,
+  "cost": 0.000275316,
+  "parsed": {
+   "problem_statement": "In the desktop app, after a new reply the transcript re-renders the previous turn's tool activity and final answer, apparently because a superseded background-review run emits events the desktop stream treats as belonging to the live turn.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "background review superseded desktop duplicate render messages",
+   "confidence": 0.78
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"In the desktop app, after a new reply the transcript re-renders the previous turn's tool activity and final answer, apparently because a superseded background-review run emits events the desktop stream treats as belonging to the live turn.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"background review superseded desktop duplicate render messages\", \"confidence\": 0.78}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 119809,
+  "attempts": 1,
+  "latency_s": 24.76486873626709,
+  "prompt_tokens": 1773,
+  "completion_tokens": 343,
+  "reasoning_tokens": 260,
+  "cost": 0.000491916,
+  "parsed": {
+   "problem_statement": "On Windows, the desktop app stops every profile's messaging gateway before an update hand-off but only restarts them on abort paths, leaving all gateways down after a successful update.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "desktop gateway stop before update restart success",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"On Windows, the desktop app stops every profile's messaging gateway before an update hand-off but only restarts them on abort paths, leaving all gateways down after a successful update.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"desktop gateway stop before update restart success\",\n  \"confidence\": 0.85\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 121984,
+  "attempts": 1,
+  "latency_s": 39.93852162361145,
+  "prompt_tokens": 1314,
+  "completion_tokens": 467,
+  "reasoning_tokens": 385,
+  "cost": 0.00057828,
+  "parsed": {
+   "problem_statement": "An SSH-isolated `hermes serve --isolated` backend started on machine B for a remote Desktop client is indistinguishable from a local serve, so B's own Desktop can adopt it, `hermes update` misclassifies it as a manual serve, and it keeps running stale code after updates.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "isolated serve spawn ledger desktop discovery",
+   "confidence": 0.55
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"An SSH-isolated `hermes serve --isolated` backend started on machine B for a remote Desktop client is indistinguishable from a local serve, so B's own Desktop can adopt it, `hermes update` misclassifies it as a manual serve, and it keeps running stale code after updates.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"isolated serve spawn ledger desktop discovery\",\n  \"confidence\": 0.55\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 119991,
+  "attempts": 1,
+  "latency_s": 2.629289150238037,
+  "prompt_tokens": 1449,
+  "completion_tokens": 163,
+  "reasoning_tokens": 63,
+  "cost": 0.000216348,
+  "parsed": {
+   "problem_statement": "The dashboard's error extraction drops the server's structured 503 detail message (e.g. the `hermes doctor` instruction for a corrupt state.db) and shows a generic \"not ready yet\" sentence instead.",
+   "kind": "bug",
+   "component": "comp/dashboard",
+   "priority": "P2",
+   "duplicate_query": "extractDetail api-error.ts 503 detail corrupt state.db dashboard",
+   "confidence": 0.92
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The dashboard's error extraction drops the server's structured 503 detail message (e.g. the `hermes doctor` instruction for a corrupt state.db) and shows a generic \\\"not ready yet\\\" sentence instead.\", \"kind\": \"bug\", \"component\": \"comp/dashboard\", \"priority\": \"P2\", \"duplicate_query\": \"extractDetail api-error.ts 503 detail corrupt state.db dashboard\", \"confidence\": 0.92}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 120205,
+  "attempts": 1,
+  "latency_s": 41.59208846092224,
+  "prompt_tokens": 1312,
+  "completion_tokens": 397,
+  "reasoning_tokens": 302,
+  "cost": 0.000794736,
+  "parsed": {
+   "problem_statement": "On Windows, foreign_state_db_holders() always returns an empty list, so the state.db write-guard/preflight for `hermes sessions optimize-storage` and `prune` silently allows maintenance (FTS rebuild + VACUUM) while other processes hold the store.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P1",
+   "duplicate_query": "foreign_state_db_holders windows state.db write guard",
+   "confidence": 0.62
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"On Windows, foreign_state_db_holders() always returns an empty list, so the state.db write-guard/preflight for `hermes sessions optimize-storage` and `prune` silently allows maintenance (FTS rebuild + VACUUM) while other processes hold the store.\", \"kind\": \"bug\", \"component\": \"comp/cli\", \"priority\": \"P1\", \"duplicate_query\": \"foreign_state_db_holders windows state.db write guard\", \"confidence\": 0.62}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122845,
+  "attempts": 1,
+  "latency_s": 2.5581159591674805,
+  "prompt_tokens": 480,
+  "completion_tokens": 135,
+  "reasoning_tokens": 58,
+  "cost": 0.000193104,
+  "parsed": {
+   "problem_statement": "A placeholder probe issue titled '__Hobson_permission_probe__' with body 'temporary' contains no actionable problem description.",
+   "kind": "other",
+   "component": "comp/agent",
+   "priority": "P4",
+   "duplicate_query": "Hobson permission probe temporary",
+   "confidence": 0.2
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"A placeholder probe issue titled '__Hobson_permission_probe__' with body 'temporary' contains no actionable problem description.\", \"kind\": \"other\", \"component\": \"comp/agent\", \"priority\": \"P4\", \"duplicate_query\": \"Hobson permission probe temporary\", \"confidence\": 0.2}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 119961,
+  "attempts": 1,
+  "latency_s": 51.958391427993774,
+  "prompt_tokens": 2060,
+  "completion_tokens": 804,
+  "reasoning_tokens": 729,
+  "cost": 0.000980688,
+  "parsed": {
+   "problem_statement": "In the default in-place compression mode, `/compress here N` (and `up to here`/`--keep N`) drops the N kept exchanges from state.db, so both model and display history lose them on resume.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P0",
+   "duplicate_query": "compress here in-place state.db tail compress_now",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"In the default in-place compression mode, `/compress here N` (and `up to here`/`--keep N`) drops the N kept exchanges from state.db, so both model and display history lose them on resume.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P0\", \"duplicate_query\": \"compress here in-place state.db tail compress_now\", \"confidence\": 0.85}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 121347,
+  "attempts": 1,
+  "latency_s": 5.128655672073364,
+  "prompt_tokens": 995,
+  "completion_tokens": 504,
+  "reasoning_tokens": 375,
+  "cost": 0.000639876,
+  "parsed": {
+   "problem_statement": "The xai provider ignores a configured model.base_url and sends requests plus XAI_API_KEY to the canonical https://api.x.ai/v1 because _pool_entry_mode_and_url in hermes_cli/runtime_provider.py returns the registry default for xai via _POOL_ENTRY_SIMPLE_MODES without applying the model.base_url fallback other providers use.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": "xai base_url ignored runtime_provider pool entry",
+   "confidence": 0.87
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The xai provider ignores a configured model.base_url and sends requests plus XAI_API_KEY to the canonical https://api.x.ai/v1 because _pool_entry_mode_and_url in hermes_cli/runtime_provider.py returns the registry default for xai via _POOL_ENTRY_SIMPLE_MODES without applying the model.base_url fallback other providers use.\", \"kind\": \"bug\", \"component\": \"comp/cli\", \"priority\": \"P2\", \"duplicate_query\": \"xai base_url ignored runtime_provider pool entry\", \"confidence\": 0.87}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 116879,
+  "attempts": 1,
+  "latency_s": 28.14924645423889,
+  "prompt_tokens": 1183,
+  "completion_tokens": 350,
+  "reasoning_tokens": 297,
+  "cost": 0.000473844,
+  "parsed": {
+   "problem_statement": "A corrupt or legacy session row causes SessionEntry.from_dict to raise an uncaught KeyError/ValueError from direct key access and datetime.fromisoformat, crashing session restore/list instead of quarantining the bad record.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "SessionEntry.from_dict fromisoformat corrupt session row gateway session.py",
+   "confidence": 0.92
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"A corrupt or legacy session row causes SessionEntry.from_dict to raise an uncaught KeyError/ValueError from direct key access and datetime.fromisoformat, crashing session restore/list instead of quarantining the bad record.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P2\",\"duplicate_query\":\"SessionEntry.from_dict fromisoformat corrupt session row gateway session.py\",\"confidence\":0.92}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 116880,
+  "attempts": 1,
+  "latency_s": 14.014910459518433,
+  "prompt_tokens": 1213,
+  "completion_tokens": 199,
+  "reasoning_tokens": 110,
+  "cost": 0.000527436,
+  "parsed": {
+   "problem_statement": "In agent/conversation_compression.py the todo-snapshot pass appends a synthetic user message with a raw list.append instead of append_message(), allowing user,user role adjacency that strict-alternation providers reject with a 400 mid-compression.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "compression todo snapshot append_message alternation",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"In agent/conversation_compression.py the todo-snapshot pass appends a synthetic user message with a raw list.append instead of append_message(), allowing user,user role adjacency that strict-alternation providers reject with a 400 mid-compression.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P2\", \"duplicate_query\": \"compression todo snapshot append_message alternation\", \"confidence\": 0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 113039,
+  "attempts": 1,
+  "latency_s": 38.78630709648132,
+  "prompt_tokens": 570,
+  "completion_tokens": 541,
+  "reasoning_tokens": 434,
+  "cost": 0.000744936,
+  "parsed": {
+   "problem_statement": "In a multiplexed/routed profile process, save_permanent_allowlist reads config via load_config() (which may reflect the launch profile's merged/default config) but writes to the routed profile's config path, so unrelated routed-profile keys can be overwritten; it should read via read_raw_config() and only modify command_allowlist.",
+   "kind": "bug",
+   "component": "comp/tools",
+   "priority": "P1",
+   "duplicate_query": "save_permanent_allowlist read_raw_config routed profile command_allowlist",
+   "confidence": 0.6
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"In a multiplexed/routed profile process, save_permanent_allowlist reads config via load_config() (which may reflect the launch profile's merged/default config) but writes to the routed profile's config path, so unrelated routed-profile keys can be overwritten; it should read via read_raw_config() and only modify command_allowlist.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/tools\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"save_permanent_allowlist read_raw_config routed profile command_allowlist\",\n  \"confidence\": 0.6\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 120897,
+  "attempts": 1,
+  "latency_s": 3.0551486015319824,
+  "prompt_tokens": 2167,
+  "completion_tokens": 534,
+  "reasoning_tokens": 410,
+  "cost": 0.0012909,
+  "parsed": {
+   "problem_statement": "Kaspersky's static file heuristic flags the unsigned, minified desktop Electron main-process bundle electron-main.mjs as a password-stealer trojan (HEUR:Trojan-PSW.JS.Disco.gen), a false positive on the app's own clean build output.",
+   "kind": "other",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "Kaspersky HEUR:Trojan-PSW.JS.Disco.gen electron-main.mjs false positive",
+   "confidence": 0.75
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Kaspersky's static file heuristic flags the unsigned, minified desktop Electron main-process bundle electron-main.mjs as a password-stealer trojan (HEUR:Trojan-PSW.JS.Disco.gen), a false positive on the app's own clean build output.\", \"kind\": \"other\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"Kaspersky HEUR:Trojan-PSW.JS.Disco.gen electron-main.mjs false positive\", \"confidence\": 0.75}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 115185,
+  "attempts": 1,
+  "latency_s": 13.902196645736694,
+  "prompt_tokens": 742,
+  "completion_tokens": 232,
+  "reasoning_tokens": 144,
+  "cost": 0.00028932,
+  "parsed": {
+   "problem_statement": "The SenseNova custom provider's insufficient_quota error is misclassified as a billing error rather than a rate limit, causing incorrect error handling.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "insufficient_quota SenseNova billing error rate limit custom provider",
+   "confidence": 0.6
+  },
+  "error": null,
+  "raw": " {\"problem_statement\": \"The SenseNova custom provider's insufficient_quota error is misclassified as a billing error rather than a rate limit, causing incorrect error handling.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P2\", \"duplicate_query\": \"insufficient_quota SenseNova billing error rate limit custom provider\", \"confidence\": 0.6}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 116352,
+  "attempts": 1,
+  "latency_s": 45.122727394104004,
+  "prompt_tokens": 793,
+  "completion_tokens": 832,
+  "reasoning_tokens": 751,
+  "cost": 0.001019328,
+  "parsed": {
+   "problem_statement": "Hermes reports the user's API key is not working and fails to start replies with an internal error, preventing any use of the agent.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "api key not working internal problem starting reply diagnostics",
+   "confidence": 0.4
+  },
+  "error": null,
+  "raw": " {\"problem_statement\": \"Hermes reports the user's API key is not working and fails to start replies with an internal error, preventing any use of the agent.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P2\", \"duplicate_query\": \"api key not working internal problem starting reply diagnostics\", \"confidence\": 0.4}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123195,
+  "attempts": 1,
+  "latency_s": 12.06868577003479,
+  "prompt_tokens": 517,
+  "completion_tokens": 184,
+  "reasoning_tokens": 115,
+  "cost": 0.000300636,
+  "parsed": {
+   "problem_statement": "The reporter withdrew this issue, stating it was filed in error and should be deleted.",
+   "kind": "other",
+   "component": "comp/agent",
+   "priority": "P4",
+   "duplicate_query": "withdrawn filed in error delete issue",
+   "confidence": 0.2
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The reporter withdrew this issue, stating it was filed in error and should be deleted.\",\n  \"kind\": \"other\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P4\",\n  \"duplicate_query\": \"withdrawn filed in error delete issue\",\n  \"confidence\": 0.2\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 114741,
+  "attempts": 1,
+  "latency_s": 37.79632115364075,
+  "prompt_tokens": 1676,
+  "completion_tokens": 518,
+  "reasoning_tokens": 439,
+  "cost": 0.001049136,
+  "parsed": {
+   "problem_statement": "The stale-stream watchdog failed to enforce its 600s threshold and killed a dead stream only after 23,261s (6.46h), leaving a turn hung silently with no user-visible signal.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "stale stream watchdog threshold stale_stream_kill",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The stale-stream watchdog failed to enforce its 600s threshold and killed a dead stream only after 23,261s (6.46h), leaving a turn hung silently with no user-visible signal.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P1\", \"duplicate_query\": \"stale stream watchdog threshold stale_stream_kill\", \"confidence\": 0.82}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 120215,
+  "attempts": 1,
+  "latency_s": 31.369926691055298,
+  "prompt_tokens": 1110,
+  "completion_tokens": 440,
+  "reasoning_tokens": 370,
+  "cost": 0.000785736,
+  "parsed": {
+   "problem_statement": "The desktop transcript-tail cache can permanently freeze a session's view on stale content after a websocket detach, persisting across app restarts because the cache entry is never invalidated when the authoritative reconcile fails to land.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "transcript-tail-cache stale freeze websocket detach localStorage",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The desktop transcript-tail cache can permanently freeze a session's view on stale content after a websocket detach, persisting across app restarts because the cache entry is never invalidated when the authoritative reconcile fails to land.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"transcript-tail-cache stale freeze websocket detach localStorage\", \"confidence\": 0.82}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123949,
+  "attempts": 1,
+  "latency_s": 21.546540021896362,
+  "prompt_tokens": 824,
+  "completion_tokens": 307,
+  "reasoning_tokens": 218,
+  "cost": 0.000540336,
+  "parsed": {
+   "problem_statement": "The kanban workflow lacks a durable, replay-safe release approval gate that intercepts the authenticated 'freigegeben' reply in gateway paths and invokes a versioned adapter contract with lease-based resume and receipt validation.",
+   "kind": "feature",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "kanban release approval gate freigegeben intercept",
+   "confidence": 0.6
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"The kanban workflow lacks a durable, replay-safe release approval gate that intercepts the authenticated 'freigegeben' reply in gateway paths and invokes a versioned adapter contract with lease-based resume and receipt validation.\", \"kind\": \"feature\", \"component\": \"comp/gateway\", \"priority\": \"P2\", \"duplicate_query\": \"kanban release approval gate freigegeben intercept\", \"confidence\": 0.6}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123950,
+  "attempts": 1,
+  "latency_s": 4.157485723495483,
+  "prompt_tokens": 1132,
+  "completion_tokens": 153,
+  "reasoning_tokens": 47,
+  "cost": 0.0005232,
+  "parsed": {
+   "problem_statement": "ContextCompressor._prune_old_tool_results() starts its demote/truncate passes at index 0, so tool results inside the protect_first_n head (e.g. a kanban_show task card) get stubbed on first compaction.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "protect_first_n prune tool results context compressor",
+   "confidence": 0.92
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"ContextCompressor._prune_old_tool_results() starts its demote/truncate passes at index 0, so tool results inside the protect_first_n head (e.g. a kanban_show task card) get stubbed on first compaction.\", \"kind\": \"bug\", \"component\": \"comp/agent\", \"priority\": \"P2\", \"duplicate_query\": \"protect_first_n prune tool results context compressor\", \"confidence\": 0.92}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123872,
+  "attempts": 1,
+  "latency_s": 19.43438959121704,
+  "prompt_tokens": 1334,
+  "completion_tokens": 188,
+  "reasoning_tokens": 117,
+  "cost": 0.000550536,
+  "parsed": {
+   "problem_statement": "Desktop Discover aborts a healthy but slow catalog download after a fixed 60-second total deadline, reporting it as a user-aborted request.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop catalog download timeout AbortSignal fetchCatalog abort",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop Discover aborts a healthy but slow catalog download after a fixed 60-second total deadline, reporting it as a user-aborted request.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"desktop catalog download timeout AbortSignal fetchCatalog abort\",\"confidence\":0.85}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 124004,
+  "attempts": 1,
+  "latency_s": 4.40299129486084,
+  "prompt_tokens": 564,
+  "completion_tokens": 328,
+  "reasoning_tokens": 237,
+  "cost": 0.0005628,
+  "parsed": {
+   "problem_statement": "Kanban review handoffs can target stale or invalid reviewer profiles, so review work is not routed to a valid reviewer; this PR resolves handoffs to a deterministic installed profile and adds an optional kanban.default_reviewer setting.",
+   "kind": "bug",
+   "component": "comp/dashboard",
+   "priority": "P2",
+   "duplicate_query": "kanban review handoff reviewer default_reviewer stale reviewer",
+   "confidence": 0.82
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Kanban review handoffs can target stale or invalid reviewer profiles, so review work is not routed to a valid reviewer; this PR resolves handoffs to a deterministic installed profile and adds an optional kanban.default_reviewer setting.\",\"kind\":\"bug\",\"component\":\"comp/dashboard\",\"priority\":\"P2\",\"duplicate_query\":\"kanban review handoff reviewer default_reviewer stale reviewer\",\"confidence\":0.82}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123905,
+  "attempts": 1,
+  "latency_s": 1.7746312618255615,
+  "prompt_tokens": 1503,
+  "completion_tokens": 257,
+  "reasoning_tokens": 148,
+  "cost": 0.0007593,
+  "parsed": {
+   "problem_statement": "Home Assistant attribute-only state_changed events (old state == new state) consume the per-entity cooldown, so a real state change arriving within the cooldown window is silently dropped.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "confidence": 0.9,
+   "duplicate_query": "homeassistant cooldown state_changed attribute-only"
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Home Assistant attribute-only state_changed events (old state == new state) consume the per-entity cooldown, so a real state change arriving within the cooldown window is silently dropped.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/plugins\",\n  \"priority\": \"P2\",\n  \"confidence\": 0.9,\n  \"duplicate_query\": \"homeassistant cooldown state_changed attribute-only\"\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123932,
+  "attempts": 1,
+  "latency_s": 7.104996204376221,
+  "prompt_tokens": 1716,
+  "completion_tokens": 722,
+  "reasoning_tokens": 650,
+  "cost": 0.0013812,
+  "parsed": {
+   "problem_statement": "New sessions can resolve the singleton Nous JWT even when the credential is billing-benched, causing an avoidable failing inference request before the configured fallback is attempted.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "billing-benched Nous fallback runtime",
+   "confidence": 0.65
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"New sessions can resolve the singleton Nous JWT even when the credential is billing-benched, causing an avoidable failing inference request before the configured fallback is attempted.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":\"billing-benched Nous fallback runtime\",\"confidence\":0.65}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122922,
+  "attempts": 1,
+  "latency_s": 22.777342557907104,
+  "prompt_tokens": 887,
+  "completion_tokens": 158,
+  "reasoning_tokens": 82,
+  "cost": 0.000380436,
+  "parsed": {
+   "problem_statement": "In the desktop model catalog menu, reasoning effort (and other meta values) is rendered as plain text appended to the model name, making it look like part of the model name rather than a separate setting.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P3",
+   "duplicate_query": "model catalog reasoning effort badge chip model name",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"In the desktop model catalog menu, reasoning effort (and other meta values) is rendered as plain text appended to the model name, making it look like part of the model name rather than a separate setting.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P3\",\"duplicate_query\":\"model catalog reasoning effort badge chip model name\",\"confidence\":0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122923,
+  "attempts": 1,
+  "latency_s": 6.587445974349976,
+  "prompt_tokens": 1046,
+  "completion_tokens": 231,
+  "reasoning_tokens": 132,
+  "cost": 0.000591,
+  "parsed": {
+   "problem_statement": "A single shared unscopedStreamSessionId pin in the desktop gateway-event router lets concurrently streaming chats overwrite each other's pin, so one session's stream deltas and tool events get grafted onto another session's transcript.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "unscopedStreamSessionId session merging desktop stream",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"A single shared unscopedStreamSessionId pin in the desktop gateway-event router lets concurrently streaming chats overwrite each other's pin, so one session's stream deltas and tool events get grafted onto another session's transcript.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"unscopedStreamSessionId session merging desktop stream\", \"confidence\": 0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122295,
+  "attempts": 1,
+  "latency_s": 5.00954794883728,
+  "prompt_tokens": 1105,
+  "completion_tokens": 393,
+  "reasoning_tokens": 301,
+  "cost": 0.0008031,
+  "parsed": {
+   "type": "json_object",
+   "problem_statement": "Desktop SSH-mode connect failures return a classified error but log nothing about exit code, signal, or stderr, so the cause of the macOS SSH drop cannot be diagnosed.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P3",
+   "duplicate_query": "desktop ssh connection failed logging diagnostics",
+   "confidence": 0.8
+  },
+  "error": null,
+  "raw": "{\"type\": \"json_object\", \"problem_statement\": \"Desktop SSH-mode connect failures return a classified error but log nothing about exit code, signal, or stderr, so the cause of the macOS SSH drop cannot be diagnosed.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P3\", \"duplicate_query\": \"desktop ssh connection failed logging diagnostics\", \"confidence\": 0.8}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123220,
+  "attempts": 1,
+  "latency_s": 30.297903060913086,
+  "prompt_tokens": 962,
+  "completion_tokens": 395,
+  "reasoning_tokens": 258,
+  "cost": 0.0007626,
+  "parsed": {
+   "problem_statement": "The e2e cron soak test is SIGKILLed at the 900s per-file cap because the autouse HomeIOGuard's check() is too slow (~611\u03bcs per guarded syscall), so the PR rewrites it to make the same decision on case-folded strings for a ~40\u00d7 speedup.",
+   "kind": "other",
+   "component": "comp/cron",
+   "priority": "P2",
+   "duplicate_query": "cron soak HomeIOGuard 900s timeout SIGKILL",
+   "confidence": 0.55
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The e2e cron soak test is SIGKILLed at the 900s per-file cap because the autouse HomeIOGuard's check() is too slow (~611\u03bcs per guarded syscall), so the PR rewrites it to make the same decision on case-folded strings for a ~40\u00d7 speedup.\",\n  \"kind\": \"other\",\n  \"component\": \"comp/cron\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"cron soak HomeIOGuard 900s timeout SIGKILL\",\n  \"confidence\": 0.55\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122841,
+  "attempts": 1,
+  "latency_s": 26.6561119556427,
+  "prompt_tokens": 1058,
+  "completion_tokens": 440,
+  "reasoning_tokens": 351,
+  "cost": 0.000565218,
+  "parsed": {
+   "problem_statement": "Background terminal jobs cannot opt out of agent-lifecycle kill sweeps, so long-running jobs the user explicitly requested are SIGTERM'd mid-run when the session turns over.",
+   "kind": "feature",
+   "component": "comp/tools",
+   "priority": "P2",
+   "duplicate_query": "persist_on_release background jobs kill_all lifecycle",
+   "confidence": 0.65
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Background terminal jobs cannot opt out of agent-lifecycle kill sweeps, so long-running jobs the user explicitly requested are SIGTERM'd mid-run when the session turns over.\", \"kind\": \"feature\", \"component\": \"comp/tools\", \"priority\": \"P2\", \"duplicate_query\": \"persist_on_release background jobs kill_all lifecycle\", \"confidence\": 0.65}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122900,
+  "attempts": 1,
+  "latency_s": 31.991544485092163,
+  "prompt_tokens": 856,
+  "completion_tokens": 394,
+  "reasoning_tokens": 327,
+  "cost": 0.000654336,
+  "parsed": {
+   "problem_statement": "An empty desktop.repo_scan_roots config silently caused the Desktop app to scan the user's entire home directory on every launch, so the fix makes empty roots a safe no-op that requires explicit opt-in configuration.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop repo_scan_roots home directory scan",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"An empty desktop.repo_scan_roots config silently caused the Desktop app to scan the user's entire home directory on every launch, so the fix makes empty roots a safe no-op that requires explicit opt-in configuration.\", \"kind\": \"bug\", \"component\": \"comp/desktop\", \"priority\": \"P2\", \"duplicate_query\": \"desktop repo_scan_roots home directory scan\", \"confidence\": 0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 124001,
+  "attempts": 1,
+  "latency_s": 139.61602902412415,
+  "prompt_tokens": 958,
+  "completion_tokens": 1698,
+  "reasoning_tokens": 1778,
+  "cost": 0.002249736,
+  "parsed": {
+   "problem_statement": "The plugin catalog and related plugin/author pages are unreadable in light mode because of low-contrast colors.",
+   "kind": "bug",
+   "component": "comp/dashboard",
+   "priority": "P2",
+   "duplicate_query": "plugin catalog light mode contrast",
+   "confidence": 0.6
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The plugin catalog and related plugin/author pages are unreadable in light mode because of low-contrast colors.\",\"kind\":\"bug\",\"component\":\"comp/dashboard\",\"priority\":\"P2\",\"duplicate_query\":\"plugin catalog light mode contrast\",\"confidence\":0.6}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122894,
+  "attempts": 1,
+  "latency_s": 3.712057113647461,
+  "prompt_tokens": 696,
+  "completion_tokens": 342,
+  "reasoning_tokens": 261,
+  "cost": 0.0006192,
+  "parsed": {
+   "problem_statement": "v2 memory checkpoint providers only receive normalized messages that omit tool output, so external archival providers cannot access the complete pre-compression transcript.",
+   "kind": "feature",
+   "component": "comp/agent",
+   "priority": "P3",
+   "duplicate_query": "raw transcript checkpoint raw_messages pre-compression memory provider",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"v2 memory checkpoint providers only receive normalized messages that omit tool output, so external archival providers cannot access the complete pre-compression transcript.\", \"kind\": \"feature\", \"component\": \"comp/agent\", \"priority\": \"P3\", \"duplicate_query\": \"raw transcript checkpoint raw_messages pre-compression memory provider\", \"confidence\": 0.85}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122904,
+  "attempts": 1,
+  "latency_s": 5.338708162307739,
+  "prompt_tokens": 540,
+  "completion_tokens": 254,
+  "reasoning_tokens": 170,
+  "cost": 0.000391536,
+  "parsed": {
+   "problem_statement": "An auto-generated formatting PR applies `npm run fix` to auto-fix lint and formatting issues in the JavaScript codebase.",
+   "kind": "other",
+   "component": "comp/dashboard",
+   "priority": "P4",
+   "duplicate_query": "npm run fix auto-fix formatting lint",
+   "confidence": 0.35
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"An auto-generated formatting PR applies `npm run fix` to auto-fix lint and formatting issues in the JavaScript codebase.\",\n  \"kind\": \"other\",\n  \"component\": \"comp/dashboard\",\n  \"priority\": \"P4\",\n  \"duplicate_query\": \"npm run fix auto-fix formatting lint\",\n  \"confidence\": 0.35\n}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 121799,
+  "attempts": 1,
+  "latency_s": 3.896988868713379,
+  "prompt_tokens": 540,
+  "completion_tokens": 66,
+  "reasoning_tokens": 0,
+  "cost": 0.0002412,
+  "parsed": {
+   "problem_statement": "The repository contains lint/formatting issues in JS files that need to be auto-fixed by running `npm run fix`.",
+   "kind": "other",
+   "component": "comp/cli",
+   "priority": "P4",
+   "duplicate_query": "npm run fix auto-fix formatting lint",
+   "confidence": 0.35
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The repository contains lint/formatting issues in JS files that need to be auto-fixed by running `npm run fix`.\",\"kind\":\"other\",\"component\":\"comp/cli\",\"priority\":\"P4\",\"duplicate_query\":\"npm run fix auto-fix formatting lint\",\"confidence\":0.35}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 123668,
+  "attempts": 1,
+  "latency_s": 7.739505290985107,
+  "prompt_tokens": 2106,
+  "completion_tokens": 559,
+  "reasoning_tokens": 457,
+  "cost": 0.001227336,
+  "parsed": {
+   "problem_statement": "On Windows PM-managed installs, cron scripts are spawned with the wrong interpreter's site-packages, causing every script to fail with `No module named 'pydantic_core._pydantic_core'`.",
+   "kind": "bug",
+   "component": "comp/cron",
+   "priority": "P1",
+   "duplicate_query": "windows cron venv pydantic_core committed_venv",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"On Windows PM-managed installs, cron scripts are spawned with the wrong interpreter's site-packages, causing every script to fail with `No module named 'pydantic_core._pydantic_core'`.\", \"kind\": \"bug\", \"component\": \"comp/cron\", \"priority\": \"P1\", \"duplicate_query\": \"windows cron venv pydantic_core committed_venv\", \"confidence\": 0.9}"
+ },
+ {
+  "model": "deepseek/deepseek-v4.1-flash",
+  "number": 122315,
+  "attempts": 1,
+  "latency_s": 18.079132080078125,
+  "prompt_tokens": 540,
+  "completion_tokens": 301,
+  "reasoning_tokens": 225,
+  "cost": 0.000373848,
+  "parsed": {
+   "problem_statement": "An auto-generated workflow PR applies `npm run fix` to auto-fix JavaScript lint and formatting issues in the repository.",
+   "kind": "other",
+   "component": "comp/dashboard",
+   "priority": "P4",
+   "duplicate_query": "npm run fix auto-fix formatting lint",
+   "confidence": 0.35
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"An auto-generated workflow PR applies `npm run fix` to auto-fix JavaScript lint and formatting issues in the repository.\", \"kind\": \"other\", \"component\": \"comp/dashboard\", \"priority\": \"P4\", \"duplicate_query\": \"npm run fix auto-fix formatting lint\", \"confidence\": 0.35}"
+ }
+]

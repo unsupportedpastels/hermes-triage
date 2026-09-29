@@ -1,0 +1,2151 @@
+[
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123888,
+  "attempts": 1,
+  "latency_s": 1.9774518013000488,
+  "prompt_tokens": 1172,
+  "completion_tokens": 145,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Hermes Desktop repeatedly shows the first-run setup chooser on Windows despite a healthy local runtime, because launcher and version-probe resolution failures are silently treated as missing installations.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": [
+    "Desktop first-run setup chooser",
+    "bootstrap-needed local installation",
+    "Windows launcher resolution",
+    "Hermes version probe timeout",
+    "stale bootstrap marker"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Hermes Desktop repeatedly shows the first-run setup chooser on Windows despite a healthy local runtime, because launcher and version-probe resolution failures are silently treated as missing installations.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":[\"Desktop first-run setup chooser\",\"bootstrap-needed local installation\",\"Windows launcher resolution\",\"Hermes version probe timeout\",\"stale bootstrap marker\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123898,
+  "attempts": 1,
+  "latency_s": 2.174882173538208,
+  "prompt_tokens": 1185,
+  "completion_tokens": 138,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Telegram responses rejected with send_path_degraded are left failed in the delivery ledger because runtime redelivery is only triggered by a full adapter reconnect, so replies remain undelivered until gateway restart.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "Telegram send_path_degraded runtime redelivery sweep failed obligations adapter reconnect",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Telegram responses rejected with send_path_degraded are left failed in the delivery ledger because runtime redelivery is only triggered by a full adapter reconnect, so replies remain undelivered until gateway restart.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P2\",\"duplicate_query\":\"Telegram send_path_degraded runtime redelivery sweep failed obligations adapter reconnect\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123685,
+  "attempts": 1,
+  "latency_s": 2.2083661556243896,
+  "prompt_tokens": 1350,
+  "completion_tokens": 114,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Archiving a desktop session can cause a stale sidebar row to reappear with missing owner metadata, making the ghost session unopenable until the app reloads.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop archive session sidebar ghost owner resolution mergeSessionPage",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Archiving a desktop session can cause a stale sidebar row to reappear with missing owner metadata, making the ghost session unopenable until the app reloads.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"desktop archive session sidebar ghost owner resolution mergeSessionPage\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123989,
+  "attempts": 1,
+  "latency_s": 2.536454916000366,
+  "prompt_tokens": 1561,
+  "completion_tokens": 128,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "API-server requests from different profiles can collide on the same derived session ID and reuse each other\u2019s persistent Docker sandbox, violating profile isolation and applying the wrong image, mounts, and policy.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": "multiplex profiles API session ID Docker sandbox isolation profile-scoped environment cache",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"API-server requests from different profiles can collide on the same derived session ID and reuse each other\u2019s persistent Docker sandbox, violating profile isolation and applying the wrong image, mounts, and policy.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P1\",\"duplicate_query\":\"multiplex profiles API session ID Docker sandbox isolation profile-scoped environment cache\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123801,
+  "attempts": 1,
+  "latency_s": 5.4598588943481445,
+  "prompt_tokens": 1645,
+  "completion_tokens": 105,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "macOS Desktop intermittently renders a single completed assistant response twice by combining history and live-stream message roots.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": [
+    "macOS desktop",
+    "duplicate assistant reply",
+    "history live reconciliation",
+    "folded transcript",
+    "stream completion",
+    "d0288be5"
+   ],
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"macOS Desktop intermittently renders a single completed assistant response twice by combining history and live-stream message roots.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":[\"macOS desktop\",\"duplicate assistant reply\",\"history live reconciliation\",\"folded transcript\",\"stream completion\",\"d0288be5\"],\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123856,
+  "attempts": 1,
+  "latency_s": 1.7884459495544434,
+  "prompt_tokens": 961,
+  "completion_tokens": 123,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The desktop stale-transcript guard can repeatedly refuse prompts in a long session after a gateway reconnect, permanently locking the user out despite the transcript being static and healthy.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop stale transcript guard conversation expired refreshIfTranscriptStale gateway reconnect",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The desktop stale-transcript guard can repeatedly refuse prompts in a long session after a gateway reconnect, permanently locking the user out despite the transcript being static and healthy.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"desktop stale transcript guard conversation expired refreshIfTranscriptStale gateway reconnect\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 124006,
+  "attempts": 1,
+  "latency_s": 3.8241865634918213,
+  "prompt_tokens": 1662,
+  "completion_tokens": 179,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The `ultra` reasoning effort is sent unchanged to gpt-6 Codex Responses models because clamping is limited to the literal gpt-5.6 model name, causing every gateway call to fail with a non-retryable 400.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": [
+    "gpt-6",
+    "reasoning effort",
+    "ultra",
+    "Codex Responses",
+    "400 clamp"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The `ultra` reasoning effort is sent unchanged to gpt-6 Codex Responses models because clamping is limited to the literal gpt-5.6 model name, causing every gateway call to fail with a non-retryable 400.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":[\"gpt-6\",\"reasoning effort\",\"ultra\",\"Codex Responses\",\"400 clamp\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123787,
+  "attempts": 1,
+  "latency_s": 2.1532936096191406,
+  "prompt_tokens": 1010,
+  "completion_tokens": 140,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Outgoing email attachment filenames are truncated or make attachments unrecognized when they contain spaces, semicolons, or non-ASCII characters because Content-Disposition parameters are interpolated without proper quoting and encoding.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "duplicate_query": "email attachment filename Content-Disposition non-ASCII semicolon _attach_file",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Outgoing email attachment filenames are truncated or make attachments unrecognized when they contain spaces, semicolons, or non-ASCII characters because Content-Disposition parameters are interpolated without proper quoting and encoding.\",\"kind\":\"bug\",\"component\":\"comp/plugins\",\"priority\":\"P2\",\"duplicate_query\":\"email attachment filename Content-Disposition non-ASCII semicolon _attach_file\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123971,
+  "attempts": 1,
+  "latency_s": 4.040898084640503,
+  "prompt_tokens": 1570,
+  "completion_tokens": 163,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "On Windows, the Desktop-started gateway is incorrectly rejected by post-update process verification because its inline Hermes launcher source is not recognized, causing successful updates to return exit 1 and repeatedly restart the gateway.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": [
+    "Windows gateway PID identity inline source",
+    "hermes update relaunch verification exit 1",
+    "gateway.pid deleted inline launcher",
+    "resume retry gateway replace",
+    "gateway status command line matcher"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"On Windows, the Desktop-started gateway is incorrectly rejected by post-update process verification because its inline Hermes launcher source is not recognized, causing successful updates to return exit 1 and repeatedly restart the gateway.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P1\",\"duplicate_query\":[\"Windows gateway PID identity inline source\",\"hermes update relaunch verification exit 1\",\"gateway.pid deleted inline launcher\",\"resume retry gateway replace\",\"gateway status command line matcher\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123768,
+  "attempts": 1,
+  "latency_s": 2.3229265213012695,
+  "prompt_tokens": 1356,
+  "completion_tokens": 182,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Live compression configuration updates fail for non-ContextCompressor context engines because the gateway calls a compressor-specific static method on the active engine, causing partial updates and stale cached token budgets.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": [
+    "live compression config",
+    "non-ContextCompressor",
+    "_coerce_threshold_tokens_cap",
+    "stale token budget",
+    "hermes-lcm"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Live compression configuration updates fail for non-ContextCompressor context engines because the gateway calls a compressor-specific static method on the active engine, causing partial updates and stale cached token budgets.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/gateway\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": [\n    \"live compression config\",\n    \"non-ContextCompressor\",\n    \"_coerce_threshold_tokens_cap\",\n    \"stale token budget\",\n    \"hermes-lcm\"\n  ],\n  \"confidence\": 0.99\n}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123781,
+  "attempts": 1,
+  "latency_s": 2.223691940307617,
+  "prompt_tokens": 863,
+  "completion_tokens": 118,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The CLI lowercases `/skin` arguments before matching available skins, preventing user-defined skins with capital letters from being selected.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": "_handle_skin_command skin case sensitivity Unknown skin user skin",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The CLI lowercases `/skin` arguments before matching available skins, preventing user-defined skins with capital letters from being selected.\",\"kind\":\"bug\",\"component\":\"comp/cli\",\"priority\":\"P2\",\"duplicate_query\":\"_handle_skin_command skin case sensitivity Unknown skin user skin\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123988,
+  "attempts": 1,
+  "latency_s": 1.9236602783203125,
+  "prompt_tokens": 1295,
+  "completion_tokens": 150,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Concurrent file.attach uploads with the same sanitized filename can overwrite each other or leave partial files after write failures.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": "file.attach atomic upload filename race partial bytes",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Concurrent file.attach uploads with the same sanitized filename can overwrite each other or leave partial files after write failures.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P1\",\"duplicate_query\":\"file.attach atomic upload filename race partial bytes\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123832,
+  "attempts": 1,
+  "latency_s": 2.189800977706909,
+  "prompt_tokens": 1211,
+  "completion_tokens": 159,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "When a chat-completions stream drops without a finish_reason, the agent repairs and executes truncated tool-call arguments, causing unintended values such as an incomplete timeout or todo list to be used.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "truncated tool-call stream, finish_reason None, repaired tool arguments, partial-stream retry",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"When a chat-completions stream drops without a finish_reason, the agent repairs and executes truncated tool-call arguments, causing unintended values such as an incomplete timeout or todo list to be used.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":\"truncated tool-call stream, finish_reason None, repaired tool arguments, partial-stream retry\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123828,
+  "attempts": 1,
+  "latency_s": 2.337216854095459,
+  "prompt_tokens": 1298,
+  "completion_tokens": 134,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "`hermes update` always installs and builds the TUI and web workspaces, wasting substantial time for Desktop-only and other split-host users.",
+   "kind": "feature",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": [
+    "hermes update component selection",
+    "Desktop-only update build",
+    "skip TUI web workspaces",
+    "component-scoped updates"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"`hermes update` always installs and builds the TUI and web workspaces, wasting substantial time for Desktop-only and other split-host users.\",\"kind\":\"feature\",\"component\":\"comp/cli\",\"priority\":\"P2\",\"duplicate_query\":[\"hermes update component selection\",\"Desktop-only update build\",\"skip TUI web workspaces\",\"component-scoped updates\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 120575,
+  "attempts": 1,
+  "latency_s": 9.350466012954712,
+  "prompt_tokens": 1530,
+  "completion_tokens": 104,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Desktop configuration views use inconsistent controls for binary on/off settings instead of the canonical Switch, while multi-option settings must remain segmented controls.",
+   "kind": "feature",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop binary settings Switch SegmentedControl configuration UI consistency",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop configuration views use inconsistent controls for binary on/off settings instead of the canonical Switch, while multi-option settings must remain segmented controls.\",\"kind\":\"feature\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"desktop binary settings Switch SegmentedControl configuration UI consistency\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 120580,
+  "attempts": 1,
+  "latency_s": 1.7358689308166504,
+  "prompt_tokens": 1403,
+  "completion_tokens": 110,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The desktop renderer re-appends the previous turn's tool activity and final answer after a new reply when a background review is superseded.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": [
+    "desktop duplicate message rendering",
+    "background review superseded",
+    "stale turn tools",
+    "renderer message stream"
+   ],
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The desktop renderer re-appends the previous turn's tool activity and final answer after a new reply when a background review is superseded.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":[\"desktop duplicate message rendering\",\"background review superseded\",\"stale turn tools\",\"renderer message stream\"],\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 119809,
+  "attempts": 1,
+  "latency_s": 2.926238536834717,
+  "prompt_tokens": 1577,
+  "completion_tokens": 134,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "After a successful Windows desktop update, the app stops all profile messaging gateways but never restarts them, leaving messaging services offline until manually started.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "Windows desktop update gateway restart messaging profiles",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"After a successful Windows desktop update, the app stops all profile messaging gateways but never restarts them, leaving messaging services offline until manually started.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":\"Windows desktop update gateway restart messaging profiles\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 121984,
+  "attempts": 1,
+  "latency_s": 2.196657657623291,
+  "prompt_tokens": 1170,
+  "completion_tokens": 168,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Remote Desktop SSH backends are misidentified as host-local serve processes, allowing local Desktop discovery and update recovery to adopt, misclassify, and leave them running stale code.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "Desktop SSH isolated serve spawn ledger discovery update inventory",
+   "confidence": 0.96
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Remote Desktop SSH backends are misidentified as host-local serve processes, allowing local Desktop discovery and update recovery to adopt, misclassify, and leave them running stale code.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":\"Desktop SSH isolated serve spawn ledger discovery update inventory\",\"confidence\":0.96}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 119991,
+  "attempts": 1,
+  "latency_s": 2.3587193489074707,
+  "prompt_tokens": 1290,
+  "completion_tokens": 133,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The dashboard discards actionable messages from object-shaped API error details, showing a generic retry prompt instead of the server's instructions for repairing a corrupt state.db.",
+   "kind": "bug",
+   "component": "comp/dashboard",
+   "priority": "P2",
+   "duplicate_query": [
+    "state.db corrupt",
+    "structured API error",
+    "extractDetail message",
+    "hermes doctor",
+    "analytics 503"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The dashboard discards actionable messages from object-shaped API error details, showing a generic retry prompt instead of the server's instructions for repairing a corrupt state.db.\",\"kind\":\"bug\",\"component\":\"comp/dashboard\",\"priority\":\"P2\",\"duplicate_query\":[\"state.db corrupt\",\"structured API error\",\"extractDetail message\",\"hermes doctor\",\"analytics 503\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 120205,
+  "attempts": 1,
+  "latency_s": 3.6029343605041504,
+  "prompt_tokens": 1174,
+  "completion_tokens": 173,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "On Windows, foreign_state_db_holders() always returns an empty list, allowing database maintenance to run while other processes are using state.db instead of refusing the operation.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P1",
+   "duplicate_query": [
+    "Windows state.db holder detection",
+    "foreign_state_db_holders empty list",
+    "optimize-storage write guard",
+    "SQLite maintenance live database",
+    "sessions prune VACUUM"
+   ],
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"On Windows, foreign_state_db_holders() always returns an empty list, allowing database maintenance to run while other processes are using state.db instead of refusing the operation.\",\"kind\":\"bug\",\"component\":\"comp/cli\",\"priority\":\"P1\",\"duplicate_query\":[\"Windows state.db holder detection\",\"foreign_state_db_holders empty list\",\"optimize-storage write guard\",\"SQLite maintenance live database\",\"sessions prune VACUUM\"],\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122845,
+  "attempts": 1,
+  "latency_s": 2.404914379119873,
+  "prompt_tokens": 362,
+  "completion_tokens": 102,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "A temporary permission probe related to __Hobson_permission_probe__ is being tracked as an issue.",
+   "kind": "other",
+   "component": "comp/agent",
+   "priority": "P3",
+   "duplicate_query": "Hobson permission probe temporary",
+   "confidence": 0.35
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"A temporary permission probe related to __Hobson_permission_probe__ is being tracked as an issue.\",\"kind\":\"other\",\"component\":\"comp/agent\",\"priority\":\"P3\",\"duplicate_query\":\"Hobson permission probe temporary\",\"confidence\":0.35}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 119961,
+  "attempts": 1,
+  "latency_s": 4.94874119758606,
+  "prompt_tokens": 1868,
+  "completion_tokens": 144,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "In-place manual conversation compression removes the exchanges the user explicitly asked to keep from state.db, causing them to disappear from resumed model and display histories across all affected surfaces.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": [
+    "compress here tail state.db",
+    "in-place compression data loss",
+    "kept exchanges superseded",
+    "resume duplicate history",
+    "archive_and_compact watermark"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"In-place manual conversation compression removes the exchanges the user explicitly asked to keep from state.db, causing them to disappear from resumed model and display histories across all affected surfaces.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":[\"compress here tail state.db\",\"in-place compression data loss\",\"kept exchanges superseded\",\"resume duplicate history\",\"archive_and_compact watermark\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 121347,
+  "attempts": 1,
+  "latency_s": 3.2297799587249756,
+  "prompt_tokens": 828,
+  "completion_tokens": 188,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The xai provider ignores the configured model.base_url and sends requests and XAI_API_KEY to the canonical api.x.ai endpoint instead of the designated relay.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "xai model.base_url runtime_provider credential pool relay",
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The xai provider ignores the configured model.base_url and sends requests and XAI_API_KEY to the canonical api.x.ai endpoint instead of the designated relay.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":\"xai model.base_url runtime_provider credential pool relay\",\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 116879,
+  "attempts": 1,
+  "latency_s": 2.215817928314209,
+  "prompt_tokens": 917,
+  "completion_tokens": 76,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "A corrupt or legacy session record with missing fields or invalid ISO timestamps crashes session listing or restoration instead of being quarantined.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": [
+    "SessionEntry.from_dict",
+    "invalid created_at",
+    "fromisoformat KeyError",
+    "session quarantine",
+    "corrupt session row"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"A corrupt or legacy session record with missing fields or invalid ISO timestamps crashes session listing or restoration instead of being quarantined.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P1\",\"duplicate_query\":[\"SessionEntry.from_dict\",\"invalid created_at\",\"fromisoformat KeyError\",\"session quarantine\",\"corrupt session row\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 116880,
+  "attempts": 1,
+  "latency_s": 3.2741599082946777,
+  "prompt_tokens": 933,
+  "completion_tokens": 115,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Conversation compression appends a synthetic user snapshot with raw list.append, creating adjacent user messages that strict role-alternation providers reject with HTTP 400 errors.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "conversation compression synthetic user snapshot role alternation append_message Anthropic Bedrock",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Conversation compression appends a synthetic user snapshot with raw list.append, creating adjacent user messages that strict role-alternation providers reject with HTTP 400 errors.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":\"conversation compression synthetic user snapshot role alternation append_message Anthropic Bedrock\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 113039,
+  "attempts": 1,
+  "latency_s": 2.4271280765533447,
+  "prompt_tokens": 455,
+  "completion_tokens": 168,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Saving a permanent command allowlist can overwrite unrelated routed-profile settings because it writes back merged launch configuration instead of the routed profile's raw configuration.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "routed profile merged config allowlist save_config read_raw_config overwrite",
+   "confidence": 0.96
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Saving a permanent command allowlist can overwrite unrelated routed-profile settings because it writes back merged launch configuration instead of the routed profile's raw configuration.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":\"routed profile merged config allowlist save_config read_raw_config overwrite\",\"confidence\":0.96}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 120897,
+  "attempts": 1,
+  "latency_s": 2.16339111328125,
+  "prompt_tokens": 1918,
+  "completion_tokens": 170,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Kaspersky's generic password-stealer heuristic falsely flags the unsigned Windows Electron main-process bundle in desktop builds, requiring user exclusions or vendor false-positive submission.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": [
+    "Kaspersky HEUR Trojan-PSW",
+    "Electron main bundle false positive",
+    "electron-main.mjs",
+    "Windows desktop antivirus detection",
+    "unsigned Electron code signing"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Kaspersky's generic password-stealer heuristic falsely flags the unsigned Windows Electron main-process bundle in desktop builds, requiring user exclusions or vendor false-positive submission.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": [\n    \"Kaspersky HEUR Trojan-PSW\",\n    \"Electron main bundle false positive\",\n    \"electron-main.mjs\",\n    \"Windows desktop antivirus detection\",\n    \"unsigned Electron code signing\"\n  ],\n  \"confidence\": 0.99\n}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 115185,
+  "attempts": 1,
+  "latency_s": 1.5984327793121338,
+  "prompt_tokens": 602,
+  "completion_tokens": 108,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "SenseNova custom-provider responses with insufficient_quota are misclassified as billing errors rather than rate-limit errors.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": [
+    "SenseNova",
+    "insufficient_quota",
+    "rate limit",
+    "billing error",
+    "custom provider"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"SenseNova custom-provider responses with insufficient_quota are misclassified as billing errors rather than rate-limit errors.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":[\"SenseNova\",\"insufficient_quota\",\"rate limit\",\"billing error\",\"custom provider\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 116352,
+  "attempts": 1,
+  "latency_s": 2.1060056686401367,
+  "prompt_tokens": 665,
+  "completion_tokens": 156,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Hermes repeatedly rejects the user's API key and fails all program requests with an internal problem instead of allowing authenticated use.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": [
+    "API key rejected",
+    "internal problem",
+    "authentication failure",
+    "programs won't work"
+   ],
+   "confidence": 0.83
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Hermes repeatedly rejects the user's API key and fails all program requests with an internal problem instead of allowing authenticated use.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":[\"API key rejected\",\"internal problem\",\"authentication failure\",\"programs won't work\"],\"confidence\":0.83}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123195,
+  "attempts": 1,
+  "latency_s": 2.0206351280212402,
+  "prompt_tokens": 401,
+  "completion_tokens": 127,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "This issue was withdrawn because it was filed in error and contains no actionable problem.",
+   "kind": "other",
+   "component": "comp/agent",
+   "priority": "P3",
+   "duplicate_query": [
+    "withdrawn issue",
+    "filed in error",
+    "no actionable problem"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"This issue was withdrawn because it was filed in error and contains no actionable problem.\",\"kind\":\"other\",\"component\":\"comp/agent\",\"priority\":\"P3\",\"duplicate_query\":[\"withdrawn issue\",\"filed in error\",\"no actionable problem\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 114741,
+  "attempts": 1,
+  "latency_s": 8.482943058013916,
+  "prompt_tokens": 1534,
+  "completion_tokens": 170,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The agent's stale-stream watchdog can fail to enforce its 600-second timeout, leaving a streaming turn hung for hours without a user-visible failure.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "stale stream watchdog timeout streaming hang abort",
+   "confidence": 0.97
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The agent's stale-stream watchdog can fail to enforce its 600-second timeout, leaving a streaming turn hung for hours without a user-visible failure.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":\"stale stream watchdog timeout streaming hang abort\",\"confidence\":0.97}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 120215,
+  "attempts": 1,
+  "latency_s": 2.228746175765991,
+  "prompt_tokens": 967,
+  "completion_tokens": 141,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The desktop transcript-tail cache can permanently display stale session content after a websocket detaches because cached data is never invalidated when authoritative reconciliation fails or does not occur.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": [
+    "transcript-tail cache",
+    "stale session content",
+    "websocket detach",
+    "reconcile timeout",
+    "localStorage hydration"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The desktop transcript-tail cache can permanently display stale session content after a websocket detaches because cached data is never invalidated when authoritative reconciliation fails or does not occur.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":[\"transcript-tail cache\",\"stale session content\",\"websocket detach\",\"reconcile timeout\",\"localStorage hydration\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123949,
+  "attempts": 1,
+  "latency_s": 2.376528024673462,
+  "prompt_tokens": 691,
+  "completion_tokens": 159,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Adds a durable, replay-safe release approval gate that requires explicit authenticated approval and validates environment-specific release results before promotion.",
+   "kind": "feature",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": [
+    "kanban release approval gate",
+    "resumable release promotion",
+    "authenticated freigegeben intercept",
+    "lease-based release adapter",
+    "replay-safe release receipt"
+   ],
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Adds a durable, replay-safe release approval gate that requires explicit authenticated approval and validates environment-specific release results before promotion.\",\"kind\":\"feature\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":[\"kanban release approval gate\",\"resumable release promotion\",\"authenticated freigegeben intercept\",\"lease-based release adapter\",\"replay-safe release receipt\"],\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123950,
+  "attempts": 1,
+  "latency_s": 1.823441505432129,
+  "prompt_tokens": 972,
+  "completion_tokens": 111,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Context compression prunes protected early tool results, destroying task-card facts before later summarization can preserve them.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "context compressor protect_first_n prune tool results head protection",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Context compression prunes protected early tool results, destroying task-card facts before later summarization can preserve them.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":\"context compressor protect_first_n prune tool results head protection\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123872,
+  "attempts": 1,
+  "latency_s": 1.5885097980499268,
+  "prompt_tokens": 1174,
+  "completion_tokens": 92,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Desktop Discover aborts healthy but slow catalog downloads after 60 seconds because a fixed total timeout does not reset when response bytes continue progressing.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop catalog download timeout AbortSignal inactivity progressing stream",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop Discover aborts healthy but slow catalog downloads after 60 seconds because a fixed total timeout does not reset when response bytes continue progressing.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"desktop catalog download timeout AbortSignal inactivity progressing stream\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 124004,
+  "attempts": 1,
+  "latency_s": 1.7593867778778076,
+  "prompt_tokens": 427,
+  "completion_tokens": 123,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Kanban review handoffs can be omitted or target stale reviewer names instead of routing them to a valid installed reviewer profile.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "kanban review handoff invalid reviewer installed profile",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Kanban review handoffs can be omitted or target stale reviewer names instead of routing them to a valid installed reviewer profile.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":\"kanban review handoff invalid reviewer installed profile\",\"confidence\":0.9}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123905,
+  "attempts": 1,
+  "latency_s": 1.7566602230072021,
+  "prompt_tokens": 1328,
+  "completion_tokens": 126,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Home Assistant attribute-only and removal events incorrectly start the per-entity cooldown, causing subsequent genuine state changes to be silently dropped.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": [
+    "Home Assistant state_changed cooldown forwarded events",
+    "adapter cooldown new_state null",
+    "attribute-only updates dropped"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Home Assistant attribute-only and removal events incorrectly start the per-entity cooldown, causing subsequent genuine state changes to be silently dropped.\",\"kind\":\"bug\",\"component\":\"comp/gateway\",\"priority\":\"P2\",\"duplicate_query\":[\"Home Assistant state_changed cooldown forwarded events\",\"adapter cooldown new_state null\",\"attribute-only updates dropped\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123932,
+  "attempts": 1,
+  "latency_s": 11.211262941360474,
+  "prompt_tokens": 1507,
+  "completion_tokens": 153,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "New sessions bypass an all-billing-benched Nous credential pool entry and attempt the benched singleton before using the configured fallback, causing an avoidable failed inference request.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": [
+    "Nous billing bench",
+    "runtime credential fallback",
+    "pool selection singleton",
+    "skip benched primary",
+    "AuthError fallback"
+   ],
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"New sessions bypass an all-billing-benched Nous credential pool entry and attempt the benched singleton before using the configured fallback, causing an avoidable failed inference request.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":[\"Nous billing bench\",\"runtime credential fallback\",\"pool selection singleton\",\"skip benched primary\",\"AuthError fallback\"],\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122922,
+  "attempts": 1,
+  "latency_s": 2.3852810859680176,
+  "prompt_tokens": 755,
+  "completion_tokens": 120,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The desktop model catalog rendered reasoning effort as plain text appended to the model name, making settings such as \u201cHigh\u201d appear to be part of the model identifier instead of a distinct option.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": [
+    "ModelCatalogMenu reasoning effort badge",
+    "model name reasoning effort chip",
+    "desktop model catalog metadata",
+    "inline effort model name"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The desktop model catalog rendered reasoning effort as plain text appended to the model name, making settings such as \u201cHigh\u201d appear to be part of the model identifier instead of a distinct option.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":[\"ModelCatalogMenu reasoning effort badge\",\"model name reasoning effort chip\",\"desktop model catalog metadata\",\"inline effort model name\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122923,
+  "attempts": 1,
+  "latency_s": 1.7808151245117188,
+  "prompt_tokens": 912,
+  "completion_tokens": 141,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Concurrent desktop chat streams can overwrite a shared unscoped gateway session pin, causing one chat's deltas, tool events, and reasoning to be merged into another chat's transcript.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": [
+    "unscoped stream pin",
+    "session merging",
+    "state leak",
+    "concurrent chat streams",
+    "gateway event routing"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Concurrent desktop chat streams can overwrite a shared unscoped gateway session pin, causing one chat's deltas, tool events, and reasoning to be merged into another chat's transcript.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":[\"unscoped stream pin\",\"session merging\",\"state leak\",\"concurrent chat streams\",\"gateway event routing\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122295,
+  "attempts": 1,
+  "latency_s": 2.550752639770508,
+  "prompt_tokens": 945,
+  "completion_tokens": 143,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Desktop SSH mode does not log exit status, signals, or stderr when a connection attempt fails, leaving the underlying cause invisible for diagnosis.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": [
+    "desktop SSH connect failure diagnostics",
+    "ssh process exited signal",
+    "empty stderr SSH auth failure",
+    "redacting _logLine SSH",
+    "macOS SSH mode"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop SSH mode does not log exit status, signals, or stderr when a connection attempt fails, leaving the underlying cause invisible for diagnosis.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":[\"desktop SSH connect failure diagnostics\",\"ssh process exited signal\",\"empty stderr SSH auth failure\",\"redacting _logLine SSH\",\"macOS SSH mode\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123220,
+  "attempts": 1,
+  "latency_s": 2.6476283073425293,
+  "prompt_tokens": 828,
+  "completion_tokens": 165,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The HomeIOGuard made the cron e2e soak exceed its 900-second timeout due to excessive per-syscall path-checking overhead.",
+   "kind": "bug",
+   "component": "comp/cron",
+   "priority": "P2",
+   "duplicate_query": [
+    "HomeIOGuard",
+    "cron soak timeout",
+    "SIGKILL 900s",
+    "guarded syscall performance",
+    "virtual clock soak"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The HomeIOGuard made the cron e2e soak exceed its 900-second timeout due to excessive per-syscall path-checking overhead.\",\"kind\":\"bug\",\"component\":\"comp/cron\",\"priority\":\"P2\",\"duplicate_query\":[\"HomeIOGuard\",\"cron soak timeout\",\"SIGKILL 900s\",\"guarded syscall performance\",\"virtual clock soak\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122841,
+  "attempts": 1,
+  "latency_s": 2.157172679901123,
+  "prompt_tokens": 902,
+  "completion_tokens": 150,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Background terminal jobs are terminated by agent-lifecycle cleanup paths despite users explicitly requesting that they persist across session transitions, and the fix must preserve explicit stops and gateway shutdown cleanup.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "background process lifecycle kill_all persist_on_release",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Background terminal jobs are terminated by agent-lifecycle cleanup paths despite users explicitly requesting that they persist across session transitions, and the fix must preserve explicit stops and gateway shutdown cleanup.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":\"background process lifecycle kill_all persist_on_release\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122900,
+  "attempts": 1,
+  "latency_s": 1.9294648170471191,
+  "prompt_tokens": 712,
+  "completion_tokens": 127,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Desktop repository discovery scans the entire home directory when no scan roots are configured, causing unintended filesystem traversal and potentially accessing protected locations on macOS.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "desktop repo scan roots home directory macOS TCC git-repo-scan",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop repository discovery scans the entire home directory when no scan roots are configured, causing unintended filesystem traversal and potentially accessing protected locations on macOS.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":\"desktop repo scan roots home directory macOS TCC git-repo-scan\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 124001,
+  "attempts": 1,
+  "latency_s": 2.5524401664733887,
+  "prompt_tokens": 832,
+  "completion_tokens": 116,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The plugin catalog, plugin pages, and author pages have insufficient text and UI contrast in light mode, making their content difficult to read.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "duplicate_query": "plugin catalog light mode contrast accessibility Docusaurus theme colors",
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The plugin catalog, plugin pages, and author pages have insufficient text and UI contrast in light mode, making their content difficult to read.\",\"kind\":\"bug\",\"component\":\"comp/plugins\",\"priority\":\"P2\",\"duplicate_query\":\"plugin catalog light mode contrast accessibility Docusaurus theme colors\",\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122894,
+  "attempts": 1,
+  "latency_s": 1.9745612144470215,
+  "prompt_tokens": 553,
+  "completion_tokens": 149,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Adds an opt-in handoff of the original pre-compression transcript to v2 checkpoint providers while preserving existing v1 and v2 message contracts and fail-closed behavior.",
+   "kind": "feature",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": [
+    "memory checkpoint raw_messages transcript compression hook v2 provider"
+   ],
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Adds an opt-in handoff of the original pre-compression transcript to v2 checkpoint providers while preserving existing v1 and v2 message contracts and fail-closed behavior.\",\"kind\":\"feature\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":[\"memory checkpoint raw_messages transcript compression hook v2 provider\"],\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122904,
+  "attempts": 1,
+  "latency_s": 2.1128573417663574,
+  "prompt_tokens": 422,
+  "completion_tokens": 123,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "The repository needs automated lint and formatting corrections applied to the JavaScript code.",
+   "kind": "other",
+   "component": "comp/cli",
+   "priority": "P3",
+   "duplicate_query": [
+    "npm run fix",
+    "auto-fix lint",
+    "JavaScript formatting",
+    "automated formatting"
+   ],
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The repository needs automated lint and formatting corrections applied to the JavaScript code.\",\"kind\":\"other\",\"component\":\"comp/cli\",\"priority\":\"P3\",\"duplicate_query\":[\"npm run fix\",\"auto-fix lint\",\"JavaScript formatting\",\"automated formatting\"],\"confidence\":0.98}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 121799,
+  "attempts": 1,
+  "latency_s": 1.8488647937774658,
+  "prompt_tokens": 422,
+  "completion_tokens": 104,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Automatically apply JavaScript lint fixes and formatting changes once CI passes.",
+   "kind": "other",
+   "component": "comp/tools",
+   "priority": "P3",
+   "duplicate_query": "npm run fix auto-fix lint formatting workflow",
+   "confidence": 0.62
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Automatically apply JavaScript lint fixes and formatting changes once CI passes.\",\"kind\":\"other\",\"component\":\"comp/tools\",\"priority\":\"P3\",\"duplicate_query\":\"npm run fix auto-fix lint formatting workflow\",\"confidence\":0.62}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 123668,
+  "attempts": 1,
+  "latency_s": 4.277642011642456,
+  "prompt_tokens": 1862,
+  "completion_tokens": 142,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Windows cron scripts could use site-packages from a virtual environment created by a different Python interpreter, causing compiled dependencies such as pydantic_core to fail to import.",
+   "kind": "bug",
+   "component": "comp/cron",
+   "priority": "P1",
+   "duplicate_query": "Windows cron committed_venv interpreter ABI pydantic_core site-packages",
+   "confidence": 0.99
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Windows cron scripts could use site-packages from a virtual environment created by a different Python interpreter, causing compiled dependencies such as pydantic_core to fail to import.\",\"kind\":\"bug\",\"component\":\"comp/cron\",\"priority\":\"P1\",\"duplicate_query\":\"Windows cron committed_venv interpreter ABI pydantic_core site-packages\",\"confidence\":0.99}"
+ },
+ {
+  "model": "stealth/space-bunny-alpha",
+  "number": 122315,
+  "attempts": 1,
+  "latency_s": 2.215050458908081,
+  "prompt_tokens": 422,
+  "completion_tokens": 147,
+  "reasoning_tokens": 0,
+  "cost": 0.0,
+  "parsed": {
+   "problem_statement": "Adds an automated `npm run fix` workflow to auto-fix lint issues and formatting changes.",
+   "kind": "other",
+   "component": "comp/cli",
+   "priority": "P3",
+   "duplicate_query": [
+    "npm run fix",
+    "auto-fix lint",
+    "formatting workflow",
+    "automated formatting"
+   ],
+   "confidence": 0.97
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Adds an automated `npm run fix` workflow to auto-fix lint issues and formatting changes.\",\"kind\":\"other\",\"component\":\"comp/cli\",\"priority\":\"P3\",\"duplicate_query\":[\"npm run fix\",\"auto-fix lint\",\"formatting workflow\",\"automated formatting\"],\"confidence\":0.97}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123888,
+  "attempts": 1,
+  "latency_s": 21.116912603378296,
+  "prompt_tokens": 1067,
+  "completion_tokens": 1179,
+  "reasoning_tokens": 1079,
+  "cost": 0.0017349,
+  "parsed": {
+   "problem_statement": "Hermes Desktop incorrectly shows the first-run setup chooser on every launch despite a healthy local runtime, because the launcher resolution path fails silently and falls through to bootstrap without logging the cause.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "first-run setup chooser bootstrap marker localBootstrapConfirmed desktop Windows",
+   "confidence": 0.88
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Hermes Desktop incorrectly shows the first-run setup chooser on every launch despite a healthy local runtime, because the launcher resolution path fails silently and falls through to bootstrap without logging the cause.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"first-run setup chooser bootstrap marker localBootstrapConfirmed desktop Windows\",\n  \"confidence\": 0.88\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123898,
+  "attempts": 1,
+  "latency_s": 28.651160717010498,
+  "prompt_tokens": 1047,
+  "completion_tokens": 1040,
+  "reasoning_tokens": 938,
+  "cost": 0.0015621,
+  "parsed": {
+   "problem_statement": "Telegram responses rejected with send_path_degraded are recorded as failed in the delivery ledger but never redelivered until gateway restart, because the runtime redelivery sweep is only triggered by full adapter reconnects and not by Telegram's polling-generation degradation/recovery path.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "send_path_degraded telegram redelivery sweep ledger",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\": \"Telegram responses rejected with send_path_degraded are recorded as failed in the delivery ledger but never redelivered until gateway restart, because the runtime redelivery sweep is only triggered by full adapter reconnects and not by Telegram's polling-generation degradation/recovery path.\", \"kind\": \"bug\", \"component\": \"comp/gateway\", \"priority\": \"P2\", \"duplicate_query\": \"send_path_degraded telegram redelivery sweep ledger\", \"confidence\": 0.85}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123685,
+  "attempts": 1,
+  "latency_s": 9.838999509811401,
+  "prompt_tokens": 1260,
+  "completion_tokens": 608,
+  "reasoning_tokens": 508,
+  "cost": 0.0011076,
+  "parsed": {
+   "problem_statement": "Archiving a session in the desktop app causes it to briefly disappear then reappear as a stale ghost row in the sidebar, which fails with 'Session owner could not be resolved' when clicked.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "archive session resurrect ghost sidebar tombstone mergeSessionPage",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Archiving a session in the desktop app causes it to briefly disappear then reappear as a stale ghost row in the sidebar, which fails with 'Session owner could not be resolved' when clicked.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"archive session resurrect ghost sidebar tombstone mergeSessionPage\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123989,
+  "attempts": 1,
+  "latency_s": 15.272122383117676,
+  "prompt_tokens": 1448,
+  "completion_tokens": 612,
+  "reasoning_tokens": 509,
+  "cost": 0.0011688,
+  "parsed": {
+   "problem_statement": "On a multiplexed gateway, API-server turns for different profiles derive the same session id when their opening messages match, causing both profiles' turns to attach to a single shared Docker container and breaking per-profile sandbox isolation.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": "multiplex profile docker container api session id collision",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"On a multiplexed gateway, API-server turns for different profiles derive the same session id when their opening messages match, causing both profiles' turns to attach to a single shared Docker container and breaking per-profile sandbox isolation.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/gateway\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"multiplex profile docker container api session id collision\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123801,
+  "attempts": 1,
+  "latency_s": 7.8506386280059814,
+  "prompt_tokens": 1606,
+  "completion_tokens": 501,
+  "reasoning_tokens": 418,
+  "cost": 0.001083,
+  "parsed": {
+   "problem_statement": "Hermes Desktop on macOS intermittently renders the same assistant reply twice despite a single stored message row and one completion event.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "duplicate assistant reply macOS desktop assistant-stream history reconciliation",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Hermes Desktop on macOS intermittently renders the same assistant reply twice despite a single stored message row and one completion event.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"duplicate assistant reply macOS desktop assistant-stream history reconciliation\",\n  \"confidence\": 0.9\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123856,
+  "attempts": 1,
+  "latency_s": 12.450608968734741,
+  "prompt_tokens": 864,
+  "completion_tokens": 688,
+  "reasoning_tokens": 590,
+  "cost": 0.001047168,
+  "parsed": {
+   "problem_statement": "The stale-transcript guard in the desktop app enters an infinite refusal loop for long sessions, permanently locking users out of conversations without a way to recover.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "stale-transcript guard conversation is stale refreshIfTranscriptStale stale refusal loop",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The stale-transcript guard in the desktop app enters an infinite refusal loop for long sessions, permanently locking users out of conversations without a way to recover.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"stale-transcript guard conversation is stale refreshIfTranscriptStale stale refusal loop\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 124006,
+  "attempts": 1,
+  "latency_s": 9.493557929992676,
+  "prompt_tokens": 1553,
+  "completion_tokens": 577,
+  "reasoning_tokens": 443,
+  "cost": 0.0011583,
+  "parsed": {
+   "problem_statement": "The `ultra` reasoning effort is sent unclamped to the Codex Responses endpoint for `gpt-6` models because the clamp is gated on a literal `gpt-5.6` string check, causing every model call to fail with a non-retryable HTTP 400 and silencing the agent.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "ultra reasoning effort gpt-6 clamp codex 400 unclamped",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The `ultra` reasoning effort is sent unclamped to the Codex Responses endpoint for `gpt-6` models because the clamp is gated on a literal `gpt-5.6` string check, causing every model call to fail with a non-retryable HTTP 400 and silencing the agent.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"ultra reasoning effort gpt-6 clamp codex 400 unclamped\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123787,
+  "attempts": 1,
+  "latency_s": 31.399118423461914,
+  "prompt_tokens": 880,
+  "completion_tokens": 1294,
+  "reasoning_tokens": 1187,
+  "cost": 0.001760352,
+  "parsed": {
+   "problem_statement": "The email adapter's _attach_file interpolates the filename directly into the Content-Disposition header string, so attachment names containing spaces, semicolons, or non-ASCII characters are truncated by mail clients or break the attachment header entirely.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "duplicate_query": "email attachment filename Content-Disposition _attach_file",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The email adapter's _attach_file interpolates the filename directly into the Content-Disposition header string, so attachment names containing spaces, semicolons, or non-ASCII characters are truncated by mail clients or break the attachment header entirely.\",\"kind\":\"bug\",\"component\":\"comp/plugins\",\"priority\":\"P2\",\"duplicate_query\":\"email attachment filename Content-Disposition _attach_file\",\"confidence\":0.85}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123971,
+  "attempts": 1,
+  "latency_s": 35.61031150817871,
+  "prompt_tokens": 1429,
+  "completion_tokens": 1547,
+  "reasoning_tokens": 1420,
+  "cost": 0.0022851,
+  "parsed": {
+   "problem_statement": "On Windows, hermes update always fails its post-relaunch gateway verification (exit 1) when the Desktop started the gateway, because the gateway PID identity probes reject the inline-source command line of Hermes' own launcher, and the failed verification then deletes the live gateway's pid file and re-spawns (killing) the gateway on resume retries.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P1",
+   "duplicate_query": "windows gateway relaunch verify inline source",
+   "confidence": 0.8
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"On Windows, hermes update always fails its post-relaunch gateway verification (exit 1) when the Desktop started the gateway, because the gateway PID identity probes reject the inline-source command line of Hermes' own launcher, and the failed verification then deletes the live gateway's pid file and re-spawns (killing) the gateway on resume retries.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/gateway\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"windows gateway relaunch verify inline source\",\n  \"confidence\": 0.8\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123768,
+  "attempts": 1,
+  "latency_s": 18.192660331726074,
+  "prompt_tokens": 1239,
+  "completion_tokens": 1239,
+  "reasoning_tokens": 1134,
+  "cost": 0.001820868,
+  "parsed": {
+   "problem_statement": "Live compression config edits silently abort on non-ContextCompressor context engines because `_coerce_threshold_tokens_cap` is called as a bound method on the engine object, which lacks this attribute.",
+   "kind": "bug",
+   "component": "comp/tui",
+   "priority": "P2",
+   "duplicate_query": "live compression config _coerce_threshold_tokens_cap ContextCompressor LCMEngine",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Live compression config edits silently abort on non-ContextCompressor context engines because `_coerce_threshold_tokens_cap` is called as a bound method on the engine object, which lacks this attribute.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/tui\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"live compression config _coerce_threshold_tokens_cap ContextCompressor LCMEngine\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123781,
+  "attempts": 1,
+  "latency_s": 15.305132150650024,
+  "prompt_tokens": 748,
+  "completion_tokens": 800,
+  "reasoning_tokens": 713,
+  "cost": 0.0011844,
+  "parsed": {
+   "problem_statement": "The CLI's /skin command lowercases the skin name argument, preventing the selection of user skins that have capitalized names.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": "skin case-sensitive user skin capitals _handle_skin_command",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The CLI's /skin command lowercases the skin name argument, preventing the selection of user skins that have capitalized names.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/cli\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"skin case-sensitive user skin capitals _handle_skin_command\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123988,
+  "attempts": 1,
+  "latency_s": 26.087806940078735,
+  "prompt_tokens": 1165,
+  "completion_tokens": 1086,
+  "reasoning_tokens": 987,
+  "cost": 0.001596252,
+  "parsed": {
+   "problem_statement": "The TUI gateway's file.attach upload path allocates destination files non-atomically, so concurrent same-name uploads in one profile can silently overwrite each other and failed writes leave partial files behind.",
+   "kind": "bug",
+   "component": "comp/tui",
+   "priority": "P2",
+   "duplicate_query": "file.attach upload race overwrite attachment",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The TUI gateway's file.attach upload path allocates destination files non-atomically, so concurrent same-name uploads in one profile can silently overwrite each other and failed writes leave partial files behind.\",\"kind\":\"bug\",\"component\":\"comp/tui\",\"priority\":\"P2\",\"duplicate_query\":\"file.attach upload race overwrite attachment\",\"confidence\":0.9}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123832,
+  "attempts": 1,
+  "latency_s": 17.353184938430786,
+  "prompt_tokens": 1115,
+  "completion_tokens": 890,
+  "reasoning_tokens": 800,
+  "cost": 0.001364868,
+  "parsed": {
+   "problem_statement": "A tool call whose stream drops with no finish_reason gets its arguments repaired and executed instead of triggering a partial-stream retry.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "repair_tool_call_arguments dropped stream finish_reason None truncated tool call partial stream retry",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"A tool call whose stream drops with no finish_reason gets its arguments repaired and executed instead of triggering a partial-stream retry.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"repair_tool_call_arguments dropped stream finish_reason None truncated tool call partial stream retry\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123828,
+  "attempts": 1,
+  "latency_s": 10.498547792434692,
+  "prompt_tokens": 1203,
+  "completion_tokens": 496,
+  "reasoning_tokens": 394,
+  "cost": 0.0009561,
+  "parsed": {
+   "problem_statement": "hermes update unconditionally rebuilds the TUI and web workspaces on every run, with no way for Desktop-only users to opt out, causing unnecessary build time and potential update failures.",
+   "kind": "feature",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": "hermes update skip tui web component-scoped desktop-only",
+   "confidence": 0.92
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"hermes update unconditionally rebuilds the TUI and web workspaces on every run, with no way for Desktop-only users to opt out, causing unnecessary build time and potential update failures.\",\n  \"kind\": \"feature\",\n  \"component\": \"comp/cli\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"hermes update skip tui web component-scoped desktop-only\",\n  \"confidence\": 0.92\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 120575,
+  "attempts": 1,
+  "latency_s": 11.976091623306274,
+  "prompt_tokens": 1421,
+  "completion_tokens": 782,
+  "reasoning_tokens": 696,
+  "cost": 0.001327068,
+  "parsed": {
+   "problem_statement": "The desktop app's configuration surfaces inconsistently render binary on/off settings using both Switch and SegmentedControl instead of a single unified affordance.",
+   "kind": "feature",
+   "component": "comp/desktop",
+   "priority": "P3",
+   "duplicate_query": "SegmentedControl Switch binary settings consistency desktop",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The desktop app's configuration surfaces inconsistently render binary on/off settings using both Switch and SegmentedControl instead of a single unified affordance.\",\n  \"kind\": \"feature\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"SegmentedControl Switch binary settings consistency desktop\",\n  \"confidence\": 0.9\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 120580,
+  "attempts": 1,
+  "latency_s": 14.889698505401611,
+  "prompt_tokens": 1285,
+  "completion_tokens": 602,
+  "reasoning_tokens": 496,
+  "cost": 0.001051452,
+  "parsed": {
+   "problem_statement": "When a new prompt hard-interrupts a still-running background review thread, the desktop renderer appends the previous turn's tool activity and final answer below the new reply, duplicating content that exists only once in the store.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "background review superseded duplicate render previous turn",
+   "confidence": 0.92
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"When a new prompt hard-interrupts a still-running background review thread, the desktop renderer appends the previous turn's tool activity and final answer below the new reply, duplicating content that exists only once in the store.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"background review superseded duplicate render previous turn\",\"confidence\":0.92}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 119809,
+  "attempts": 1,
+  "latency_s": 35.208664417266846,
+  "prompt_tokens": 1474,
+  "completion_tokens": 1444,
+  "reasoning_tokens": 1341,
+  "cost": 0.002175,
+  "parsed": {
+   "problem_statement": "On Windows, the desktop app stops every profile's messaging gateway before applying an update but never restarts them on the successful update path (while also suppressing the CLI updater's cold-start fallback), leaving all gateways down indefinitely.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "windows desktop update gateway restart",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"On Windows, the desktop app stops every profile's messaging gateway before applying an update but never restarts them on the successful update path (while also suppressing the CLI updater's cold-start fallback), leaving all gateways down indefinitely.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P1\",\"duplicate_query\":\"windows desktop update gateway restart\",\"confidence\":0.9}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 121984,
+  "attempts": 1,
+  "latency_s": 14.180847406387329,
+  "prompt_tokens": 1060,
+  "completion_tokens": 988,
+  "reasoning_tokens": 889,
+  "cost": 0.001465968,
+  "parsed": {
+   "problem_statement": "A remote Desktop's SSH-isolated serve backend is misclassified by the host's own Desktop and updater, causing it to run stale code after updates and potentially dropping chats.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "isolated serve spawn ledger hermes update desktop ssh stale code",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"A remote Desktop's SSH-isolated serve backend is misclassified by the host's own Desktop and updater, causing it to run stale code after updates and potentially dropping chats.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"isolated serve spawn ledger hermes update desktop ssh stale code\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 119991,
+  "attempts": 1,
+  "latency_s": 18.18006134033203,
+  "prompt_tokens": 1169,
+  "completion_tokens": 623,
+  "reasoning_tokens": 509,
+  "cost": 0.001041852,
+  "parsed": {
+   "problem_statement": "The web dashboard's extractDetail in web/src/lib/api-error.ts cannot parse object-shaped 503 error details, so a corrupt state.db shows the generic 'not ready yet, try again' message instead of the server's actionable 'run hermes doctor' instruction.",
+   "kind": "bug",
+   "component": "comp/dashboard",
+   "priority": "P2",
+   "duplicate_query": "extractDetail corrupt state_db_corrupt dashboard 503",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The web dashboard's extractDetail in web/src/lib/api-error.ts cannot parse object-shaped 503 error details, so a corrupt state.db shows the generic 'not ready yet, try again' message instead of the server's actionable 'run hermes doctor' instruction.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/dashboard\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"extractDetail corrupt state_db_corrupt dashboard 503\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 120205,
+  "attempts": 1,
+  "latency_s": 17.864309787750244,
+  "prompt_tokens": 1067,
+  "completion_tokens": 1103,
+  "reasoning_tokens": 1002,
+  "cost": 0.0016437,
+  "parsed": {
+   "problem_statement": "On Windows, foreign_state_db_holders() unconditionally returns an empty list, silently bypassing the write-guard that should prevent state.db maintenance while other processes hold the store.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "foreign_state_db_holders Windows state.db write-guard optimize-storage",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"On Windows, foreign_state_db_holders() unconditionally returns an empty list, silently bypassing the write-guard that should prevent state.db maintenance while other processes hold the store.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"foreign_state_db_holders Windows state.db write-guard optimize-storage\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122845,
+  "attempts": 1,
+  "latency_s": 11.227528810501099,
+  "prompt_tokens": 224,
+  "completion_tokens": 417,
+  "reasoning_tokens": 340,
+  "cost": 0.000511152,
+  "parsed": {
+   "problem_statement": "This is a temporary permission probe/test issue with no actual bug report or feature request content.",
+   "kind": "other",
+   "component": "comp/gateway",
+   "priority": "P3",
+   "duplicate_query": "permission probe temporary test issue",
+   "confidence": 0.3
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"This is a temporary permission probe/test issue with no actual bug report or feature request content.\",\"kind\":\"other\",\"component\":\"comp/gateway\",\"priority\":\"P3\",\"duplicate_query\":\"permission probe temporary test issue\",\"confidence\":0.3}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 119961,
+  "attempts": 1,
+  "latency_s": 16.400903463363647,
+  "prompt_tokens": 1733,
+  "completion_tokens": 644,
+  "reasoning_tokens": 534,
+  "cost": 0.0012927,
+  "parsed": {
+   "problem_statement": "/compress here N with the default in-place compression mode fails to persist the kept tail exchanges to state.db, so those exchanges are silently lost from both model and display history on resume or agent rebuild across CLI, TUI/Desktop, and gateway surfaces.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "compress in_place kept tail state.db",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"/compress here N with the default in-place compression mode fails to persist the kept tail exchanges to state.db, so those exchanges are silently lost from both model and display history on resume or agent rebuild across CLI, TUI/Desktop, and gateway surfaces.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P1\",\"duplicate_query\":\"compress in_place kept tail state.db\",\"confidence\":0.95}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 121347,
+  "attempts": 1,
+  "latency_s": 13.745568990707397,
+  "prompt_tokens": 714,
+  "completion_tokens": 983,
+  "reasoning_tokens": 883,
+  "cost": 0.001356168,
+  "parsed": {
+   "problem_statement": "The xai provider ignores the configured model.base_url and sends requests and the XAI_API_KEY to the default https://api.x.ai/v1 instead of the specified relay URL.",
+   "kind": "bug",
+   "component": "comp/cli",
+   "priority": "P2",
+   "duplicate_query": "xai base_url ignored model.base_url api.x.ai credential pool",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The xai provider ignores the configured model.base_url and sends requests and the XAI_API_KEY to the default https://api.x.ai/v1 instead of the specified relay URL.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/cli\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"xai base_url ignored model.base_url api.x.ai credential pool\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 116879,
+  "attempts": 1,
+  "latency_s": 7.129484415054321,
+  "prompt_tokens": 810,
+  "completion_tokens": 411,
+  "reasoning_tokens": 321,
+  "cost": 0.0007362,
+  "parsed": {
+   "problem_statement": "SessionEntry.from_dict crashes on corrupt session rows due to unguarded datetime.fromisoformat calls and direct dictionary key access instead of quarantining the bad record.",
+   "kind": "bug",
+   "component": "comp/gateway",
+   "priority": "P2",
+   "duplicate_query": "fromisoformat KeyError session corrupt quarantine",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"SessionEntry.from_dict crashes on corrupt session rows due to unguarded datetime.fromisoformat calls and direct dictionary key access instead of quarantining the bad record.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/gateway\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"fromisoformat KeyError session corrupt quarantine\",\n  \"confidence\": 0.9\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 116880,
+  "attempts": 1,
+  "latency_s": 6.161608457565308,
+  "prompt_tokens": 827,
+  "completion_tokens": 396,
+  "reasoning_tokens": 288,
+  "cost": 0.000685668,
+  "parsed": {
+   "problem_statement": "Raw list.append in conversation compression bypasses the role alternation guard, allowing adjacent user roles that cause strict-alternation providers (Anthropic/Bedrock) to return 400 errors and kill the turn mid-compression.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "compression append_message alternation todo_snapshot synthetic user role adjacency",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Raw list.append in conversation compression bypasses the role alternation guard, allowing adjacent user roles that cause strict-alternation providers (Anthropic/Bedrock) to return 400 errors and kill the turn mid-compression.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"compression append_message alternation todo_snapshot synthetic user role adjacency\",\n  \"confidence\": 0.9\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 113039,
+  "attempts": 1,
+  "latency_s": 13.619703769683838,
+  "prompt_tokens": 318,
+  "completion_tokens": 545,
+  "reasoning_tokens": 446,
+  "cost": 0.000692952,
+  "parsed": {
+   "problem_statement": "In a routed profile process, save_permanent_allowlist reads the merged launch config but writes to the routed profile config path, potentially overwriting unrelated routed-profile config keys.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "save_permanent_allowlist routed profile config overwrite",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"In a routed profile process, save_permanent_allowlist reads the merged launch config but writes to the routed profile config path, potentially overwriting unrelated routed-profile config keys.\",\"kind\":\"bug\",\"component\":\"comp/agent\",\"priority\":\"P2\",\"duplicate_query\":\"save_permanent_allowlist routed profile config overwrite\",\"confidence\":0.85}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 120897,
+  "attempts": 1,
+  "latency_s": 14.316766738891602,
+  "prompt_tokens": 1966,
+  "completion_tokens": 912,
+  "reasoning_tokens": 804,
+  "cost": 0.0016842,
+  "parsed": {
+   "problem_statement": "Kaspersky Internet Security flags the desktop app's Electron main-process bundle (electron-main.mjs) as a false positive HEUR:Trojan-PSW.JS.Disco.gen.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "Kaspersky false positive HEUR:Trojan-PSW electron-main.mjs",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Kaspersky Internet Security flags the desktop app's Electron main-process bundle (electron-main.mjs) as a false positive HEUR:Trojan-PSW.JS.Disco.gen.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"Kaspersky false positive HEUR:Trojan-PSW electron-main.mjs\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 115185,
+  "attempts": 1,
+  "latency_s": 10.219298839569092,
+  "prompt_tokens": 460,
+  "completion_tokens": 434,
+  "reasoning_tokens": 348,
+  "cost": 0.0006588,
+  "parsed": {
+   "problem_statement": "The SenseNova custom provider misclassifies insufficient_quota errors as fatal billing errors instead of rate limit errors, preventing the agent from retrying appropriately.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "SenseNova insufficient_quota billing rate limit",
+   "confidence": 0.7
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The SenseNova custom provider misclassifies insufficient_quota errors as fatal billing errors instead of rate limit errors, preventing the agent from retrying appropriately.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"SenseNova insufficient_quota billing rate limit\",\n  \"confidence\": 0.7\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 116352,
+  "attempts": 1,
+  "latency_s": 15.327653646469116,
+  "prompt_tokens": 542,
+  "completion_tokens": 990,
+  "reasoning_tokens": 902,
+  "cost": 0.001312968,
+  "parsed": {
+   "problem_statement": "Hermes agent reports an internal problem when starting replies and fails to execute tools, with API key errors preventing program execution.",
+   "kind": "bug",
+   "component": "comp/tools",
+   "priority": "P2",
+   "duplicate_query": "internal problem starting reply api key Hermes hit a problem tools not working",
+   "confidence": 0.6
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Hermes agent reports an internal problem when starting replies and fails to execute tools, with API key errors preventing program execution.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/tools\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"internal problem starting reply api key Hermes hit a problem tools not working\",\n  \"confidence\": 0.6\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123195,
+  "attempts": 1,
+  "latency_s": 7.127931594848633,
+  "prompt_tokens": 262,
+  "completion_tokens": 277,
+  "reasoning_tokens": 196,
+  "cost": 0.000411,
+  "parsed": {
+   "problem_statement": "The issue was filed in error and withdrawn by the reporter, with all content removed, so it contains no actionable report.",
+   "kind": "other",
+   "component": "comp/agent",
+   "priority": "P3",
+   "duplicate_query": "withdrawn filed in error content removed",
+   "confidence": 0.1
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The issue was filed in error and withdrawn by the reporter, with all content removed, so it contains no actionable report.\",\n  \"kind\": \"other\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"withdrawn filed in error content removed\",\n  \"confidence\": 0.1\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 114741,
+  "attempts": 1,
+  "latency_s": 7.625272512435913,
+  "prompt_tokens": 1613,
+  "completion_tokens": 408,
+  "reasoning_tokens": 302,
+  "cost": 0.0009735,
+  "parsed": {
+   "problem_statement": "The stale-stream watchdog fired 38\u00d7 later than its 600s threshold (23,261s late), causing a turn to hang silently for 6.46 hours with no user-visible signal.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "stale stream watchdog threshold late kill",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The stale-stream watchdog fired 38\u00d7 later than its 600s threshold (23,261s late), causing a turn to hang silently for 6.46 hours with no user-visible signal.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"stale stream watchdog threshold late kill\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 120215,
+  "attempts": 1,
+  "latency_s": 5.379211187362671,
+  "prompt_tokens": 849,
+  "completion_tokens": 361,
+  "reasoning_tokens": 252,
+  "cost": 0.000650268,
+  "parsed": {
+   "problem_statement": "The desktop app's transcript-tail cache can permanently freeze a session's view on stale content after a websocket detach, and this stale state survives app restarts because the cache is never invalidated when the authoritative reconcile fails to land.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "transcript-tail cache stale websocket detach frozen session localStorage reconcile",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The desktop app's transcript-tail cache can permanently freeze a session's view on stale content after a websocket detach, and this stale state survives app restarts because the cache is never invalidated when the authoritative reconcile fails to land.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"transcript-tail cache stale websocket detach frozen session localStorage reconcile\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123949,
+  "attempts": 1,
+  "latency_s": 10.605059623718262,
+  "prompt_tokens": 594,
+  "completion_tokens": 601,
+  "reasoning_tokens": 508,
+  "cost": 0.000861768,
+  "parsed": {
+   "problem_statement": "Add a durable, replay-safe release approval gate to kanban workflows that intercepts authenticated release approvals in gateway paths with lease-based resume and receipt validation.",
+   "kind": "feature",
+   "component": "comp/cli",
+   "priority": "P3",
+   "duplicate_query": "kanban release approval gate freigegeben resumable",
+   "confidence": 0.88
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Add a durable, replay-safe release approval gate to kanban workflows that intercepts authenticated release approvals in gateway paths with lease-based resume and receipt validation.\",\n  \"kind\": \"feature\",\n  \"component\": \"comp/cli\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"kanban release approval gate freigegeben resumable\",\n  \"confidence\": 0.88\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123950,
+  "attempts": 1,
+  "latency_s": 11.226794481277466,
+  "prompt_tokens": 854,
+  "completion_tokens": 704,
+  "reasoning_tokens": 606,
+  "cost": 0.001063368,
+  "parsed": {
+   "problem_statement": "ContextCompressor's Phase-1 tool-result prune demotes tool results inside the protect_first_n head before the summarization phase can protect them, causing data loss in early turns.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P1",
+   "duplicate_query": "protect_first_n prune_old_tool_results head tool result compress",
+   "confidence": 0.98
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"ContextCompressor's Phase-1 tool-result prune demotes tool results inside the protect_first_n head before the summarization phase can protect them, causing data loss in early turns.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"protect_first_n prune_old_tool_results head tool result compress\",\n  \"confidence\": 0.98\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123872,
+  "attempts": 1,
+  "latency_s": 5.116323709487915,
+  "prompt_tokens": 1085,
+  "completion_tokens": 332,
+  "reasoning_tokens": 248,
+  "cost": 0.0007239,
+  "parsed": {
+   "problem_statement": "Desktop Discover aborts healthy slow catalog transfers after 60 seconds because the total deadline does not renew with continued byte progress.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "catalog download timeout fetchCatalog abort slow transfer",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Desktop Discover aborts healthy slow catalog transfers after 60 seconds because the total deadline does not renew with continued byte progress.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"catalog download timeout fetchCatalog abort slow transfer\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 124004,
+  "attempts": 1,
+  "latency_s": 17.036518573760986,
+  "prompt_tokens": 287,
+  "completion_tokens": 808,
+  "reasoning_tokens": 695,
+  "cost": 0.000999252,
+  "parsed": {
+   "problem_statement": "Kanban review handoffs were silently omitted when the assigned reviewer name was stale or invalid, so reviews never reached a valid reviewer; the PR adds an optional kanban.default_reviewer fallback to a deterministic installed profile while preserving dispatcher admission, caps, and guards.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "kanban review handoff default_reviewer stale reviewer",
+   "confidence": 0.7
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Kanban review handoffs were silently omitted when the assigned reviewer name was stale or invalid, so reviews never reached a valid reviewer; the PR adds an optional kanban.default_reviewer fallback to a deterministic installed profile while preserving dispatcher admission, caps, and guards.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"kanban review handoff default_reviewer stale reviewer\",\n  \"confidence\": 0.7\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123905,
+  "attempts": 1,
+  "latency_s": 25.236242532730103,
+  "prompt_tokens": 1209,
+  "completion_tokens": 1076,
+  "reasoning_tokens": 973,
+  "cost": 0.001597452,
+  "parsed": {
+   "problem_statement": "The Home Assistant adapter stamped the per-entity event cooldown before deciding whether to forward a state_changed event, so attribute-only no-op events consumed the 30s cooldown and real state changes immediately after were silently dropped.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "duplicate_query": "homeassistant state_changed cooldown attribute-only dropped",
+   "confidence": 0.85
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"The Home Assistant adapter stamped the per-entity event cooldown before deciding whether to forward a state_changed event, so attribute-only no-op events consumed the 30s cooldown and real state changes immediately after were silently dropped.\",\"kind\":\"bug\",\"component\":\"comp/plugins\",\"priority\":\"P2\",\"duplicate_query\":\"homeassistant state_changed cooldown attribute-only dropped\",\"confidence\":0.85}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123932,
+  "attempts": 1,
+  "latency_s": 7.442705154418945,
+  "prompt_tokens": 1460,
+  "completion_tokens": 520,
+  "reasoning_tokens": 432,
+  "cost": 0.001024368,
+  "parsed": {
+   "problem_statement": "New sessions resolve the singleton Nous JWT even when the credential is billing-benched, causing an avoidable failing inference request before the configured fallback is attempted.",
+   "kind": "bug",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "billing-benched Nous fallback runtime pool",
+   "confidence": 0.92
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"New sessions resolve the singleton Nous JWT even when the credential is billing-benched, causing an avoidable failing inference request before the configured fallback is attempted.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"billing-benched Nous fallback runtime pool\",\n  \"confidence\": 0.92\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122922,
+  "attempts": 1,
+  "latency_s": 17.567641019821167,
+  "prompt_tokens": 631,
+  "completion_tokens": 739,
+  "reasoning_tokens": 627,
+  "cost": 0.001019652,
+  "parsed": {
+   "problem_statement": "In the desktop model catalog menu, the reasoning effort setting was rendered as plain tertiary text appended to the model name (e.g. 'Qwen3.7 Max High'), causing users to misread it as part of the model's name rather than a separate setting.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P3",
+   "duplicate_query": "ModelCatalogMenu reasoning effort model name badge chip",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"In the desktop model catalog menu, the reasoning effort setting was rendered as plain tertiary text appended to the model name (e.g. 'Qwen3.7 Max High'), causing users to misread it as part of the model's name rather than a separate setting.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"ModelCatalogMenu reasoning effort model name badge chip\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122923,
+  "attempts": 1,
+  "latency_s": 7.557260990142822,
+  "prompt_tokens": 797,
+  "completion_tokens": 390,
+  "reasoning_tokens": 274,
+  "cost": 0.000669468,
+  "parsed": {
+   "problem_statement": "Concurrently streaming desktop chats can steal each other's unscoped gateway stream events because the gateway-event router used a single shared slot for the unscoped stream session ID, causing one conversation's deltas, tool events, and reasoning to be grafted onto another's transcript.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "unscoped stream session merging state leak concurrent gateway event",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Concurrently streaming desktop chats can steal each other's unscoped gateway stream events because the gateway-event router used a single shared slot for the unscoped stream session ID, causing one conversation's deltas, tool events, and reasoning to be grafted onto another's transcript.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"unscoped stream session merging state leak concurrent gateway event\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122295,
+  "attempts": 1,
+  "latency_s": 14.745365619659424,
+  "prompt_tokens": 815,
+  "completion_tokens": 526,
+  "reasoning_tokens": 421,
+  "cost": 0.0008757,
+  "parsed": {
+   "problem_statement": "Desktop SSH connection failures are invisible to users and developers because SshConnection.open() returns the classified error without logging the exit code, signal, or stderr, so the cause of ssh child processes dying after connect cannot be diagnosed.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P2",
+   "duplicate_query": "desktop ssh connect failed signal stderr logging",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"Desktop SSH connection failures are invisible to users and developers because SshConnection.open() returns the classified error without logging the exit code, signal, or stderr, so the cause of ssh child processes dying after connect cannot be diagnosed.\",\"kind\":\"bug\",\"component\":\"comp/desktop\",\"priority\":\"P2\",\"duplicate_query\":\"desktop ssh connect failed signal stderr logging\",\"confidence\":0.9}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123220,
+  "attempts": 1,
+  "latency_s": 11.308486223220825,
+  "prompt_tokens": 757,
+  "completion_tokens": 702,
+  "reasoning_tokens": 569,
+  "cost": 0.001031868,
+  "parsed": {
+   "problem_statement": "The e2e cron soak test was being SIGKILLed at the 900s CI cap because the HomeIOGuard's check() method cost ~611\u03bcs per guarded syscall, accumulating ~1400s of CPU time across 2.3M calls.",
+   "kind": "bug",
+   "component": "comp/cron",
+   "priority": "P2",
+   "duplicate_query": "HomeIOGuard cron soak SIGKILL 900s test_cron_virtual_clock_soak",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The e2e cron soak test was being SIGKILLed at the 900s CI cap because the HomeIOGuard's check() method cost ~611\u03bcs per guarded syscall, accumulating ~1400s of CPU time across 2.3M calls.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/cron\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"HomeIOGuard cron soak SIGKILL 900s test_cron_virtual_clock_soak\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122841,
+  "attempts": 1,
+  "latency_s": 26.137938499450684,
+  "prompt_tokens": 780,
+  "completion_tokens": 1759,
+  "reasoning_tokens": 1665,
+  "cost": 0.002307168,
+  "parsed": {
+   "problem_statement": "Background processes are unconditionally killed by agent-lifecycle sweeps such as session end, turn timeout, and agent close, preventing users from keeping long-running jobs alive across conversations.",
+   "kind": "feature",
+   "component": "comp/agent",
+   "priority": "P2",
+   "duplicate_query": "persist_on_release background jobs kill_all lifecycle",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Background processes are unconditionally killed by agent-lifecycle sweeps such as session end, turn timeout, and agent close, preventing users from keeping long-running jobs alive across conversations.\",\n  \"kind\": \"feature\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"persist_on_release background jobs kill_all lifecycle\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122900,
+  "attempts": 1,
+  "latency_s": 16.74333691596985,
+  "prompt_tokens": 592,
+  "completion_tokens": 1287,
+  "reasoning_tokens": 1202,
+  "cost": 0.001722,
+  "parsed": {
+   "problem_statement": "An empty desktop.repo_scan_roots configuration silently expands to a bounded scan of the user's entire home directory on every Desktop launch.",
+   "kind": "bug",
+   "component": "comp/desktop",
+   "priority": "P1",
+   "duplicate_query": "repo_scan_roots home directory desktop scan",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"An empty desktop.repo_scan_roots configuration silently expands to a bounded scan of the user's entire home directory on every Desktop launch.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/desktop\",\n  \"priority\": \"P1\",\n  \"duplicate_query\": \"repo_scan_roots home directory desktop scan\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 124001,
+  "attempts": 1,
+  "latency_s": 12.274706363677979,
+  "prompt_tokens": 714,
+  "completion_tokens": 788,
+  "reasoning_tokens": 709,
+  "cost": 0.001122168,
+  "parsed": {
+   "problem_statement": "The plugin catalog, plugin pages, and author pages are unreadable in light mode due to insufficient color contrast.",
+   "kind": "bug",
+   "component": "comp/plugins",
+   "priority": "P2",
+   "duplicate_query": "plugin catalog light mode contrast readability",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The plugin catalog, plugin pages, and author pages are unreadable in light mode due to insufficient color contrast.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/plugins\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"plugin catalog light mode contrast readability\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122894,
+  "attempts": 1,
+  "latency_s": 11.060272455215454,
+  "prompt_tokens": 410,
+  "completion_tokens": 667,
+  "reasoning_tokens": 577,
+  "cost": 0.000885768,
+  "parsed": {
+   "problem_statement": "The v2 checkpoint evidence list normalizes messages and omits tool output, preventing external archival providers from accessing the complete original transcript before lossy compaction.",
+   "kind": "feature",
+   "component": "comp/agent",
+   "priority": "P3",
+   "duplicate_query": "raw transcript checkpoint memory provider pre-compression raw_messages",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"The v2 checkpoint evidence list normalizes messages and omits tool output, preventing external archival providers from accessing the complete original transcript before lossy compaction.\",\n  \"kind\": \"feature\",\n  \"component\": \"comp/agent\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"raw transcript checkpoint memory provider pre-compression raw_messages\",\n  \"confidence\": 0.9\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122904,
+  "attempts": 1,
+  "latency_s": 11.020620822906494,
+  "prompt_tokens": 284,
+  "completion_tokens": 791,
+  "reasoning_tokens": 711,
+  "cost": 0.000996768,
+  "parsed": {
+   "problem_statement": "JavaScript code contains lint and formatting issues that require auto-fixing.",
+   "kind": "other",
+   "component": "comp/tools",
+   "priority": "P3",
+   "duplicate_query": [
+    "npm run fix",
+    "auto-fix",
+    "lint",
+    "formatting",
+    "workflow"
+   ],
+   "confidence": 0.7
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"JavaScript code contains lint and formatting issues that require auto-fixing.\",\n  \"kind\": \"other\",\n  \"component\": \"comp/tools\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": [\"npm run fix\", \"auto-fix\", \"lint\", \"formatting\", \"workflow\"],\n  \"confidence\": 0.7\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 121799,
+  "attempts": 1,
+  "latency_s": 21.19740581512451,
+  "prompt_tokens": 285,
+  "completion_tokens": 921,
+  "reasoning_tokens": 840,
+  "cost": 0.001134252,
+  "parsed": {
+   "problem_statement": "An automated workflow run applies `npm run fix` lint and formatting corrections to the repository's JavaScript code.",
+   "kind": "other",
+   "component": "comp/dashboard",
+   "priority": "P3",
+   "duplicate_query": "npm run fix auto-fix lint formatting",
+   "confidence": 0.55
+  },
+  "error": null,
+  "raw": "{\"problem_statement\":\"An automated workflow run applies `npm run fix` lint and formatting corrections to the repository's JavaScript code.\",\"kind\":\"other\",\"component\":\"comp/dashboard\",\"priority\":\"P3\",\"duplicate_query\":\"npm run fix auto-fix lint formatting\",\"confidence\":0.55}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 123668,
+  "attempts": 1,
+  "latency_s": 15.197441577911377,
+  "prompt_tokens": 1789,
+  "completion_tokens": 1014,
+  "reasoning_tokens": 919,
+  "cost": 0.001715868,
+  "parsed": {
+   "problem_statement": "Windows cron scripts fail with ModuleNotFoundError for compiled extensions because the scheduler resolves the wrong interpreter's site-packages when no generation is committed.",
+   "kind": "bug",
+   "component": "comp/cron",
+   "priority": "P2",
+   "duplicate_query": "Windows cron pydantic_core _pydantic_core committed_venv selected_venv",
+   "confidence": 0.95
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"Windows cron scripts fail with ModuleNotFoundError for compiled extensions because the scheduler resolves the wrong interpreter's site-packages when no generation is committed.\",\n  \"kind\": \"bug\",\n  \"component\": \"comp/cron\",\n  \"priority\": \"P2\",\n  \"duplicate_query\": \"Windows cron pydantic_core _pydantic_core committed_venv selected_venv\",\n  \"confidence\": 0.95\n}"
+ },
+ {
+  "model": "meituan/longcat-2.0",
+  "number": 122315,
+  "attempts": 1,
+  "latency_s": 7.912957429885864,
+  "prompt_tokens": 284,
+  "completion_tokens": 550,
+  "reasoning_tokens": 476,
+  "cost": 0.000707568,
+  "parsed": {
+   "problem_statement": "JavaScript code has lint issues and formatting inconsistencies that need to be auto-fixed.",
+   "kind": "other",
+   "component": "comp/cli",
+   "priority": "P3",
+   "duplicate_query": "npm run fix auto-fix lint issues formatting workflow",
+   "confidence": 0.9
+  },
+  "error": null,
+  "raw": "{\n  \"problem_statement\": \"JavaScript code has lint issues and formatting inconsistencies that need to be auto-fixed.\",\n  \"kind\": \"other\",\n  \"component\": \"comp/cli\",\n  \"priority\": \"P3\",\n  \"duplicate_query\": \"npm run fix auto-fix lint issues formatting workflow\",\n  \"confidence\": 0.9\n}"
+ }
+]

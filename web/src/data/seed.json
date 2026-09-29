@@ -1,0 +1,892 @@
+[
+ {
+  "number": 123888,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123888",
+  "title": "Desktop shows the first-run setup chooser on every start while the local install is healthy (Windows, PM install)",
+  "author": "user-01",
+  "createdAt": "2026-09-26T11:50:14Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "Hermes Desktop on Windows shows the first-run setup chooser on every launch even though the local runtime is healthy, because backend resolution failures are silent and the bootstrap-needed gate ignores a verified local launcher.",
+  "dupQuery": "bootstrap-needed localBootstrapConfirmed first-run setup chooser resolveSourceInstallationBackend bootstrap marker stale",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 5.9
+  }
+ },
+ {
+  "number": 123898,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123898",
+  "title": "Telegram: responses rejected with send_path_degraded are never redelivered until restart (runtime sweep only wired to adapter reconnect)",
+  "author": "user-02",
+  "createdAt": "2026-09-26T11:59:52Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "Telegram responses rejected with send_path_degraded are never redelivered until gateway restart because the runtime redelivery sweep is only triggered on full adapter reconnect, not on the polling-generation degradation/recovery edge.",
+  "dupQuery": "send_path_degraded Telegram redelivery sweep_failed_for_runtime delivery_ledger",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/gateway",
+   "by": "alt-glitch",
+   "delayMin": 7.0
+  }
+ },
+ {
+  "number": 123685,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123685",
+  "title": "Desktop: archiving a session resurrects it in the sidebar seconds later; clicking the ghost row fails with \"Session owner could not be resolved\"",
+  "author": "user-03",
+  "createdAt": "2026-09-26T08:06:27Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "Archiving a desktop session optimistically removes it from the sidebar, but an in-flight list refresh merges the stale pre-archive row back as a ghost with lost owner metadata, causing clicks to fail with a session-owner resolution error.",
+  "dupQuery": "archive session resurrect sidebar ghost dropTombstoned mergeSessionPage stale row Session owner could not be resolved archive tombstone lineage ids desktop sidebar archive race",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 3.4
+  }
+ },
+ {
+  "number": 123989,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123989",
+  "title": "[Bug]: Multiplex: API-server turns for different profiles share one Docker sandbox when their opening messages match",
+  "author": "user-04",
+  "createdAt": "2026-09-26T13:59:53Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "On a multiplexed gateway, API-server turns for different profiles that share the same opening message derive the same session id and end up sharing one persistent Docker container, violating per-profile isolation.",
+  "dupQuery": "multiplex profiles docker container session id collision",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/gateway",
+   "by": "alt-glitch",
+   "delayMin": 11.0
+  }
+ },
+ {
+  "number": 123801,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123801",
+  "title": "[Bug]: macOS Desktop renders duplicate assistant reply on d0288be5 despite one stored row and one completion",
+  "author": "user-05",
+  "createdAt": "2026-09-26T10:03:56Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "Hermes Desktop on macOS intermittently renders the same assistant reply twice even though the gateway persisted only one message row and emitted one completion, likely due to a history/live reconciliation identity mismatch between a timestamp-index-assistant root and an assistant-stream root.",
+  "dupQuery": "duplicate assistant reply macOS Desktop assistant-stream timestamp-index-assistant folded history d0288be5",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 8.4
+  }
+ },
+ {
+  "number": 123856,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123856",
+  "title": "Desktop: stale-transcript guard never converges — repeated 'conversation is stale' refusals lock the user out of a long session",
+  "author": "user-06",
+  "createdAt": "2026-09-26T11:19:58Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "The desktop stale-transcript guard (refreshIfTranscriptStale) refuses every send in a long 302-message session with a 'conversation is stale' toast that never converges, permanently locking the user out of that session even after an app restart.",
+  "dupQuery": "stale-transcript guard refreshIfTranscriptStale conversation is stale LATEST_SESSION_MESSAGES_LIMIT refusal loop",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 6.6
+  }
+ },
+ {
+  "number": 124006,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/124006",
+  "title": "[Bug]: `ultra` reasoning effort is sent unclamped on gpt-6 models, silencing the gateway with a non-retryable 400 (clamp gated on literal \"gpt-5.6\")",
+  "author": "user-07",
+  "createdAt": "2026-09-26T14:22:40Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "The `ultra` reasoning effort is sent unclamped to Codex Responses on gpt-6 models because the clamp is gated on the literal `gpt-5.6`, causing non-retryable HTTP 400 errors and a silent gateway.",
+  "dupQuery": "ultra reasoning effort gpt-6 clamp gpt-5.6",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 9.0
+  }
+ },
+ {
+  "number": 123787,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123787",
+  "title": "[Bug]: Email attachments lose their filename when it has a space, ';' or non-ASCII characters",
+  "author": "user-08",
+  "createdAt": "2026-09-26T09:50:39Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "The email adapter's `_attach_file` builds the Content-Disposition header by string-interpolating the filename, so names containing spaces, semicolons, or non-ASCII characters are truncated or RFC 2047-encoded into an invalid header, causing attachments to lose their filename or not be recognized as attachments at all.",
+  "dupQuery": "email attachment filename Content-Disposition _attach_file",
+  "labels": {
+   "kind": "type/bug",
+   "comp": "comp/plugins",
+   "prio": "P3",
+   "by": "alt-glitch",
+   "delayMin": 2.7
+  }
+ },
+ {
+  "number": 123971,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123971",
+  "title": "Windows: hermes update always fails its post-relaunch gateway check (exit 1) when the Desktop started the gateway",
+  "author": "user-09",
+  "createdAt": "2026-09-26T13:40:38Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "On Windows, `hermes update` always exits 1 because the post-relaunch gateway verification cannot recognize a Desktop-started gateway whose command line uses an inline `python -c` bootstrap source, and the failed verification also unlinks the running gateway's identity files and re-spawns it on retry.",
+  "dupQuery": "Windows gateway relaunch verification inline source update exit 1",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/gateway",
+   "by": "alt-glitch",
+   "delayMin": 11.6
+  }
+ },
+ {
+  "number": 123768,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123768",
+  "title": "Live compression config silently aborts on non-ContextCompressor context engines (`_coerce_threshold_tokens_cap`)",
+  "author": "user-10",
+  "createdAt": "2026-09-26T09:36:56Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "Live compression config silently aborts on non-ContextCompressor context engines (`_coerce_threshold_tokens_cap`)",
+  "dupQuery": "tui_gateway/session_compression.py:169 calls _coerce_threshold_tokens_cap as a bound method on whatever object the session's context engine exposes. That method is a ContextCompressor staticmethod, so the call only resolves when the built-in compressor is the active engine. With any other context engine (e.g. hermes-lcm), it raises AttributeError, the enclosing handler swallows it, and every live compression-config edit stops reaching the session — silently.",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/tui",
+   "by": "alt-glitch",
+   "delayMin": 7.1
+  }
+ },
+ {
+  "number": 123781,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123781",
+  "title": "[Bug]: `/skin MyTheme` answers \"Unknown skin: mytheme\" for a user skin with capitals in its name",
+  "author": "user-08",
+  "createdAt": "2026-09-26T09:42:08Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "The CLI `/skin <name>` command lowercases the argument before matching against available skins, so user-defined skins whose names contain uppercase letters (e.g. `MyTheme`) can never be selected.",
+  "dupQuery": "skin command case sensitive lower list_skins",
+  "labels": {
+   "kind": "type/bug",
+   "comp": "comp/cli",
+   "prio": "P3",
+   "by": "alt-glitch",
+   "delayMin": 11.4
+  }
+ },
+ {
+  "number": 123988,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123988",
+  "title": "fix(tui_gateway): allocate file.attach uploads atomically",
+  "author": "user-11",
+  "createdAt": "2026-09-26T13:59:37Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "The TUI gateway's file.attach upload path allocates attachment filenames with a non-atomic existence check followed by Path.write_bytes(), allowing concurrent same-name uploads to overwrite each other and leaving partial files behind on write failure.",
+  "dupQuery": "file.attach atomic upload overwrite partial write TUI gateway",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/tui",
+   "by": "alt-glitch",
+   "delayMin": 11.2
+  }
+ },
+ {
+  "number": 123832,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123832",
+  "title": "[Bug]: a tool call whose stream drops with no finish_reason runs on a repaired prefix (`timeout: 600` → `6`, a todo list cut short)",
+  "author": "user-08",
+  "createdAt": "2026-09-26T10:48:47Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "A tool call from a chat-completions stream that drops with no finish_reason has its truncated arguments silently repaired and executed on a guessed prefix instead of triggering the partial-stream retry.",
+  "dupQuery": "_repair_tool_call_arguments _assemble_tool_calls dropped stream tool call finish_reason None truncated tool arguments",
+  "labels": {
+   "kind": "type/bug",
+   "comp": "comp/agent",
+   "prio": "P1",
+   "by": "alt-glitch",
+   "delayMin": 10.0
+  }
+ },
+ {
+  "number": 123828,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123828",
+  "title": "[Feature]: Component-scoped updates — let Desktop-only users skip the ui-tui and web build in `hermes update`",
+  "author": "user-12",
+  "createdAt": "2026-09-26T10:43:08Z",
+  "isPr": false,
+  "state": "issue_open",
+  "problem": "`hermes update` unconditionally installs and builds the `ui-tui` and `web` workspaces with no config or CLI opt-out, forcing Desktop-only users to pay for frontends they never use.",
+  "dupQuery": "hermes update skip ui-tui web build component-scoped",
+  "labels": {
+   "kind": "type/feature",
+   "prio": "P3",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 6.2
+  }
+ },
+ {
+  "number": 120575,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/120575",
+  "title": "[Feature]: One switch for binary settings — desktop configuration views mix Switch and SegmentedControl",
+  "author": "user-13",
+  "createdAt": "2026-09-23T19:00:51Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "Desktop configuration views inconsistently render binary on/off settings using either the canonical Switch or SegmentedControl, and should be unified onto the existing Switch only for genuinely binary controls.",
+  "dupQuery": "SegmentedControl Switch binary settings desktop configuration unify",
+  "labels": {
+   "kind": "type/feature",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 3.6
+  }
+ },
+ {
+  "number": 120580,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/120580",
+  "title": "[Bug]: Desktop re-renders the previous turn's tools and final answer after a new reply when background review is superseded",
+  "author": "user-14",
+  "createdAt": "2026-09-23T19:08:43Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "In the desktop app, when a new prompt interrupts a still-running background review from the previous turn, the transcript incorrectly re-renders the previous turn's tool activity and final answer below the new reply.",
+  "dupQuery": "background_review_superseded desktop re-render duplicate previous turn messages",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 6.6
+  }
+ },
+ {
+  "number": 119809,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/119809",
+  "title": "Windows: Desktop stops every profile's messaging gateway before an update but never restarts it on the success path",
+  "author": "user-15",
+  "createdAt": "2026-09-23T03:46:59Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "On Windows, the desktop app stops every profile's messaging gateway before an update hand-off but never restarts them on the success path, leaving all gateways down after a successful update.",
+  "dupQuery": "gateway stop before update success path restart Windows",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P1",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 9.0
+  }
+ },
+ {
+  "number": 121984,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/121984",
+  "title": "[Bug]: a Desktop SSH backend (serve --isolated) is adopted by the host's own Desktop, misclassified by hermes update, and runs stale code after updates",
+  "author": "user-16",
+  "createdAt": "2026-09-24T22:08:24Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "An SSH-isolated `hermes serve --isolated` backend started by a remote Hermes Desktop on machine B is misidentified as a local manual serve, letting B's Desktop attach to it and causing `hermes update` to misclassify, not restart, and leave it running stale code after updates.",
+  "dupQuery": "isolated serve spawn ledger desktop-ssh manual-serve retirement",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 6.3
+  }
+ },
+ {
+  "number": 119991,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/119991",
+  "title": "[Bug]: Dashboard shows \"not ready yet, try again\" for a corrupt state.db and drops the server's `hermes doctor` instruction",
+  "author": "user-08",
+  "createdAt": "2026-09-23T07:32:30Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "The web dashboard discards the server's structured 503 error detail for a corrupt state.db and shows a generic 'not ready yet, try again' message instead of the actionable `hermes doctor` instruction.",
+  "dupQuery": "state.db corrupt 503 extractDetail dashboard not ready",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/dashboard",
+   "by": "alt-glitch",
+   "delayMin": 10.8
+  }
+ },
+ {
+  "number": 120205,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/120205",
+  "title": "Windows: foreign_state_db_holders() returns [] so the state.db write-guard / optimize-storage preflight is a silent no-op",
+  "author": "user-17",
+  "createdAt": "2026-09-23T12:44:33Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "On Windows, foreign_state_db_holders() unconditionally returns an empty list, making the state.db write-guard/optimize-storage preflight a silent no-op that allows maintenance to run while other processes hold the store.",
+  "dupQuery": "foreign_state_db_holders Windows state.db write-guard preflight no-op",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P1",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 5.2
+  }
+ },
+ {
+  "number": 122845,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/122845",
+  "title": "__Hobson_permission_probe__",
+  "author": "user-18",
+  "createdAt": "2026-09-25T16:30:36Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "A temporary permission probe issue was opened in the hermes-agent repository.",
+  "dupQuery": "__Hobson_permission_probe__ temporary permission probe Hobson",
+  "labels": {
+   "prio": "P4",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 17.4
+  }
+ },
+ {
+  "number": 119961,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/119961",
+  "title": "[Bug]: /compress here N in the default in-place mode drops the kept exchanges from state.db",
+  "author": "user-08",
+  "createdAt": "2026-09-23T07:09:25Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "In the default in-place compression mode, `/compress here N` (and `up to here` / `--keep`) drops the N exchanges the user asked to keep from state.db, so both model and display histories lose them on resume or rebuild.",
+  "dupQuery": "compress here N in_place state.db kept exchanges active=0 compacted=0 archive_and_compact",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P0",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 6.1
+  }
+ },
+ {
+  "number": 121347,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/121347",
+  "title": "[Bug]: xai ignores model.base_url — request and XAI_API_KEY go to api.x.ai instead of the configured relay",
+  "author": "user-19",
+  "createdAt": "2026-09-24T10:01:24Z",
+  "isPr": false,
+  "state": "issue_completed",
+  "problem": "The xai provider ignores a configured model.base_url and sends requests plus XAI_API_KEY to the canonical https://api.x.ai/v1 instead of the user's relay, unlike other API-key providers.",
+  "dupQuery": "xai base_url ignored runtime_provider pool entry",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 6.9
+  }
+ },
+ {
+  "number": 116879,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/116879",
+  "title": "[Bug]: Corrupt session row crashes SessionEntry.from_dict — unguarded fromisoformat + direct key access",
+  "author": "user-20",
+  "createdAt": "2026-09-20T06:17:42Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "SessionEntry.from_dict in gateway/session.py performs unguarded direct key access and datetime.fromisoformat calls, so a single corrupt or legacy session row raises an uncaught KeyError/ValueError and crashes session restore/list instead of quarantining the bad row.",
+  "dupQuery": "SessionEntry.from_dict fromisoformat corrupt session quarantine",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/gateway",
+   "by": "alt-glitch",
+   "delayMin": 4.1
+  }
+ },
+ {
+  "number": 116880,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/116880",
+  "title": "[Bug]: Compression appends synthetic user snapshot with raw list.append, bypassing alternation guard",
+  "author": "user-20",
+  "createdAt": "2026-09-20T06:17:50Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "In conversation compression, a synthetic todo-snapshot user message is appended with raw list.append instead of append_message, allowing adjacent user roles that break strict-alternation providers.",
+  "dupQuery": "compression append_message alternation todo_snapshot synthetic user",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 3.9
+  }
+ },
+ {
+  "number": 113039,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/113039",
+  "title": "Always approval can serialize a routed profile from merged config",
+  "author": "user-21",
+  "createdAt": "2026-09-16T16:18:11Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "save_permanent_allowlist reads load_config() then writes save_config(), so in a routed profile process the write may overwrite unrelated routed-profile keys because the read came from the launch profile's merged/default config, and it should instead use read_raw_config() as the write-back source and modify only command_allowlist while covering existing and missing routed profile config files.",
+  "dupQuery": "save_permanent_allowlist read_raw_config routed profile command_allowlist load_config save_config",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 115.5
+  }
+ },
+ {
+  "number": 120897,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/120897",
+  "title": "[Bug]: Kaspersky false positive: desktop electron-main.mjs flagged as HEUR:Trojan-PSW.JS.Disco.gen (Windows, build-from-source)",
+  "author": "user-22",
+  "createdAt": "2026-09-24T01:53:21Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "Kaspersky Internet Security reports a static file-heuristic false positive (HEUR:Trojan-PSW.JS.Disco.gen) on the desktop app's built Electron main-process bundle electron-main.mjs, both in dist and in the packaged app.asar.unpacked.",
+  "dupQuery": "Kaspersky false positive electron-main.mjs HEUR:Trojan-PSW.JS.Disco.gen desktop bundle",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 8.5
+  }
+ },
+ {
+  "number": 115185,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/115185",
+  "title": "[Bug]: SenseNova custom provider: insufficient_quota treated as billing error instead of rate limit",
+  "author": "user-23",
+  "createdAt": "2026-09-18T15:59:05Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "The SenseNova custom provider misclassifies the `insufficient_quota` error as a billing error rather than a rate-limit error, causing incorrect error handling in the agent core.",
+  "dupQuery": "SenseNova insufficient_quota rate limit billing error",
+  "labels": {
+   "kind": "type/bug",
+   "comp": "comp/agent",
+   "prio": "P3",
+   "by": "alt-glitch",
+   "delayMin": 9.4
+  }
+ },
+ {
+  "number": 116352,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/116352",
+  "title": "[Bug]: https://support.nousresearch.com/diagnostics/0c51d585-4129-4fa1-8246-5a2a36fd02c0",
+  "author": "user-24",
+  "createdAt": "2026-09-19T19:37:57Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "Hermes reports the API key as invalid and fails to start replies with an internal error, preventing tools from working on Windows 11.",
+  "dupQuery": "api key internal problem starting reply windows 11",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 11.2
+  }
+ },
+ {
+  "number": 123195,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/123195",
+  "title": "Withdrawn — filed in error",
+  "author": "user-25",
+  "createdAt": "2026-09-25T23:35:44Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "The issue was filed in error and has been withdrawn by the reporter.",
+  "dupQuery": "withdrawn filed in error reporter",
+  "labels": {
+   "prio": "P3",
+   "by": "alt-glitch",
+   "delayMin": 9.1
+  }
+ },
+ {
+  "number": 114741,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/114741",
+  "title": "[Bug]: Stale-stream watchdog ignored its 600s threshold and fired 23,261s (6.5 h) late — turn hung silently",
+  "author": "user-26",
+  "createdAt": "2026-09-18T07:21:28Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "The stale-stream watchdog failed to enforce its 600s threshold on a second stall in the same session, firing 23,261s (6.46h) late and leaving a turn hung silently, likely because the stall origin timestamp is not reset after the first stale_stream_kill.",
+  "dupQuery": "stale stream watchdog threshold late kill",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 12.8
+  }
+ },
+ {
+  "number": 120215,
+  "url": "https://github.com/NousResearch/hermes-agent/issues/120215",
+  "title": "Desktop: transcript-tail cache can freeze a session on stale content after websocket detach (survives restart)",
+  "author": "user-27",
+  "createdAt": "2026-09-23T12:54:13Z",
+  "isPr": false,
+  "state": "issue_not_planned",
+  "problem": "The desktop app's transcript-tail cache can leave a session permanently frozen on stale transcript content (surviving restarts) because a detached websocket prevents the authoritative reconcile from overwriting the cached tail, and the cache entry is never invalidated.",
+  "dupQuery": "transcript-tail cache stale detach reconcile localStorage",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 11.2
+  }
+ },
+ {
+  "number": 123949,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123949",
+  "title": "feat(kanban): add resumable release approval gate",
+  "author": "user-28",
+  "createdAt": "2026-09-26T12:49:54Z",
+  "isPr": true,
+  "state": "pr_open",
+  "problem": "Add a durable, replay-safe Kanban release approval gate that intercepts authenticated `freigegeben` replies and invokes a versioned adapter with lease-based resume and fail-closed behavior.",
+  "dupQuery": "kanban release approval gate, freigegeben, lease-based resume, adapter contract, fail closed",
+  "labels": {
+   "kind": "type/feature",
+   "prio": "P3",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 4.9
+  }
+ },
+ {
+  "number": 123950,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123950",
+  "title": "fix(agent): shield the protect_first_n head from the Phase-1 tool-result prune (#123935)",
+  "author": "user-29",
+  "createdAt": "2026-09-26T12:51:17Z",
+  "isPr": true,
+  "state": "pr_open",
+  "problem": "ContextCompressor._prune_old_tool_results() starts its demotion/truncation passes at index 0, so it prunes tool results inside the protect_first_n head that the summarization phase later protects (e.g. a kanban_show task card in the first turn gets stubbed on the first compression).",
+  "dupQuery": "prune_old_tool_results protect_first_n head context compressor",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 3.6
+  }
+ },
+ {
+  "number": 123872,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123872",
+  "title": "fix(desktop): let progressing catalog downloads outlive the deadline",
+  "author": "user-30",
+  "createdAt": "2026-09-26T11:36:22Z",
+  "isPr": true,
+  "state": "pr_open",
+  "problem": "Desktop Discover aborts a healthy but slow catalog download after a fixed 60-second total deadline, because fetchCatalog applies AbortSignal.timeout across the entire response including the large skills body.",
+  "dupQuery": "catalog download timeout abort desktop discover 60s",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 9.8
+  }
+ },
+ {
+  "number": 124004,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/124004",
+  "title": "fix(kanban): route review handoffs to valid reviewers",
+  "author": "user-31",
+  "createdAt": "2026-09-26T14:22:23Z",
+  "isPr": true,
+  "state": "pr_open",
+  "problem": "Kanban review handoffs can be omitted or routed to stale reviewer names, so they need to be sent to a valid installed reviewer profile.",
+  "dupQuery": "kanban review handoffs default_reviewer reviewers dispatcher",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 9.8
+  }
+ },
+ {
+  "number": 123905,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123905",
+  "title": "fix(homeassistant): no-op state_changed events no longer consume the cooldown (salvage #12083)",
+  "author": "user-08",
+  "createdAt": "2026-09-26T12:08:01Z",
+  "isPr": true,
+  "state": "pr_open",
+  "problem": "The Home Assistant adapter stamps the per-entity cooldown before deciding whether to forward a state_changed event, so attribute-only or removal events that are dropped start the 30 s window and a real state change immediately after is silently dropped.",
+  "dupQuery": "homeassistant state_changed cooldown attribute-only adapter",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/gateway",
+   "by": "alt-glitch",
+   "delayMin": 10.5
+  }
+ },
+ {
+  "number": 123932,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123932",
+  "title": "fix(runtime): skip billing-benched Nous before configured fallback",
+  "author": "user-30",
+  "createdAt": "2026-09-26T12:26:55Z",
+  "isPr": true,
+  "state": "pr_open",
+  "problem": "New sessions can resolve the singleton Nous JWT even when that credential is billing-benched in the pool, causing an avoidable failing inference request before the configured fallback is attempted.",
+  "dupQuery": "billing-benched Nous fallback runtime pool OAuth singleton",
+  "labels": {
+   "kind": "type/bug",
+   "comp": "comp/agent",
+   "prio": "P2",
+   "by": "alt-glitch",
+   "delayMin": 10.0
+  }
+ },
+ {
+  "number": 122922,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122922",
+  "title": "fix(desktop): render reasoning effort as a badge chip, not part of the model name",
+  "author": "user-32",
+  "createdAt": "2026-09-25T17:26:53Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "In the desktop model catalog menu, the reasoning-effort value is rendered as inline tertiary text appended to the model name (e.g. \"Qwen3.7 Max High\"), so users mistake it for part of the model's name instead of a setting of the same model.",
+  "dupQuery": "model catalog menu reasoning effort badge chip",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 6.6
+  }
+ },
+ {
+  "number": 122923,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122923",
+  "title": "fix(desktop): track one unscoped stream pin per session",
+  "author": "user-32",
+  "createdAt": "2026-09-25T17:27:18Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "Concurrent desktop chat streams share a single unscoped stream session pin, so a second chat's message.start overwrites the first's pin and misattributes the first stream's unscoped gateway events to the second chat's transcript.",
+  "dupQuery": "unscopedStreamSessionId shared pin session merging state leak",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 6.3
+  }
+ },
+ {
+  "number": 122295,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122295",
+  "title": "fix(desktop): log what ssh did when an SSH connect fails",
+  "author": "user-32",
+  "createdAt": "2026-09-25T04:45:09Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "Desktop SSH connection failures return an error without logging the ssh exit code, signal, or stderr, leaving no diagnostics to explain why the ssh child exits.",
+  "dupQuery": "desktop ssh connect failure logging",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 9.3
+  }
+ },
+ {
+  "number": 123220,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123220",
+  "title": "test: make the home-IO guard cheap enough for the cron soak to finish",
+  "author": "user-32",
+  "createdAt": "2026-09-26T00:15:21Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "The e2e cron soak test is SIGKILLed at the 900s per-file cap because the autouse HomeIOGuard's per-syscall path checks are too slow, so the guard needs to be made cheap enough for the soak to finish.",
+  "dupQuery": "HomeIOGuard cron soak SIGKILL 900s",
+  "labels": {
+   "kind": "type/test",
+   "prio": "P2",
+   "comp": "comp/cron",
+   "by": "alt-glitch",
+   "delayMin": 13.2
+  }
+ },
+ {
+  "number": 122841,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122841",
+  "title": "fix(processes): persist_on_release keeps background jobs alive across lifecycle kill sweeps",
+  "author": "user-32",
+  "createdAt": "2026-09-25T16:29:10Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "Background terminal processes spawned with background=true are unconditionally killed by agent lifecycle sweeps (agent release, gateway turn timeout, agent close) with no way for a job to opt out and survive the conversation.",
+  "dupQuery": "persist_on_release background job kill_all lifecycle sweep",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 5.5
+  }
+ },
+ {
+  "number": 122900,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122900",
+  "title": "fix(desktop): stop home-directory repo scans when no roots are configured",
+  "author": "user-32",
+  "createdAt": "2026-09-25T17:11:40Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "An empty desktop.repo_scan_roots configuration caused Desktop to scan the user's entire home directory on every launch, so the fix makes empty roots a safe no-op that requires explicit opt-in for filesystem scanning.",
+  "dupQuery": "desktop.repo_scan_roots home directory scan git-repo-scan empty roots repo discovery",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P2",
+   "comp": "comp/cli",
+   "by": "alt-glitch",
+   "delayMin": 10.4
+  }
+ },
+ {
+  "number": 124001,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/124001",
+  "title": "Plugin catalog is readable in light mode (salvage #123809)",
+  "author": "user-33",
+  "createdAt": "2026-09-26T14:18:36Z",
+  "isPr": true,
+  "state": "pr_merged",
+  "problem": "The plugin catalog, plugin pages, and author pages are not readable in light mode due to insufficient color contrast, while dark mode should remain unchanged.",
+  "dupQuery": "plugin catalog light mode contrast readability",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P3",
+   "by": "alt-glitch",
+   "delayMin": 13.3
+  }
+ },
+ {
+  "number": 122894,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122894",
+  "title": "feat(memory): expose raw transcript to opt-in checkpoints",
+  "author": "user-34",
+  "createdAt": "2026-09-25T17:10:05Z",
+  "isPr": true,
+  "state": "pr_closed_unmerged",
+  "problem": "Opt-in v2 checkpoint providers cannot access the complete pre-compression transcript because the evidence list normalizes messages and omits tool output, so an external archival provider needs the raw messages passed through the checkpoint hook.",
+  "dupQuery": "raw transcript checkpoint provider raw_messages pre-compression",
+  "labels": {
+   "kind": "type/feature",
+   "prio": "P3",
+   "comp": "comp/agent",
+   "by": "alt-glitch",
+   "delayMin": 12.3
+  }
+ },
+ {
+  "number": 122904,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122904",
+  "title": "fmt(js): `npm run fix` auto-fix",
+  "author": "hermes-seaeye[bot]",
+  "createdAt": "2026-09-25T17:14:50Z",
+  "isPr": true,
+  "state": "pr_closed_unmerged",
+  "problem": "JavaScript formatting and lint issues need to be automatically fixed by running `npm run fix`.",
+  "dupQuery": "npm run fix, auto-fix lint, formatting, JavaScript, auto-generated",
+  "labels": {
+   "kind": "type/refactor",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 7.3
+  }
+ },
+ {
+  "number": 121799,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/121799",
+  "title": "fmt(js): `npm run fix` auto-fix",
+  "author": "hermes-seaeye[bot]",
+  "createdAt": "2026-09-24T16:57:55Z",
+  "isPr": true,
+  "state": "pr_closed_unmerged",
+  "problem": "The JavaScript codebase has lint and formatting issues that need to be automatically fixed via `npm run fix`.",
+  "dupQuery": "npm run fix auto-fix lint formatting",
+  "labels": {}
+ },
+ {
+  "number": 123668,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/123668",
+  "title": "fix(cron): read the committed generation for Windows cron scripts",
+  "author": "user-35",
+  "createdAt": "2026-09-26T07:39:58Z",
+  "isPr": true,
+  "state": "pr_closed_unmerged",
+  "problem": "Windows cron scripts resolve their child interpreter's dependency tree via pm.environments.selected_venv, which falls back to the leftover in-tree venv built for a different CPython interpreter, causing every script to die with ModuleNotFoundError: No module named 'pydantic_core._pydantic_core'.",
+  "dupQuery": "windows cron selected_venv committed_venv pydantic_core ABI mismatch",
+  "labels": {
+   "kind": "type/bug",
+   "prio": "P1",
+   "comp": "comp/cron",
+   "by": "alt-glitch",
+   "delayMin": 7.2
+  }
+ },
+ {
+  "number": 122315,
+  "url": "https://github.com/NousResearch/hermes-agent/pull/122315",
+  "title": "fmt(js): `npm run fix` auto-fix",
+  "author": "hermes-seaeye[bot]",
+  "createdAt": "2026-09-25T05:07:04Z",
+  "isPr": true,
+  "state": "pr_closed_unmerged",
+  "problem": "JavaScript formatting and lint issues need to be auto-fixed via `npm run fix`.",
+  "dupQuery": "fmt js npm run fix auto-fix lint",
+  "labels": {
+   "kind": "type/refactor",
+   "prio": "P3",
+   "comp": "comp/desktop",
+   "by": "alt-glitch",
+   "delayMin": 7.0
+  }
+ }
+]

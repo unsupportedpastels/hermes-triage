@@ -1,0 +1,1116 @@
+[
+ {
+  "number": 123888,
+  "author": "user-01",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    5.9
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    5.9
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    5.9
+   ]
+  ]
+ },
+ {
+  "number": 123898,
+  "author": "user-02",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    7.0
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    7.0
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    7.0
+   ]
+  ]
+ },
+ {
+  "number": 123685,
+  "author": "user-03",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    3.4
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    3.4
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    3.4
+   ]
+  ]
+ },
+ {
+  "number": 123989,
+  "author": "user-04",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    11.0
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    11.0
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    11.0
+   ]
+  ]
+ },
+ {
+  "number": 123801,
+  "author": "user-05",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    8.4
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    8.4
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    8.4
+   ]
+  ]
+ },
+ {
+  "number": 123856,
+  "author": "user-06",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.6
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    6.6
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    6.6
+   ]
+  ]
+ },
+ {
+  "number": 124006,
+  "author": "user-07",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    9.0
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    9.0
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    9.0
+   ]
+  ]
+ },
+ {
+  "number": 123787,
+  "author": "user-08",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    2.7
+   ],
+   [
+    "comp/plugins",
+    "alt-glitch",
+    2.7
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    2.7
+   ]
+  ]
+ },
+ {
+  "number": 123971,
+  "author": "user-09",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    11.6
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    11.6
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    11.6
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    11.6
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    11.6
+   ]
+  ]
+ },
+ {
+  "number": 123768,
+  "author": "user-10",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    7.1
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    7.1
+   ],
+   [
+    "comp/tui",
+    "alt-glitch",
+    7.1
+   ],
+   [
+    "comp/plugins",
+    "alt-glitch",
+    7.1
+   ]
+  ]
+ },
+ {
+  "number": 123781,
+  "author": "user-08",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    11.4
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    11.4
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    11.4
+   ]
+  ]
+ },
+ {
+  "number": 123988,
+  "author": "user-11",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    11.2
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    11.2
+   ],
+   [
+    "comp/tui",
+    "alt-glitch",
+    11.2
+   ]
+  ]
+ },
+ {
+  "number": 123832,
+  "author": "user-08",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    10.0
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    10.0
+   ],
+   [
+    "P1",
+    "alt-glitch",
+    10.0
+   ]
+  ]
+ },
+ {
+  "number": 123828,
+  "author": "user-12",
+  "labels": [
+   [
+    "type/feature",
+    "alt-glitch",
+    6.2
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    6.2
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    6.2
+   ]
+  ]
+ },
+ {
+  "number": 120575,
+  "author": "user-13",
+  "labels": [
+   [
+    "type/feature",
+    "alt-glitch",
+    3.6
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    3.6
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    3.6
+   ],
+   [
+    "comp/dashboard",
+    "alt-glitch",
+    3.6
+   ]
+  ]
+ },
+ {
+  "number": 120580,
+  "author": "user-14",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.6
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    6.6
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    6.6
+   ]
+  ]
+ },
+ {
+  "number": 119809,
+  "author": "user-15",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    9.0
+   ],
+   [
+    "P1",
+    "alt-glitch",
+    9.0
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    9.0
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    9.0
+   ]
+  ]
+ },
+ {
+  "number": 121984,
+  "author": "user-16",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.3
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    6.3
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    6.3
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    6.3
+   ]
+  ]
+ },
+ {
+  "number": 119991,
+  "author": "user-08",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    10.8
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    10.8
+   ],
+   [
+    "comp/dashboard",
+    "alt-glitch",
+    10.8
+   ]
+  ]
+ },
+ {
+  "number": 120205,
+  "author": "user-17",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    5.2
+   ],
+   [
+    "P1",
+    "alt-glitch",
+    5.2
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    5.2
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    5.2
+   ]
+  ]
+ },
+ {
+  "number": 122845,
+  "author": "user-18",
+  "labels": [
+   [
+    "P4",
+    "alt-glitch",
+    17.4
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    17.4
+   ]
+  ]
+ },
+ {
+  "number": 119961,
+  "author": "user-08",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.1
+   ],
+   [
+    "P0",
+    "alt-glitch",
+    6.1
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    6.1
+   ]
+  ]
+ },
+ {
+  "number": 121347,
+  "author": "user-19",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.9
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    6.9
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    6.9
+   ]
+  ]
+ },
+ {
+  "number": 116879,
+  "author": "user-20",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    4.1
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    4.1
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    4.1
+   ]
+  ]
+ },
+ {
+  "number": 116880,
+  "author": "user-20",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    3.9
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    3.9
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    3.9
+   ]
+  ]
+ },
+ {
+  "number": 113039,
+  "author": "user-21",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    115.5
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    115.5
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    115.5
+   ]
+  ]
+ },
+ {
+  "number": 120897,
+  "author": "user-22",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    8.5
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    8.5
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    8.5
+   ]
+  ]
+ },
+ {
+  "number": 115185,
+  "author": "user-23",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    9.4
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    9.4
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    9.4
+   ]
+  ]
+ },
+ {
+  "number": 116352,
+  "author": "user-24",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    11.2
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    11.2
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    11.2
+   ]
+  ]
+ },
+ {
+  "number": 123195,
+  "author": "user-25",
+  "labels": [
+   [
+    "P3",
+    "alt-glitch",
+    9.1
+   ]
+  ]
+ },
+ {
+  "number": 114741,
+  "author": "user-26",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    12.8
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    12.8
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    12.8
+   ]
+  ]
+ },
+ {
+  "number": 120215,
+  "author": "user-27",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    11.2
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    11.2
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    11.2
+   ]
+  ]
+ },
+ {
+  "number": 123949,
+  "author": "user-28",
+  "labels": [
+   [
+    "type/feature",
+    "alt-glitch",
+    4.9
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    4.9
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    4.9
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    4.9
+   ]
+  ]
+ },
+ {
+  "number": 123950,
+  "author": "user-29",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    3.6
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    3.6
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    3.6
+   ]
+  ]
+ },
+ {
+  "number": 123872,
+  "author": "user-30",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    9.8
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    9.8
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    9.8
+   ]
+  ]
+ },
+ {
+  "number": 124004,
+  "author": "user-31",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    9.8
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    9.8
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    9.8
+   ],
+   [
+    "comp/cron",
+    "alt-glitch",
+    9.8
+   ]
+  ]
+ },
+ {
+  "number": 123905,
+  "author": "user-08",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    10.5
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    10.5
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    10.5
+   ],
+   [
+    "comp/plugins",
+    "alt-glitch",
+    10.5
+   ]
+  ]
+ },
+ {
+  "number": 123932,
+  "author": "user-30",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    10.0
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    10.0
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    10.0
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    10.0
+   ]
+  ]
+ },
+ {
+  "number": 122922,
+  "author": "user-32",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.6
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    6.6
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    6.6
+   ]
+  ]
+ },
+ {
+  "number": 122923,
+  "author": "user-32",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    6.3
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    6.3
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    6.3
+   ]
+  ]
+ },
+ {
+  "number": 122295,
+  "author": "user-32",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    9.3
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    9.3
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    9.3
+   ]
+  ]
+ },
+ {
+  "number": 123220,
+  "author": "user-32",
+  "labels": [
+   [
+    "type/test",
+    "alt-glitch",
+    13.2
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    13.2
+   ],
+   [
+    "comp/cron",
+    "alt-glitch",
+    13.2
+   ]
+  ]
+ },
+ {
+  "number": 122841,
+  "author": "user-32",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    5.5
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    5.5
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    5.5
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    5.5
+   ],
+   [
+    "comp/gateway",
+    "alt-glitch",
+    5.5
+   ],
+   [
+    "comp/tools",
+    "alt-glitch",
+    5.5
+   ],
+   [
+    "comp/tui",
+    "alt-glitch",
+    5.5
+   ]
+  ]
+ },
+ {
+  "number": 122900,
+  "author": "user-32",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    10.4
+   ],
+   [
+    "P2",
+    "alt-glitch",
+    10.4
+   ],
+   [
+    "comp/cli",
+    "alt-glitch",
+    10.4
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    10.4
+   ]
+  ]
+ },
+ {
+  "number": 124001,
+  "author": "user-33",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    13.3
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    13.3
+   ]
+  ]
+ },
+ {
+  "number": 122894,
+  "author": "user-34",
+  "labels": [
+   [
+    "type/feature",
+    "alt-glitch",
+    12.3
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    12.3
+   ],
+   [
+    "comp/agent",
+    "alt-glitch",
+    12.3
+   ],
+   [
+    "comp/plugins",
+    "alt-glitch",
+    12.3
+   ]
+  ]
+ },
+ {
+  "number": 122904,
+  "author": "hermes-seaeye[bot]",
+  "labels": [
+   [
+    "type/refactor",
+    "alt-glitch",
+    7.3
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    7.3
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    7.3
+   ],
+   [
+    "comp/tui",
+    "alt-glitch",
+    7.3
+   ]
+  ]
+ },
+ {
+  "number": 121799,
+  "author": "hermes-seaeye[bot]",
+  "labels": []
+ },
+ {
+  "number": 123668,
+  "author": "user-35",
+  "labels": [
+   [
+    "type/bug",
+    "alt-glitch",
+    7.2
+   ],
+   [
+    "P1",
+    "alt-glitch",
+    7.2
+   ],
+   [
+    "comp/cron",
+    "alt-glitch",
+    7.2
+   ]
+  ]
+ },
+ {
+  "number": 122315,
+  "author": "hermes-seaeye[bot]",
+  "labels": [
+   [
+    "type/refactor",
+    "alt-glitch",
+    7.0
+   ],
+   [
+    "P3",
+    "alt-glitch",
+    7.0
+   ],
+   [
+    "comp/desktop",
+    "alt-glitch",
+    7.0
+   ],
+   [
+    "comp/tui",
+    "alt-glitch",
+    7.0
+   ],
+   [
+    "comp/plugins",
+    "alt-glitch",
+    7.0
+   ]
+  ]
+ }
+]

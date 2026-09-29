@@ -1,0 +1,22 @@
+{
+ "model": "deepseek/deepseek-v4.1-flash",
+ "items": 50,
+ "validJsonFirstTry": 50,
+ "dupSelfHit": [
+  37,
+  49
+ ],
+ "cost": 0.0227,
+ "latencyMedianS": 6.4,
+ "latencyP90S": 20.8,
+ "promptTokens": 43270,
+ "completionTokens": 8759,
+ "reasoningTokens": 4865,
+ "labeledItems": 49,
+ "labelCount": 163,
+ "labelActors": [
+  "alt-glitch"
+ ],
+ "labelDelayMedianMin": 8.4,
+ "labelDelayMaxMin": 115.5
+}
