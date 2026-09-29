@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from "react";
-import { DEFAULT_RULES, clusterReports, evaluate, pairKey, rank, reconcile } from "./engine";
+import { DEFAULT_RULES, clusterReports, evaluate, foldDuplicates, pairKey, rank, reconcile } from "./engine";
 import { SCENARIO } from "./sim";
 import type { Closable, Cluster, FeedEntry, Incident, IncidentTab, Meta, QueueCard, Report, Rule, RuleId, SeedRow, Source, View } from "./types";
 
@@ -31,6 +31,14 @@ export interface State {
   clusterThreshold: number;
   /** pairKeys of reports the model check judged to have different causes; never grouped on keywords. */
   apart: Set<string>;
+  /** pairKeys of reports the model check judged to share a cause; All reports folds them together. */
+  same: Set<string>;
+  /** Each report folded as a confident duplicate, and its parent's id (see foldDuplicates). */
+  parentOf: Map<string, string>;
+  /** Each parent's folded duplicates, oldest first. */
+  folded: Map<string, string[]>;
+  /** All reports shows only the parent of each set of confident duplicates. */
+  foldDupes: boolean;
   live: boolean;
   simIndex: number;
   now: number;
@@ -52,9 +60,9 @@ export interface State {
   /** False until the whole `DAYS` window has arrived; the first load comes in two parts. */
   complete: boolean;
   loadError: string | null;
-  /** Issue numbers ticked in All reports, waiting for "Queue for the agent". */
+  /** Issue and PR numbers ticked, waiting for "Queue for the agent". */
   picked: number[];
-  /** Kanban cards of queued issues, by issue number. */
+  /** Kanban cards of queued issues and PRs, by number. */
   queue: Record<number, QueueCard>;
   queueing: boolean;
   queueNote: string | null;
@@ -74,14 +82,17 @@ let memo: {
   reports: Report[];
   threshold: number;
   apart: Set<string>;
+  same: Set<string>;
   byId: Map<string, Report>;
   clusters: Cluster[];
   clusterById: Map<string, Cluster>;
   clusterOf: Map<string, string>;
+  parentOf: Map<string, string>;
+  folded: Map<string, string[]>;
 } | null = null;
 
 function derive(s: State): State {
-  if (!memo || memo.reports !== s.reports || memo.threshold !== s.clusterThreshold || memo.apart !== s.apart) {
+  if (!memo || memo.reports !== s.reports || memo.threshold !== s.clusterThreshold || memo.apart !== s.apart || memo.same !== s.same) {
     const clusters = clusterReports(s.reports, s.clusterThreshold, s.apart);
     const clusterOf = new Map<string, string>();
     clusters.forEach((c) => c.reportIds.forEach((id) => clusterOf.set(id, c.id)));
@@ -89,15 +100,17 @@ function derive(s: State): State {
       reports: s.reports,
       threshold: s.clusterThreshold,
       apart: s.apart,
+      same: s.same,
       byId: new Map(s.reports.map((r) => [r.id, r])),
       clusters,
       clusterById: new Map(clusters.map((c) => [c.id, c])),
       clusterOf,
+      ...foldDuplicates(s.reports, clusterOf, s.same),
     };
   }
-  const { byId, clusters, clusterById, clusterOf } = memo;
+  const { byId, clusters, clusterById, clusterOf, parentOf, folded } = memo;
   const incidents = reconcile(s.incidents, clusters, evaluate(byId, clusters, s.rules, s.now), byId, s.now);
-  return { ...s, byId, clusters, clusterById, clusterOf, incidents };
+  return { ...s, byId, clusters, clusterById, clusterOf, parentOf, folded, incidents };
 }
 
 /** Adds feed entries for incidents that opened, re-opened or escalated in this update. */
@@ -125,6 +138,10 @@ let state: State = derive({
   rules: DEFAULT_RULES,
   clusterThreshold: 0.5,
   apart: new Set(),
+  same: new Set(),
+  parentOf: new Map(),
+  folded: new Map(),
+  foldDupes: true,
   live: SIM,
   simIndex: 0,
   now: Date.now(),
@@ -175,7 +192,7 @@ function patchIncident(id: string, f: (i: Incident) => Incident) {
   set({ incidents: state.incidents.map((i) => (i.id === id ? f(i) : i)) });
 }
 
-type Payload = { reports: SeedRow[]; closable?: Closable[]; apart?: [number, number][]; meta: Meta };
+type Payload = { reports: SeedRow[]; closable?: Closable[]; apart?: [number, number][]; same?: [number, number][]; meta: Meta };
 
 async function fetchReports(query: string): Promise<Payload> {
   const res = await fetch(`/api/reports?${query}`);
@@ -196,6 +213,7 @@ function apply(data: Payload, fresh: Report[], complete: boolean) {
     {
       reports: [...state.reports.filter((r) => r.sample), ...fresh],
       apart: new Set((data.apart ?? []).map(([a, b]) => pairKey(a, b))),
+      same: new Set((data.same ?? []).map(([a, b]) => pairKey(a, b))),
       meta: data.meta,
       closable: data.closable ?? [],
       loaded: true,
@@ -240,6 +258,7 @@ export const actions = {
   clearTags: () => set({ tags: [] }),
   includeClosed: (includeClosed: boolean) => set({ includeClosed }),
   hideOwned: (hideOwned: boolean) => set({ hideOwned }),
+  foldDupes: (foldDupes: boolean) => set({ foldDupes }),
   reportSort: (reportSort: ReportSort) => set({ reportSort }),
   incidentTab: (incidentTab: IncidentTab) => set({ incidentTab }),
   toggleLive: () => set({ live: !state.live }),
@@ -274,11 +293,17 @@ export const actions = {
   async queuePicked() {
     if (!state.picked.length || state.queueing) return;
     set({ queueing: true, queueNote: null });
+    // each picked parent carries the duplicates folded under it, so its worker checks them too
+    const related: Record<number, number[]> = {};
+    for (const n of state.picked) {
+      const kids = (state.folded.get(`gh#${n}`) ?? []).map((id) => state.byId.get(id)?.number).filter((m): m is number => m != null);
+      if (kids.length) related[n] = kids;
+    }
     try {
       const res = await fetch("/api/queue", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ numbers: state.picked }),
+        body: JSON.stringify({ numbers: state.picked, related }),
       });
       const data = (await res.json()) as { error?: string; queued?: { number: number; error?: string }[]; cards?: Record<number, QueueCard> };
       if (!res.ok) throw new Error(data.error ?? `HTTP ${res.status}`);

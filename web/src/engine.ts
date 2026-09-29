@@ -199,6 +199,52 @@ export function clusterReports(reports: Report[], threshold: number, apart: Read
   }));
 }
 
+/**
+ * Duplicates confident enough to fold under one parent in All reports: reports in one group of similar
+ * reports that a "Fixes #N" link joins or the model check judged to share a cause (`same`, pairKeys).
+ * Keyword overlap alone never folds. The parent is the open issue the group's PRs fix most, else its
+ * oldest issue, else its oldest PR. Returns each folded report's parent id and each parent's folded
+ * report ids, oldest first.
+ */
+export function foldDuplicates(reports: Report[], clusterOf: Map<string, string>, same: ReadonlySet<string>) {
+  const at = new Map(reports.filter((r) => r.number != null).map((r) => [r.number!, r]));
+  const up = new Map<string, string>();
+  const find = (id: string): string => {
+    const p = up.get(id);
+    if (!p) return id;
+    const top = find(p);
+    up.set(id, top);
+    return top;
+  };
+  const join = (a: Report, b: Report) => {
+    if (clusterOf.get(a.id) !== clusterOf.get(b.id)) return;
+    const x = find(a.id), y = find(b.id);
+    if (x !== y) up.set(y, x);
+  };
+  for (const r of reports) r.fixes?.forEach((n) => at.get(n) && join(r, at.get(n)!));
+  same.forEach((k) => {
+    const [a, b] = k.split("-").map((n) => at.get(Number(n)));
+    if (a && b) join(a, b);
+  });
+  const groups = new Map<string, Report[]>();
+  for (const r of reports) {
+    const root = find(r.id);
+    (groups.get(root) ?? groups.set(root, []).get(root)!).push(r);
+  }
+  const parentOf = new Map<string, string>();
+  const folded = new Map<string, string[]>();
+  for (const rs of groups.values()) {
+    if (rs.length < 2) continue;
+    const fixed = (r: Report) => rs.filter((p) => p.fixes?.includes(r.number!)).length;
+    const issues = rs.filter((r) => !r.isPr).sort((a, b) => fixed(b) - fixed(a) || a.createdAt - b.createdAt);
+    const parent = issues[0] ?? [...rs].sort((a, b) => a.createdAt - b.createdAt)[0];
+    const kids = rs.filter((r) => r !== parent).sort((a, b) => a.createdAt - b.createdAt);
+    kids.forEach((r) => parentOf.set(r.id, parent.id));
+    folded.set(parent.id, kids.map((r) => r.id));
+  }
+  return { parentOf, folded };
+}
+
 export interface Verdict {
   level: Level;
   reasons: Reason[];

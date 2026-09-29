@@ -157,6 +157,12 @@ input.pick { margin: 0; accent-color: var(--accent); cursor: pointer; }
 button.queue-go { padding: 4px 12px; border: 1px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 22%, var(--surface)); color: var(--fg); font-size: 13px; }
 button.queue-go:disabled { opacity: 0.6; cursor: default; }
 .queue-note { color: var(--text); }
+button.fold-toggle { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); background: none; cursor: pointer; }
+ul.folded { margin: 6px 0 2px; padding: 0 0 0 12px; border-left: 2px solid var(--line); list-style: none; font-size: 13px; color: var(--muted); }
+ul.folded li { padding: 4px 6px; border-radius: 6px; cursor: pointer; }
+ul.folded li:hover { background: var(--raised); }
+ul.folded .ref { color: var(--fg); }
+ul.folded .clamp { color: var(--fg); -webkit-line-clamp: 1; }
 .owners { margin: 0; padding-left: 18px; font-size: 13px; }
 .owners li { margin: 2px 0; }
 select.sort { padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 13px; }

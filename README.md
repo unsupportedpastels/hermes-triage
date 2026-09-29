@@ -63,8 +63,8 @@ chip and detail section, so work they've already done stands out.
 
 ## Queueing issues for the agent
 
-Tick up to 10 open issues in All reports, or tick an alert in Needs attention to pick every open
-issue behind it, and press "Queue N for the agent", or run
+Tick up to 10 open issues or PRs in All reports, or tick an alert in Needs attention to pick every
+open report behind it, and press "Queue N for the agent", or run
 `scripts/issue_queue.py add N [N ...]`. Each issue becomes a Hermes Kanban card that the gateway's
 dispatcher runs as a worker (at most `kanban.max_in_progress` at once) on the delegate model,
 following the `hermes-issue-queue-worker` skill. The worker reads the issue and every PR on it,
@@ -113,6 +113,12 @@ would merge two groups holding such a pair. Only "Fixes #N" links can still put 
 share of same-cause pairs inside groups from 85% to 89% (67% to 75% in groups of 6 or more), by
 DeepSeek's judgment, which agreed with a blind hand-labeling on 92% of 99 pairs. Pairs that only
 group below 0.40 are never checked and group on keywords alone.
+
+All reports folds confident duplicates ("Fold duplicates", on by default): within a group, reports
+joined by a "Fixes #N" link or judged the same cause by the model check (`same` in `/api/reports`)
+are listed under one parent, the open issue the group's PRs fix most, else its oldest issue, else
+its oldest PR. Keyword overlap alone never folds. Queueing a parent sends its folded duplicates to
+the worker to check, and a Needs attention alert picks parents rather than each duplicate.
 
 ## Dashboard
 

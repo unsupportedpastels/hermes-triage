@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import pipeline from "./data/pipeline.json";
-import { rank } from "./engine";
+import { pairKey, rank } from "./engine";
 import { DAYS, QUEUE_MAX, SIM, actions, useStore, type ReportSort, type State } from "./store";
 import type { Closable, Incident, IncidentTab, QueueCard, Report, Rule, Source } from "./types";
 import {
@@ -217,7 +217,11 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
   const staff = staffOn(reps);
   const staffed = reps.filter((r) => r.owners?.length).length;
   const mine = reps.filter((r) => r.mine).length;
-  const issues = reps.filter(queueable).map((r) => r.number!);
+  // a report folded as a duplicate is queued through its parent, so its worker covers the set
+  const issues = [...new Set(reps.map((r) => s.parentOf.get(r.id) ?? r.id))]
+    .map((id) => s.byId.get(id))
+    .filter((r): r is Report => !!r && queueable(r))
+    .map((r) => r.number!);
   const cards = issues.map((n) => s.queue[n]).filter((c): c is QueueCard => !!c);
   const unqueued = issues.filter((n) => !s.queue[n]);
   const allPicked = unqueued.length > 0 && unqueued.every((n) => s.picked.includes(n));
@@ -239,11 +243,11 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
           <input
             type="checkbox"
             className="pick"
-            aria-label={`Pick ${plural(unqueued.length, "open issue")} in this alert to queue for the agent`}
+            aria-label={`Pick ${plural(unqueued.length, "open report")} in this alert to queue for the agent`}
             title={
               tooMany
-                ? `Its ${plural(unqueued.length, "open issue")} would go past ${QUEUE_MAX} at a time`
-                : `Pick ${unqueued.length === 1 ? "its open issue" : `its ${unqueued.length} open issues`} to queue for the agent`
+                ? `Its ${plural(unqueued.length, "open report")} would go past ${QUEUE_MAX} at a time`
+                : `Pick ${unqueued.length === 1 ? "its open report" : `its ${unqueued.length} open reports`} to queue for the agent; confident duplicates go with their parent`
             }
             checked={allPicked}
             disabled={tooMany}
@@ -265,7 +269,7 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
               .map((n) => `#${n}: ${queueLabel(s.queue[n])}`)
               .join("\n")}
           >
-            {issues.length === 1 ? queueLabel(cards[0]) : `Agent: ${cards.length} of ${plural(issues.length, "issue")} queued`}
+            {issues.length === 1 ? queueLabel(cards[0]) : `Agent: ${cards.length} of ${issues.length} queued`}
           </span>
         )}
         {staff.length > 0 && (
@@ -378,24 +382,37 @@ export function ReportsView() {
     const d = dayLabel(r.createdAt, s.now);
     return [d, d];
   };
-  const list = s.reports
+  const filtered = s.reports.filter(
+    (r) =>
+      (s.includeClosed || isOpenState(r)) &&
+      (s.source === "all" || r.source === s.source) &&
+      s.tags.every((t) => r.tags?.includes(t)) &&
+      (!s.hideOwned || !r.owners?.length),
+  );
+  const list = filtered
     .filter(
       (r) =>
-        (s.includeClosed || isOpenState(r)) &&
-        (s.source === "all" || r.source === s.source) &&
-        s.tags.every((t) => r.tags?.includes(t)) &&
-        (!s.hideOwned || !r.owners?.length) &&
-        (!q ||
-          `${r.number ?? ""} ${r.title} ${r.problem} ${(r.tags ?? []).join(" ")} ${r.author} ${(r.owners ?? []).map((o) => o.login).join(" ")}`
-            .toLowerCase()
-            .includes(q)),
+        !q ||
+        `${r.number ?? ""} ${r.title} ${r.problem} ${(r.tags ?? []).join(" ")} ${r.author} ${(r.owners ?? []).map((o) => o.login).join(" ")}`
+          .toLowerCase()
+          .includes(q),
     )
     .sort(orders[s.reportSort]);
+  // With folding on, a confident duplicate is listed under its parent, and a search that matches it
+  // lists the parent; one whose parent the filters leave out stays on its own.
+  const passes = new Set(filtered.map((r) => r.id));
+  const top = (r: Report) => {
+    const p = s.parentOf.get(r.id);
+    return p && passes.has(p) ? s.byId.get(p)! : r;
+  };
+  const rows = s.foldDupes ? [...new Set(list.map(top))].sort(orders[s.reportSort]) : list;
+  const foldedHere = (r: Report) => (s.foldDupes ? (s.folded.get(r.id) ?? []).filter((id) => passes.has(id)) : []);
+  const foldedCount = s.foldDupes ? rows.reduce((n, r) => n + foldedHere(r).length, 0) : 0;
   // Counts come from the current results, so they show how far each label would narrow them.
   const tagCounts = new Map<string, number>();
   for (const r of list) for (const t of r.tags ?? []) if (!s.tags.includes(t)) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
   const groups: [string, string, Report[]][] = [];
-  for (const r of list.slice(0, SHOW)) {
+  for (const r of rows.slice(0, SHOW)) {
     const [key, label] = groupOf(r);
     const last = groups[groups.length - 1];
     if (last && last[0] === key) last[2].push(r);
@@ -430,10 +447,15 @@ export function ReportsView() {
           <input type="checkbox" checked={s.hideOwned} onChange={(e) => actions.hideOwned(e.target.checked)} />
           Hide items staff are on
         </label>
+        <label className="check" title="List a PR or report under the issue it duplicates when a Fixes link or the model check says they share a cause. Keyword overlap alone never folds.">
+          <input type="checkbox" checked={s.foldDupes} onChange={(e) => actions.foldDupes(e.target.checked)} />
+          Fold duplicates
+        </label>
         <QueueBar s={s} />
         <span className="meta">
-          {plural(list.length, "report")}
-          {list.length > SHOW && ` · showing the first ${SHOW}; search to narrow`}
+          {plural(rows.length, "report")}
+          {foldedCount > 0 && ` · ${foldedCount} more folded as duplicates`}
+          {rows.length > SHOW && ` · showing the first ${SHOW}; search to narrow`}
         </span>
       </Head>
       {list.length === 0 && <Empty title="No reports match">Try a different search or remove a label filter.</Empty>}
@@ -444,7 +466,7 @@ export function ReportsView() {
           </h2>
           <ul className="list">
             {rs.map((r) => (
-              <ReportItem key={r.id} r={r} s={s} />
+              <ReportItem key={r.id} r={r} s={s} folded={foldedHere(r)} />
             ))}
           </ul>
         </div>
@@ -510,8 +532,8 @@ export function queueLabel(c: QueueCard) {
   return `Agent: ${STATUS_WORD[c.status] ?? c.status}`;
 }
 
-/** Only open issues can be queued; PRs are handled through the issue they fix. */
-const queueable = (r: Report) => !r.sample && !r.isPr && r.number != null && isOpenState(r);
+/** Open GitHub issues and PRs can be queued. */
+const queueable = (r: Report) => !r.sample && r.number != null && isOpenState(r);
 
 /** The picked issues' "Queue N for the agent" button, shared by Needs attention and All reports. */
 function QueueBar({ s }: { s: State }) {
@@ -533,7 +555,16 @@ function QueueBar({ s }: { s: State }) {
   );
 }
 
-function ReportItem({ r, s }: { r: Report; s: State }) {
+/** Why a folded report counts as a duplicate of its parent. */
+function foldReason(k: Report, p: Report, s: State) {
+  if (k.fixes?.includes(p.number!)) return "says it fixes it";
+  if (p.fixes?.includes(k.number!)) return "the parent says it fixes this";
+  if (s.same.has(pairKey(k.number!, p.number!))) return "same cause per the model check";
+  return "same cause, through another duplicate";
+}
+
+function ReportItem({ r, s, folded = [] }: { r: Report; s: State; folded?: string[] }) {
+  const [open, setOpen] = useState(false);
   const size = s.clusterById.get(s.clusterOf.get(r.id)!)?.reportIds.length ?? 1;
   const card = r.number != null ? s.queue[r.number] : undefined;
   const picked = r.number != null && s.picked.includes(r.number);
@@ -562,7 +593,20 @@ function ReportItem({ r, s }: { r: Report; s: State }) {
           {stateName(r)} · {r.author} · <Age at={r.createdAt} now={s.now} />
         </span>
         <span className="spacer" />
-        {size > 1 && <span className="similar">{plural(size - 1, "similar report")}</span>}
+        {folded.length > 0 && (
+          <button
+            className="chip fold-toggle"
+            aria-expanded={open}
+            title="Confident duplicates folded under this one"
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            }}
+          >
+            {open ? "Hide" : "+"} {plural(folded.length, "duplicate")}
+          </button>
+        )}
+        {size - 1 > folded.length && <span className="similar">{plural(size - 1, "similar report")}</span>}
         {card && (
           <span className={cx("chip queued", card.outcome && "done")} title={`Kanban card ${card.task}${card.failure ? `\nLast failure: ${card.failure}` : ""}`}>
             {queueLabel(card)}
@@ -582,6 +626,26 @@ function ReportItem({ r, s }: { r: Report; s: State }) {
       </div>
       <h2 className="item-title clamp">{r.title}</h2>
       {r.problem !== r.title && <p className="summary clamp">{r.problem}</p>}
+      {open && folded.length > 0 && (
+        <ul className="folded">
+          {folded.map((id) => {
+            const k = s.byId.get(id)!;
+            return (
+              <li
+                key={id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  actions.select(id);
+                }}
+              >
+                <span className="ref">{refLabel(k)}</span> {stateName(k)} · {k.author} · <Age at={k.createdAt} now={s.now} /> ·{" "}
+                <span className="meta">{foldReason(k, r, s)}</span>
+                <div className="clamp">{k.title}</div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
       <SalvageNote r={r} />
       <div className="chips">
         {r.labels.by ? <LabelChips l={r.labels} /> : <span className="pending">{isOpenState(r) ? "Waiting for alt-glitch's labels" : "No labels"}</span>}

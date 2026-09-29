@@ -4,7 +4,8 @@
 GET /api/reports?days=N returns open issues and PRs opened in the last N days (default 14, at
 most 90) with their summaries and salvage links, open PRs whose salvage already merged, plus
 pipeline stats, plus `apart`: pairs of those reports that check_pairs.py's model check judged to
-have different causes, so the dashboard doesn't group them on keywords. Everything else is served
+have different causes, so the dashboard doesn't group them on keywords, and `same`: the pairs it
+judged to share a cause, which All reports folds under one parent. Everything else is served
 from web/dist. `&skip=M` leaves out reports from the newest M days (the dashboard loads those
 first); `apart` and the rest still cover all N days.
 Each report also carries `owners`: the STAFF members active on it (opened it, assigned, commented,
@@ -14,8 +15,9 @@ GET /api/stats?days=N returns counts over the whole mirror for the Stats page (d
 most 365), including who merged or closed PRs in the window and the issues those merges closed.
 GET /api/advisories returns every GHSA ID an issue or PR names, with the items naming it and the
 advisory details ingest.py cached, plus hermes-agent's own published advisories.
-GET /api/queue returns the issues queued for an agent to work (issue_queue.py status), and
-POST /api/queue with {"numbers": [...]} queues up to 10 more. That is the only write: it creates
+GET /api/queue returns the issues and PRs queued for an agent to work (issue_queue.py status), and
+POST /api/queue with {"numbers": [...], "related": {"N": [...]}} queues up to 10 more, each with the
+duplicates the dashboard folded under it. That is the only write: it creates
 Hermes Kanban cards, never touches GitHub, and is refused unless the request comes from this page.
 The database is opened read-only; ingest.py, summarize.py and check_pairs.py stay the only writers.
 """
@@ -108,12 +110,13 @@ def load(days, skip=0):
         synced = db.execute("SELECT max(finished_at) FROM runs WHERE outcome = 'ok'").fetchone()[0]
         # CROSS JOIN keeps the scan on the few checked pairs; as `a IN (...) AND b IN (...)` SQLite
         # probed every pair of open reports instead (seconds rather than milliseconds).
-        apart = db.execute(
+        checked_pairs = lambda same: db.execute(
             "SELECT p.a, p.b FROM pair_checks p CROSS JOIN items x CROSS JOIN items y "
-            "WHERE p.same = 0 AND x.number = p.a AND y.number = p.b AND x.state = 'open' AND y.state = 'open' "
+            "WHERE p.same = ? AND x.number = p.a AND y.number = p.b AND x.state = 'open' AND y.state = 'open' "
             f"AND x.created_at >= {SINCE} AND y.created_at >= {SINCE}",
-            (f"-{days} days",) * 2).fetchall() if db.execute(
+            (same,) + (f"-{days} days",) * 2).fetchall() if db.execute(
             "SELECT 1 FROM sqlite_master WHERE name = 'pair_checks'").fetchone() else []
+        apart, same = checked_pairs(0), checked_pairs(1)
     finally:
         db.close()
     link = lambda number, author, state, merged: {
@@ -169,6 +172,7 @@ def load(days, skip=0):
         "reports": reports,
         "closable": list(closable.values()),
         "apart": [list(p) for p in apart],
+        "same": [list(p) for p in same],
         "meta": {
             "openTotal": sum(status.values()),
             "summarized": status.get("done", 0),
@@ -356,11 +360,12 @@ class Handler(SimpleHTTPRequestHandler):
         try:
             raw = json.loads(self.rfile.read(min(int(self.headers.get("Content-Length", 0)), 10_000)))
             numbers = [int(n) for n in raw["numbers"]]
+            related = {int(k): [int(m) for m in v][:50] for k, v in (raw.get("related") or {}).items()}
         except (ValueError, KeyError, TypeError):
-            return self.send_json(400, {"error": 'expected {"numbers": [issue numbers]}'})
+            return self.send_json(400, {"error": 'expected {"numbers": [issue or PR numbers]}'})
         if not 1 <= len(numbers) <= issue_queue.MAX_BATCH:
-            return self.send_json(400, {"error": f"queue 1 to {issue_queue.MAX_BATCH} issues at a time"})
-        return self.send_json(200, {"queued": issue_queue.add(numbers), "cards": issue_queue.status()})
+            return self.send_json(400, {"error": f"queue 1 to {issue_queue.MAX_BATCH} at a time"})
+        return self.send_json(200, {"queued": issue_queue.add(numbers, related), "cards": issue_queue.status()})
 
     def do_GET(self):
         url = urlparse(self.path)

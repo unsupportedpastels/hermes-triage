@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Queue hermes-agent issues for an agent to work end to end, and report how they're going.
+"""Queue hermes-agent issues and PRs for an agent to work end to end, and report how they're going.
 
-`issue_queue.py add N [N ...]` creates one Hermes Kanban card per open issue (at most 10 at a time). The
+`issue_queue.py add N [N ...]` creates one Hermes Kanban card per open issue or PR (at most 10 at a time). The
 gateway's dispatcher runs each card as a worker that follows the hermes-issue-queue-worker skill:
 it reads the issue and every PR on it, checks whether main already fixes it, compares and salvages
 existing PRs or writes its own fix, and blocks at one outcome with its evidence in
@@ -36,40 +36,48 @@ CARD_ARGS = [
 ]
 
 
-def open_issues(numbers):
-    """Title of each number that the mirror has as an open issue (not a PR)."""
+def open_items(numbers):
+    """(title, is_pr) of each number that the mirror has as an open issue or PR."""
     db = sqlite3.connect(f"file:{DB}?mode=ro", uri=True, timeout=30)
     try:
         marks = ",".join("?" * len(numbers))
-        return dict(db.execute(
-            f"SELECT number, title FROM items WHERE number IN ({marks}) AND state = 'open' AND NOT is_pr",
-            numbers).fetchall())
+        return {n: (title, bool(is_pr)) for n, title, is_pr in db.execute(
+            f"SELECT number, title, is_pr FROM items WHERE number IN ({marks}) AND state = 'open'",
+            numbers).fetchall()}
     finally:
         db.close()
 
 
-def card_body(number, title):
-    return (
-        f"Work hermes-agent issue #{number} end to end: {title}\n"
-        f"https://github.com/{REPO}/issues/{number}\n\n"
+def card_body(number, title, is_pr, related=()):
+    kind, path = ("PR", "pull") if is_pr else ("issue", "issues")
+    body = (
+        f"Work hermes-agent {kind} #{number} end to end: {title}\n"
+        f"https://github.com/{REPO}/{path}/{number}\n\n"
         "Follow the hermes-issue-queue-worker skill exactly. No GitHub writes of any kind.\n"
         f"Write artifacts to {ARTIFACTS}/{number}/ (outcome.txt, evidence.md and the outcome's files),\n"
         "then kanban_block with the outcome tag as the first line of the reason.\n"
     )
+    if related:
+        body += ("\nThe triage dashboard folded these open reports under it as the same cause (a Fixes link "
+                 "or the model check); put each in the ledger and verify it: "
+                 + " ".join(f"#{m}" for m in related) + "\n")
+    return body
 
 
-def add(numbers):
+def add(numbers, related=None):
     numbers = list(dict.fromkeys(numbers))
     if len(numbers) > MAX_BATCH:
-        sys.exit(f"at most {MAX_BATCH} issues at a time, got {len(numbers)}")
-    titles = open_issues(numbers)
+        sys.exit(f"at most {MAX_BATCH} at a time, got {len(numbers)}")
+    items = open_items(numbers)
     out = []
     for n in numbers:
-        if n not in titles:
-            out.append({"number": n, "error": "not an open issue in the mirror"})
+        if n not in items:
+            out.append({"number": n, "error": "not an open issue or PR in the mirror"})
             continue
-        cmd = [HERMES, "kanban", "create", f"Work hermes-agent issue #{n}: {titles[n][:80]}",
-               "--body", card_body(n, titles[n]), "--idempotency-key", KEY.format(n), *CARD_ARGS, "--json"]
+        title, is_pr = items[n]
+        cmd = [HERMES, "kanban", "create", f"Work hermes-agent {'PR' if is_pr else 'issue'} #{n}: {title[:80]}",
+               "--body", card_body(n, title, is_pr, (related or {}).get(n, ())),
+               "--idempotency-key", KEY.format(n), *CARD_ARGS, "--json"]
         res = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
         if res.returncode:
             out.append({"number": n, "error": (res.stderr or res.stdout).strip()[-300:]})
@@ -108,9 +116,9 @@ def status():
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
-    a = sub.add_parser("add", help="queue issues")
+    a = sub.add_parser("add", help="queue issues or PRs")
     a.add_argument("numbers", type=int, nargs="+")
-    s = sub.add_parser("status", help="list queued issues")
+    s = sub.add_parser("status", help="list queued issues and PRs")
     s.add_argument("--json", action="store_true")
     args = ap.parse_args()
     if args.cmd == "add":
