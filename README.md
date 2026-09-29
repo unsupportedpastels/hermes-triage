@@ -63,7 +63,8 @@ chip and detail section, so work they've already done stands out.
 
 ## Queueing issues for the agent
 
-Tick up to 10 open issues in All reports and press "Queue N for the agent", or run
+Tick up to 10 open issues in All reports, or tick an alert in Needs attention to pick every open
+issue behind it, and press "Queue N for the agent", or run
 `scripts/issue_queue.py add N [N ...]`. Each issue becomes a Hermes Kanban card that the gateway's
 dispatcher runs as a worker (at most `kanban.max_in_progress` at once) on the delegate model,
 following the `hermes-issue-queue-worker` skill. The worker reads the issue and every PR on it,

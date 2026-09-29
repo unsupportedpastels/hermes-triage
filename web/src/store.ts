@@ -267,6 +267,9 @@ export const actions = {
   setThreshold: (clusterThreshold: number) => set({ clusterThreshold }, true),
   pick: (n: number) =>
     set({ picked: state.picked.includes(n) ? state.picked.filter((x) => x !== n) : [...state.picked, n].slice(0, QUEUE_MAX) }),
+  /** Picks or unpicks several issues at once, e.g. every open issue behind an alert. */
+  pickAll: (ns: number[], on: boolean) =>
+    set({ picked: on ? [...new Set([...state.picked, ...ns])].slice(0, QUEUE_MAX) : state.picked.filter((x) => !ns.includes(x)) }),
   clearPicks: () => set({ picked: [], queueNote: null }),
   async queuePicked() {
     if (!state.picked.length || state.queueing) return;

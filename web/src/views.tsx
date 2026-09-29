@@ -81,6 +81,7 @@ export function IncidentsView() {
             </button>
           ))}
         </div>
+        <QueueBar s={s} />
       </Head>
       {list.length === 0 &&
         (s.incidentTab === "open" ? (
@@ -216,6 +217,11 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
   const staff = staffOn(reps);
   const staffed = reps.filter((r) => r.owners?.length).length;
   const mine = reps.filter((r) => r.mine).length;
+  const issues = reps.filter(queueable).map((r) => r.number!);
+  const cards = issues.map((n) => s.queue[n]).filter((c): c is QueueCard => !!c);
+  const unqueued = issues.filter((n) => !s.queue[n]);
+  const allPicked = unqueued.length > 0 && unqueued.every((n) => s.picked.includes(n));
+  const tooMany = !allPicked && s.picked.length + unqueued.filter((n) => !s.picked.includes(n)).length > QUEUE_MAX;
   return (
     <li
       data-id={i.id}
@@ -229,12 +235,39 @@ function IncidentItem({ i, s }: { i: Incident; s: State }) {
       onClick={() => actions.select(i.id)}
     >
       <div className="item-top">
+        {unqueued.length > 0 && (
+          <input
+            type="checkbox"
+            className="pick"
+            aria-label={`Pick ${plural(unqueued.length, "open issue")} in this alert to queue for the agent`}
+            title={
+              tooMany
+                ? `Its ${plural(unqueued.length, "open issue")} would go past ${QUEUE_MAX} at a time`
+                : `Pick ${unqueued.length === 1 ? "its open issue" : `its ${unqueued.length} open issues`} to queue for the agent`
+            }
+            checked={allPicked}
+            disabled={tooMany}
+            onClick={(e) => e.stopPropagation()}
+            onChange={() => actions.pickAll(unqueued, !allPicked)}
+          />
+        )}
         <LevelBadge level={i.level} />
         <span className="status" data-status={i.status}>
           {STATUS_NAME[i.status]}
           {!i.firing && " · rules quiet"}
         </span>
         {mine > 0 && <span className="chip mine">{reps.length > 1 ? `You're on ${mine} of ${reps.length}` : "You're on it"}</span>}
+        {cards.length > 0 && (
+          <span
+            className={cx("chip queued", cards.every((c) => c.outcome) && "done")}
+            title={issues
+              .filter((n) => s.queue[n])
+              .map((n) => `#${n}: ${queueLabel(s.queue[n])}`)
+              .join("\n")}
+          >
+            {issues.length === 1 ? queueLabel(cards[0]) : `Agent: ${cards.length} of ${plural(issues.length, "issue")} queued`}
+          </span>
+        )}
         {staff.length > 0 && (
           <span className="chip owned" title={staff.map(([login, n]) => `${login} is on ${plural(n, "report")}`).join("\n")}>
             Staff: {listJoin(staff.map(([login]) => login))}
@@ -397,18 +430,7 @@ export function ReportsView() {
           <input type="checkbox" checked={s.hideOwned} onChange={(e) => actions.hideOwned(e.target.checked)} />
           Hide items staff are on
         </label>
-        {s.picked.length > 0 && (
-          <span className="queue-bar">
-            <button className="queue-go" disabled={s.queueing} onClick={() => void actions.queuePicked()}>
-              {s.queueing ? "Queueing…" : `Queue ${s.picked.length} for the agent`}
-            </button>
-            <button className="clear-tags" onClick={actions.clearPicks}>
-              Clear
-            </button>
-            {s.picked.length >= QUEUE_MAX && <span className="meta">{QUEUE_MAX} at a time</span>}
-          </span>
-        )}
-        {s.queueNote && <span className="meta queue-note">{s.queueNote}</span>}
+        <QueueBar s={s} />
         <span className="meta">
           {plural(list.length, "report")}
           {list.length > SHOW && ` · showing the first ${SHOW}; search to narrow`}
@@ -490,6 +512,26 @@ export function queueLabel(c: QueueCard) {
 
 /** Only open issues can be queued; PRs are handled through the issue they fix. */
 const queueable = (r: Report) => !r.sample && !r.isPr && r.number != null && isOpenState(r);
+
+/** The picked issues' "Queue N for the agent" button, shared by Needs attention and All reports. */
+function QueueBar({ s }: { s: State }) {
+  return (
+    <>
+      {s.picked.length > 0 && (
+        <span className="queue-bar">
+          <button className="queue-go" disabled={s.queueing} onClick={() => void actions.queuePicked()}>
+            {s.queueing ? "Queueing…" : `Queue ${s.picked.length} for the agent`}
+          </button>
+          <button className="clear-tags" onClick={actions.clearPicks}>
+            Clear
+          </button>
+          {s.picked.length >= QUEUE_MAX && <span className="meta">{QUEUE_MAX} at a time</span>}
+        </span>
+      )}
+      {s.queueNote && <span className="meta queue-note">{s.queueNote}</span>}
+    </>
+  );
+}
 
 function ReportItem({ r, s }: { r: Report; s: State }) {
   const size = s.clusterById.get(s.clusterOf.get(r.id)!)?.reportIds.length ?? 1;
