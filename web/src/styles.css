@@ -150,6 +150,13 @@ input[type="checkbox"], input[type="range"] { accent-color: var(--accent-strong)
 .chip.prio-p1 { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
 .chip.owned { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); background: none; }
 .chip.mine { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); background: none; }
+.chip.queued { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); background: none; }
+.chip.queued.done { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+input.pick { margin: 0; accent-color: var(--accent); cursor: pointer; }
+.queue-bar { display: inline-flex; align-items: center; gap: 8px; }
+button.queue-go { padding: 4px 12px; border: 1px solid var(--accent); border-radius: 8px; background: color-mix(in srgb, var(--accent) 22%, var(--surface)); color: var(--fg); font-size: 13px; }
+button.queue-go:disabled { opacity: 0.6; cursor: default; }
+.queue-note { color: var(--text); }
 .owners { margin: 0; padding-left: 18px; font-size: 13px; }
 .owners li { margin: 2px 0; }
 select.sort { padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 13px; }

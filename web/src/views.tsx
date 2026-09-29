@@ -1,8 +1,8 @@
 import { useState, type ReactNode } from "react";
 import pipeline from "./data/pipeline.json";
 import { rank } from "./engine";
-import { DAYS, SIM, actions, useStore, type ReportSort, type State } from "./store";
-import type { Closable, Incident, IncidentTab, Report, Rule, Source } from "./types";
+import { DAYS, QUEUE_MAX, SIM, actions, useStore, type ReportSort, type State } from "./store";
+import type { Closable, Incident, IncidentTab, QueueCard, Report, Rule, Source } from "./types";
 import {
   Age,
   LabelChips,
@@ -397,6 +397,18 @@ export function ReportsView() {
           <input type="checkbox" checked={s.hideOwned} onChange={(e) => actions.hideOwned(e.target.checked)} />
           Hide items staff are on
         </label>
+        {s.picked.length > 0 && (
+          <span className="queue-bar">
+            <button className="queue-go" disabled={s.queueing} onClick={() => void actions.queuePicked()}>
+              {s.queueing ? "Queueing…" : `Queue ${s.picked.length} for the agent`}
+            </button>
+            <button className="clear-tags" onClick={actions.clearPicks}>
+              Clear
+            </button>
+            {s.picked.length >= QUEUE_MAX && <span className="meta">{QUEUE_MAX} at a time</span>}
+          </span>
+        )}
+        {s.queueNote && <span className="meta queue-note">{s.queueNote}</span>}
         <span className="meta">
           {plural(list.length, "report")}
           {list.length > SHOW && ` · showing the first ${SHOW}; search to narrow`}
@@ -463,8 +475,26 @@ function TagFilter({ counts, selected }: { counts: Map<string, number>; selected
 /** Type, component and priority already show as LabelChips. */
 const CORE_TAG = /^(type\/|comp\/|P[0-4]$)/;
 
+const OUTCOME_NAME: Record<string, string> = {
+  "READY-PUSH": "Fix ready to push",
+  "READY-CLOSE": "Fixed on main, ready to close",
+  "READY-MERGE-EXISTING": "An existing PR is ready to merge",
+};
+const STATUS_WORD: Record<string, string> = { todo: "Queued", ready: "Queued", triage: "Queued", running: "Working", blocked: "Blocked", done: "Done", archived: "Archived" };
+
+/** What the agent's card for an issue says: its outcome once the worker wrote one, else its status. */
+export function queueLabel(c: QueueCard) {
+  if (c.outcome) return OUTCOME_NAME[c.outcome] ?? (c.outcome.startsWith("STOP:") ? `Stopped: ${c.outcome.slice(5).trim()}` : c.outcome);
+  return `Agent: ${STATUS_WORD[c.status] ?? c.status}`;
+}
+
+/** Only open issues can be queued; PRs are handled through the issue they fix. */
+const queueable = (r: Report) => !r.sample && !r.isPr && r.number != null && isOpenState(r);
+
 function ReportItem({ r, s }: { r: Report; s: State }) {
   const size = s.clusterById.get(s.clusterOf.get(r.id)!)?.reportIds.length ?? 1;
+  const card = r.number != null ? s.queue[r.number] : undefined;
+  const picked = r.number != null && s.picked.includes(r.number);
   return (
     <li
       data-id={r.id}
@@ -472,6 +502,18 @@ function ReportItem({ r, s }: { r: Report; s: State }) {
       onClick={() => actions.select(r.id)}
     >
       <div className="item-top">
+        {queueable(r) && !card && (
+          <input
+            type="checkbox"
+            className="pick"
+            aria-label={`Pick ${refLabel(r)} to queue for the agent`}
+            title="Pick to queue for the agent"
+            checked={picked}
+            disabled={!picked && s.picked.length >= QUEUE_MAX}
+            onClick={(e) => e.stopPropagation()}
+            onChange={() => actions.pick(r.number!)}
+          />
+        )}
         <SourceBadge source={r.source} />
         <span className="ref">{refLabel(r)}</span>
         <span>
@@ -479,6 +521,11 @@ function ReportItem({ r, s }: { r: Report; s: State }) {
         </span>
         <span className="spacer" />
         {size > 1 && <span className="similar">{plural(size - 1, "similar report")}</span>}
+        {card && (
+          <span className={cx("chip queued", card.outcome && "done")} title={`Kanban card ${card.task}${card.failure ? `\nLast failure: ${card.failure}` : ""}`}>
+            {queueLabel(card)}
+          </span>
+        )}
         {r.mine && (
           <span className="chip mine" title={`You ${ownerActs(r.mine, true)}`}>
             You're on it

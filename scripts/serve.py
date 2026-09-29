@@ -14,6 +14,9 @@ GET /api/stats?days=N returns counts over the whole mirror for the Stats page (d
 most 365), including who merged or closed PRs in the window and the issues those merges closed.
 GET /api/advisories returns every GHSA ID an issue or PR names, with the items naming it and the
 advisory details ingest.py cached, plus hermes-agent's own published advisories.
+GET /api/queue returns the issues queued for an agent to work (issue_queue.py status), and
+POST /api/queue with {"numbers": [...]} queues up to 10 more. That is the only write: it creates
+Hermes Kanban cards, never touches GitHub, and is refused unless the request comes from this page.
 The database is opened read-only; ingest.py, summarize.py and check_pairs.py stay the only writers.
 """
 import argparse
@@ -27,6 +30,8 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+
+import issue_queue
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "triage.db"
@@ -328,9 +333,35 @@ def advisories(_days=None):
 
 
 ROUTES["/api/advisories"] = (advisories, None, None)
+ROUTES["/api/queue"] = (lambda _days: issue_queue.status(), None, None)
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def send_json(self, status, obj):
+        body = json.dumps(obj, separators=(",", ":")).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def do_POST(self):
+        if urlparse(self.path).path != "/api/queue":
+            return self.send_json(404, {"error": "not found"})
+        # Only this page may queue: a browser always sends Origin on a cross-site POST.
+        origin = urlparse(self.headers.get("Origin", "")).netloc
+        if origin != self.headers.get("Host"):
+            return self.send_json(403, {"error": "cross-origin request refused"})
+        try:
+            raw = json.loads(self.rfile.read(min(int(self.headers.get("Content-Length", 0)), 10_000)))
+            numbers = [int(n) for n in raw["numbers"]]
+        except (ValueError, KeyError, TypeError):
+            return self.send_json(400, {"error": 'expected {"numbers": [issue numbers]}'})
+        if not 1 <= len(numbers) <= issue_queue.MAX_BATCH:
+            return self.send_json(400, {"error": f"queue 1 to {issue_queue.MAX_BATCH} issues at a time"})
+        return self.send_json(200, {"queued": issue_queue.add(numbers), "cards": issue_queue.status()})
+
     def do_GET(self):
         url = urlparse(self.path)
         if url.path not in ROUTES:

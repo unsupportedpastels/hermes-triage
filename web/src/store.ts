@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 import { DEFAULT_RULES, clusterReports, evaluate, pairKey, rank, reconcile } from "./engine";
 import { SCENARIO } from "./sim";
-import type { Closable, Cluster, FeedEntry, Incident, IncidentTab, Meta, Report, Rule, RuleId, SeedRow, Source, View } from "./types";
+import type { Closable, Cluster, FeedEntry, Incident, IncidentTab, Meta, QueueCard, Report, Rule, RuleId, SeedRow, Source, View } from "./types";
 
 const LEVEL_NAME = { watch: "Watching", warn: "Warning", urgent: "Urgent" } as const;
 
@@ -13,6 +13,9 @@ export const DAYS = Number(params.get("days")) || 14;
 /** The first load fetches this many newest days, so the page fills in, then the rest of `DAYS`. */
 const FIRST_DAYS = 2;
 const POLL_MS = 60_000;
+const QUEUE_POLL_MS = 15_000;
+/** The server queues at most this many issues per request. */
+export const QUEUE_MAX = 10;
 
 /** How All reports is ordered; newest and oldest group by day, the others by group or priority. */
 export type ReportSort = "newest" | "similar" | "priority" | "oldest";
@@ -49,6 +52,12 @@ export interface State {
   /** False until the whole `DAYS` window has arrived; the first load comes in two parts. */
   complete: boolean;
   loadError: string | null;
+  /** Issue numbers ticked in All reports, waiting for "Queue for the agent". */
+  picked: number[];
+  /** Kanban cards of queued issues, by issue number. */
+  queue: Record<number, QueueCard>;
+  queueing: boolean;
+  queueNote: string | null;
 }
 
 const toReport = (s: SeedRow): Report => ({
@@ -134,6 +143,10 @@ let state: State = derive({
   loaded: false,
   complete: false,
   loadError: null,
+  picked: [],
+  queue: {},
+  queueing: false,
+  queueNote: null,
 });
 
 const listeners = new Set<() => void>();
@@ -252,6 +265,34 @@ export const actions = {
   setParam: (id: RuleId, key: string, value: number) =>
     set({ rules: state.rules.map((r) => (r.id === id ? { ...r, params: { ...r.params, [key]: value } } : r)) }, true),
   setThreshold: (clusterThreshold: number) => set({ clusterThreshold }, true),
+  pick: (n: number) =>
+    set({ picked: state.picked.includes(n) ? state.picked.filter((x) => x !== n) : [...state.picked, n].slice(0, QUEUE_MAX) }),
+  clearPicks: () => set({ picked: [], queueNote: null }),
+  async queuePicked() {
+    if (!state.picked.length || state.queueing) return;
+    set({ queueing: true, queueNote: null });
+    try {
+      const res = await fetch("/api/queue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ numbers: state.picked }),
+      });
+      const data = (await res.json()) as { error?: string; queued?: { number: number; error?: string }[]; cards?: Record<number, QueueCard> };
+      if (!res.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
+      const failed = (data.queued ?? []).filter((q) => q.error);
+      set({
+        queue: data.cards ?? state.queue,
+        picked: failed.map((q) => q.number),
+        queueNote: failed.length
+          ? `Not queued: ${failed.map((q) => `#${q.number} (${q.error})`).join(", ")}`
+          : `Queued ${data.queued?.length ?? 0} for the agent`,
+      });
+    } catch (e) {
+      set({ queueNote: `Queueing failed: ${e instanceof Error ? e.message : String(e)}` });
+    } finally {
+      set({ queueing: false });
+    }
+  },
   injectNext() {
     const i = state.simIndex;
     const t = SCENARIO[i % SCENARIO.length];
@@ -276,6 +317,15 @@ export const actions = {
   },
 };
 
+async function loadQueue() {
+  try {
+    const res = await fetch("/api/queue");
+    if (res.ok) set({ queue: (await res.json()) as Record<number, QueueCard> });
+  } catch {
+    // the next poll tries again; the report list doesn't depend on it
+  }
+}
+
 /**
  * One-second clock for ages and time windows. Reloads the mirror every minute; with `?sim`, also
  * injects a sample report every `?tick=` ms (default 6000) while live.
@@ -285,6 +335,8 @@ export function startClock() {
   let last = Date.now();
   void loadReports();
   setInterval(() => void loadReports(), POLL_MS);
+  void loadQueue();
+  setInterval(() => void loadQueue(), QUEUE_POLL_MS);
   setInterval(() => {
     if (SIM && state.live && Date.now() - last >= tickMs) {
       last = Date.now();

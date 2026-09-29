@@ -61,6 +61,20 @@ someone else's commits shows up through the force-push. `ME` in the same file is
 user; their own activity is read the same way and shown apart from staff as a green "You're on it"
 chip and detail section, so work they've already done stands out.
 
+## Queueing issues for the agent
+
+Tick up to 10 open issues in All reports and press "Queue N for the agent", or run
+`scripts/issue_queue.py add N [N ...]`. Each issue becomes a Hermes Kanban card that the gateway's
+dispatcher runs as a worker (at most `kanban.max_in_progress` at once) on the delegate model,
+following the `hermes-issue-queue-worker` skill. The worker reads the issue and every PR on it,
+checks whether main already fixes it, compares and salvages existing PRs with authorship kept or
+writes its own fix, and stops at one outcome: ready to push, ready to close (fixed on main),
+an existing PR ready to merge, or stopped with a reason. Its evidence and drafted PR body or
+comments go in `~/hermes-issue-queue/N/`. Workers never write to GitHub; pushing, commenting and
+closing happen only after the user approves. The row shows the card's status and outcome;
+`scripts/issue_queue.py status` lists them. Queueing an issue twice returns the existing card.
+`POST /api/queue` is the dashboard's only write and is refused unless the request comes from the page.
+
 `ingest.py` also looks up every GHSA ID named in an issue or PR title or body in GitHub's advisory
 database (GraphQL, 50 per query) into `advisories`: severity, summary, CVE and affected packages
 with their first fixed versions. Each ID is looked up again after 30 days. An ID GitHub doesn't

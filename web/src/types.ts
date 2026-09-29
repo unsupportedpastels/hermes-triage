@@ -88,6 +88,16 @@ export interface SeedRow {
   ownersChecked?: boolean;
 }
 
+/** An issue's Kanban card from /api/queue, created when it was queued for the agent. */
+export interface QueueCard {
+  task: string;
+  /** Kanban status: todo, ready, running, blocked, done, archived. */
+  status: string;
+  /** The worker's outcome tag, e.g. "READY-PUSH" or "STOP: cannot-reproduce"; null until it writes one. */
+  outcome: string | null;
+  failure: string | null;
+}
+
 /** Pipeline stats from /api/reports. */
 export interface Meta {
   openTotal: number;
